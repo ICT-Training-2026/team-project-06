@@ -1,3 +1,20 @@
-h1 {
-    color: aqua;
+.Logo img{
+    width: 300px;
+    height: auto;
+}
+
+.Logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.usercontent {
+    text-align: center;
+}
+
+.btn {
+    text-align: center;
+    margin-top: 10px;
+    background-color: aqua;
 }
