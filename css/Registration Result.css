@@ -4,5 +4,7 @@
 }
 
 .btn {
-    
+    background-color: aqua;
+    border-radius: 7px;
+    padding: 20px 40px;
 }
