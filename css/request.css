@@ -1,10 +1,59 @@
-h2{
-    background-color: #00BFE9;
-    padding: 5px; 
-    width: 100px; /* 背景の幅を指定 */
-    height: 30px;
-    display: flex; /* Flexboxを使用 */
+.request {
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    align-items: center; /* 水平方向の中央揃え */
+    justify-content: center; /* 垂直方向の中央揃え */
+    min-height: 100vh; /* ビューポート全体の高さに対応 */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平方向の中央揃え */
+    justify-content: center; /* 垂直方向の中央揃え */
+    min-height: 100vh; /* ビューポート全体の高さに対応 */
+}
+
+.attendance-category, .date, .comment {
+    display: flex;
     align-items: center; /* 垂直方向の中央揃え */
     justify-content: center; /* 水平方向の中央揃え */
-    margin: 0; /* 余白をリセット */
+    margin-bottom: 20px; /* セクション間の余白 */
+    width: 100%; /* 親要素の幅に合わせる */
+}
+
+h2 {
+    font-size: 35px;
+    background-color: #00BFE9;
+    padding: 40px;
+    width: 230px; /* 背景の幅を指定 */
+    height: 45px;
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
+    margin: 20px;
+}
+
+form label, form input, form p, form textarea {
+    margin-right: 10px; /* 要素間の余白を設定 */
+    font-size: 35px;
+}
+
+
+form label {
+    margin-right: 10px; /* ラベル間の間隔を設定 */
+}
+
+
+.date form {
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+}
+
+
+input[type="radio"] {
+    transform: scale(3) translateY(-1.5px); 
+    margin-right: 20px; 
+    margin-left: 80px;
+    
 }
