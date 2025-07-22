@@ -2,6 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 30px;
+    margin-top: 20px;
+    border: 2px solid #00BFE9;
+    max-width: 400px;
+    height: 100px; /* 必要に応じて高さを指定 */
+    width: 100%; /* 必要に応じて幅を指定 */
 }
 
 .InputItems {
@@ -14,9 +20,26 @@
     align-items: center;
 }
 
+.textbox {
+    width: 250px; 
+    height: 35px; 
+    background-color: #fffad0; 
+    border: 3px solid #9EDDFF;
+    border-radius: 4px;
+}
+
+.fontcontrol {
+    font-size: 25px
+}
+
+
+
 .btn {
-    margin: 0 10px; 
-    background-color: aqua;
+    font-size: 15px;
+    margin: 0 30px; 
+    background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    margin-top: 20px;
     border-radius: 7px;
     padding: 20px 40px;
 }

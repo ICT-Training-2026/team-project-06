@@ -22,17 +22,18 @@
     </div>
   </header>
 
-  <div class="employeeID">
-    <label for="employeeID">社員ID </label>
-    <input type="text" id="employeeID" name="name" />
-  </div>
+<div class="employeeID">
+  <label for="employeeID">社員ID </label>
+  <input type="text" id="employeeID" class="textbox" name="name" />
+</div>
 
+<div class="fontcontrol">
   <div class="InputItems">
-  <div>
-    <label for="day">社員ID </label>
-    <input type="text" id="day" name="name" />
-  </div>
-   <div class="StartingTime">
+    <div>
+      <label for="day">日付 </label>
+      <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
+    </div>
+    <div class="StartingTime">
         <label for="currentTime">始業時間</label>
         <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
         <span>⇒</span>
@@ -62,6 +63,7 @@
         <span>⇒</span>
         <input type="text" id="newTime" class="textbox" placeholder="入力">
     </div>
+  </div>
 </div>
 
 <div class="button-container">
