@@ -3,12 +3,12 @@
     justify-content: center;
     align-items: center; 
     text-align: center;
-    margin-top: 200px;
-    gap: 60px;
+    margin-top: 250px;
+    gap: 100px;
 }
 
 .btn {
     background-color: aqua;
-    border-radius: 5px;
-    padding: 30px 45px; /*ボタンを大きくする*/
+    border-radius: 7px;
+    padding: 40px 60px; /*ボタンを大きくする*/
 }
