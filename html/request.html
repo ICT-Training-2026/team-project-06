@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Request Page</title>
+    <link rel="stylesheet" href="../css/request.css" />
+</head>
+
+<body>
+    <request class="request">
+        <div class="attendance-category">
+            <h2>勤怠区分</h2>
+            <form>
+                <label>
+                    <input type="radio" name="attendance" value="振休">
+                    振休
+                </label><br>
+                <label>
+                    <input type="radio" name="attendance" value="年休">
+                    年休
+                </label><br>
+                <label>
+                    <input type="radio" name="attendance" value="欠勤">
+                    欠勤
+                </label><br>
+            </form>
+        </div>
+        <div class="date">
+            <h2>日付</h2>
+            <form>
+                <label for="start-date">開始日:</label>
+                <input type="date" id="start-date" name="start-date"><br><br>
+
+                <label for="end-date">終了日:</label>
+                <input type="date" id="end-date" name="end-date"><br><br>
+
+            </form>
+        </div>
+        <div class="comment">
+            <h2>コメント</h2>
+            <form>
+                <label for="comment">コメント:</label><br>
+                <textarea id="comment" name="comment" rows="0" cols="50"></textarea><br><br>
+            </form>
+            <div class="request-buttons">
+                <input type="submit" value="申請">
+            </div>
+    </request>
+</body>
+
+</html>
