@@ -1,0 +1,50 @@
+.all {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    padding-right: 500px;
+    background-color: #088;
+  }
+  .date {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  .time {
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .category {
+    font-size: 25px;
+    padding-left: 200px;
+    padding-top: 100px;
+    display: flex;
+  }
+
+  .category label {
+    margin-right: 50px;
+  }
+
+
+  .button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 300px;
+  margin: 50px auto;
+}
+  .roundbtn {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  background-color: #f5f925; 
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  }
+  .round-btn:hover {
+  background-color: #45a049; 
+}
