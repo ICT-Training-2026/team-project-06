@@ -3,7 +3,6 @@
     text-align: center;
     padding-top: 100px;
     padding-right: 500px;
-    background-color: #088;
   }
   .date {
     font-size: 50px;
@@ -15,8 +14,8 @@
   }
 
   .category {
-    font-size: 25px;
-    padding-left: 200px;
+    font-size: 35px;
+    padding-left: 270px;
     padding-top: 100px;
     display: flex;
   }
@@ -32,6 +31,7 @@
   gap: 25px;
   max-width: 300px;
   margin: 50px auto;
+  
 }
   .roundbtn {
   width: 150px;
