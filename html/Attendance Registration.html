@@ -22,29 +22,29 @@
     </div>
 </header>
 
-<div class="all">
-    <div class="date" id="date"></div>
-    <div class="time" id="time"></div>
-
-    <script src="../js/Attendance Registration.js"></script>
+<div class="container">
+    <div class="left-content">
+        <div class="all">
+            <div class="date" id="date"></div>
+            <div class="time" id="time"></div>
+            <script src="../js/Attendance Registration.js"></script>
+        </div>
+        <div class="category">
+            <label>
+                <input type="radio" name="option" value="1" checked>出勤
+            </label>
+            <label>
+                <input type="radio" name="option" value="2">振出
+            </label>
+        </div>
+    </div>
+    <div class="button-grid">
+        <a href="ClockIn.html"><button class="roundbtn">出勤</button></a>
+        <a href="ClockOut.html"><button class="roundbtn">欠勤</button></a>
+        <a href="StartBreak.html"><button class="roundbtn">休憩開始</button></a>
+        <a href="ENDBreak.html"><button class="roundbtn">休憩終了</button></a>
+    </div>
 </div>
-
-<div class="category">
-    <label>
-        <input type="radio" name="option" value="1" checked>出勤
-    </label>
-    <label>
-        <input type="radio" name="option" value="2">振出
-    </label>
-</div>
-
-<div class="button-grid">
-    <a href="ClockIn.html"><button class="roundbtn">出勤</button></a>
-    <a href="ClockOut.html"><button class="roundbtn">欠勤</button></a>
-    <a href="StartBreak.html"><button class="roundbtn">休憩開始</button></a>
-    <a href="ENDBreak.html"><button class="roundbtn">休憩終了</button></a>
-</div>
-
 
 </body>
 </html>
