@@ -3,9 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: 'Arial', sans-serif;
-}
 .header {
   background-color: #00BFE9; 
   display: flex;
@@ -14,29 +11,31 @@ body {
   padding: 10px 20px;
 }
 .logo-container img{
-  width: 30px;  
-  height: 20px;
+  padding-left: 30px;
+  width: 130px;  
+  height: 80px;
 }
 .welcome-text {
   text-align: center;
   flex-grow: 1;
   color: black;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 35px;
 }
 .buttons {
   display: flex;
   gap: 10px;
 }
-.btn {
+.headerbtn {
   padding: 8px 16px;
   border: none;
   border-radius: 15px;
   background-color: white;
-  font-size: 16px;
+  font-size: 28px;
   cursor: pointer;
+  height: 80px;
 }
-.btn:hover {
+.headerbtn:hover {
   background-color: #ddd;
 }
 
