@@ -1,0 +1,14 @@
+.managerhomebtn {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    margin-top: 250px;
+    gap: 100px;
+}
+
+.btn {
+    background-color: aqua;
+    border-radius: 7px;
+    padding: 40px 60px; /*ボタンを大きくする*/
+}
