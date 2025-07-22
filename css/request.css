@@ -1,0 +1,10 @@
+h2{
+    background-color: #00BFE9;
+    padding: 5px; 
+    width: 100px; /* 背景の幅を指定 */
+    height: 30px;
+    display: flex; /* Flexboxを使用 */
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
+    margin: 0; /* 余白をリセット */
+}
