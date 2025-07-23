@@ -22,54 +22,54 @@
     </div>
   </header>
 
-<div class="employeeID">
-  <label for="employeeID">社員ID </label>
-  <input type="text" id="employeeID" class="textbox" name="name" />
-</div>
 
-<div class="fontcontrol">
-  <div class="InputItems">
-    <div>
-      <label for="day">日付 </label>
-      <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
+     <main class="main-content">
+    <div class="id-box">
+      <label for="employeeId">社員ID</label>
+      <input type="text" id="employeeId">
     </div>
-    <div class="StartingTime">
-        <label for="currentTime">始業時間</label>
-        <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
-        <span>⇒</span>
-        <input type="text" id="newTime" class="textbox" placeholder="入力">
+    <div class="record-box">
+      <div class="content">
+        <label>日付</label>
+        <input type="text" value="[DBデータ]" readonly>
+      </div>
+      <div class="content">
+        <label>始業時刻</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>終業時刻</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>労働時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>休憩時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>残業時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
     </div>
-    <div class="ClosingTime">
-        <label for="currentTime">終業時間</label>
-        <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
-        <span>⇒</span>
-        <input type="text" id="newTime" class="textbox" placeholder="入力">
-    </div>
-    <div class="WorkingHours">
-        <label for="currentTime">労働時間(分)</label>
-        <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
-        <span>⇒</span>
-        <input type="text" id="newTime" class="textbox" placeholder="入力">
-    </div>
-    <div class="BreakTime">
-        <label for="currentTime">休憩時間(分)</label>
-        <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
-        <span>⇒</span>
-        <input type="text" id="newTime" class="textbox" placeholder="入力">
-    </div>
-    <div class="OvertimeHours">
-        <label for="currentTime">残業時間(分)</label>
-        <input type="text" id="currentTime" class="textbox" value="[DBデータ]" readonly>
-        <span>⇒</span>
-        <input type="text" id="newTime" class="textbox" placeholder="入力">
-    </div>
-  </div>
-</div>
-
-<div class="button-container">
-    <a href=".html"><button class="btn" type="button">編集</button></a>
+      <div class="btn-box">
+    <a href=".html"><button class="edit-btn" type="button">編集</button></a>
     <!-- リンクは不要かも -->
-    <a href=".html"><button class="btn" type="button">削除</button></a>
+    <a href=".html"><button class="delete-btn" type="button">削除</button></a>
     <!-- リンクは不要かも -->
+    </div>
+  </main>
 </body>
 </html>
