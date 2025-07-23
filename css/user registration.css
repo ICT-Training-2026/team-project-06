@@ -1,18 +1,18 @@
 .registration {
     display: flex;
     flex-direction: column;
-    align-items: center; /* ‘S‘Ì‚ğ’†‰›‚É‘µ‚¦‚é */
+    align-items: center; /* å…¨ä½“ã‚’ä¸­å¤®ã«æƒãˆã‚‹ */
 }
 
 .record-box {
-    border:3px solid #9EDDFF; /* Â‚¢˜gü‚ğw’è */
-    padding: 20px; /* “à‘¤‚Ì—]”’‚ğw’è */
-    border-radius: 5px; /* Šp‚ğŠÛ‚­‚·‚éi”CˆÓj */
-    margin-bottom: 15px; /* ‰º‚É—]”’‚ğ’Ç‰Á */
-    width: 700px; /* ”CˆÓ‚Ì•‚ğw’è */
+    border:3px solid #9EDDFF; /* é’ã„æ ç·šã‚’æŒ‡å®š */
+    padding: 20px; /* å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
+    border-radius: 5px; /* è§’ã‚’ä¸¸ãã™ã‚‹ï¼ˆä»»æ„ï¼‰ */
+    margin-bottom: 15px; /* ä¸‹ã«ä½™ç™½ã‚’è¿½åŠ  */
+    width: 700px; /* ä»»æ„ã®å¹…ã‚’æŒ‡å®š */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Â˜g‚ğ’†‰›‚Éİ’u */
+    align-items: center; /* é’æ ã‚’ä¸­å¤®ã«è¨­ç½® */
 }
 
 .record-box > div {
@@ -28,23 +28,23 @@
     font-size: 22px;
     background-color: #00BFE9;
     padding: 10px;
-    width: 130px; /* ”wŒi‚Ì•‚ğw’è */
+    width: 130px; /* èƒŒæ™¯ã®å¹…ã‚’æŒ‡å®š */
     height: 45px;
     display: flex;
-    align-items: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
-    justify-content: center; /* …•½•ûŒü‚Ì’†‰›‘µ‚¦ */
+    align-items: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    justify-content: center; /* æ°´å¹³æ–¹å‘ã®ä¸­å¤®æƒãˆ */
     margin: 10px;
     border-radius: 7px;
 }
 
 .registration-buttons {
     display: flex;
-    justify-content: center; /* ƒ{ƒ^ƒ“‚ğ’†‰›‚É‘µ‚¦‚é */
+    justify-content: center; /* ãƒœã‚¿ãƒ³ã‚’ä¸­å¤®ã«æƒãˆã‚‹ */
     width: 100%;
 }
 
 .registration h2 {
-    text-align: center; /* h2‚ğ’†‰›‚É‘µ‚¦‚é */
+    text-align: center; /* h2ã‚’ä¸­å¤®ã«æƒãˆã‚‹ */
     font-size: 30px;
     margin:15px;
     
@@ -60,7 +60,7 @@
 }
 
 .department h3 {
-    margin-left: -200px; /* ¶‚É‚¸‚ç‚·—Ê‚ğw’è */
+    margin-left: -200px; /* å·¦ã«ãšã‚‰ã™é‡ã‚’æŒ‡å®š */
 }
 
 .position h3{
@@ -81,8 +81,8 @@
 
 .department select {
     font-size: 20px;
-    width: 80px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì•‚ğw’è */
-    padding: 5px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì“à‘¤‚Ì—]”’‚ğw’è */
+    width: 80px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å¹…ã‚’æŒ‡å®š */
+    padding: 5px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
     margin-top: 20px;
     background-color: #FFFAD0; 
     border: 3px solid #9EDDFF;
@@ -91,8 +91,8 @@
 
 .position select{
     font-size: 20px;
-    width: 80px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì•‚ğw’è */
-    padding: 5px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì“à‘¤‚Ì—]”’‚ğw’è */
+    width: 80px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å¹…ã‚’æŒ‡å®š */
+    padding: 5px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
     margin-top: 20px;
     background-color: #FFFAD0; 
     border: 3px solid #9EDDFF;
@@ -102,8 +102,8 @@
 
 .EmployeeID textarea{
     font-size: 20px;
-    width: 170px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì•‚ğw’è */
-    padding: 5px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì“à‘¤‚Ì—]”’‚ğw’è */
+    width: 170px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å¹…ã‚’æŒ‡å®š */
+    padding: 5px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
     margin-bottom: px;
     height: 40px;
     background-color: #FFFAD0; 
@@ -114,8 +114,8 @@
 
 .name textarea{
     font-size: 20px;
-    width: 170px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì•‚ğw’è */
-    padding: 5px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì“à‘¤‚Ì—]”’‚ğw’è */
+    width: 170px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å¹…ã‚’æŒ‡å®š */
+    padding: 5px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
     margin-bottom: px;
     height: 40px;
     background-color: #FFFAD0; 
@@ -125,8 +125,8 @@
 
 .pasword textarea{
     font-size: 20px;
-    width: 170px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì•‚ğw’è */
-    padding: 5px; /* ƒvƒ‹ƒ_ƒEƒ“‚Ì“à‘¤‚Ì—]”’‚ğw’è */
+    width: 170px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å¹…ã‚’æŒ‡å®š */
+    padding: 5px; /* ãƒ—ãƒ«ãƒ€ã‚¦ãƒ³ã®å†…å´ã®ä½™ç™½ã‚’æŒ‡å®š */
     margin-bottom: px;
     height: 40px;
     background-color: #FFFAD0; 
