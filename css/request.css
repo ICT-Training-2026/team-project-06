@@ -32,6 +32,7 @@ h2 {
     align-items: center; /* 垂直方向の中央揃え */
     justify-content: center; /* 水平方向の中央揃え */
     margin: 20px;
+    border-radius: 7px;
 }
 
 form label, form input, form p, form textarea {
@@ -54,6 +55,32 @@ form label {
 input[type="radio"] {
     transform: scale(3) translateY(-1.5px); 
     margin-right: 20px; 
-    margin-left: 80px;
+    margin-left: 85px;
     
+}
+
+.date input[type="date"] {
+    width: 280px; /* ここで幅を指定します */
+    padding: 20px; /* 内側の余白を指定します */
+    /* 他のスタイルも必要に応じて追加できます */
+}
+
+.comment textarea {
+     width: 600px; /* ここで幅を指定します */
+     height: 100px; 
+     padding: 20px;
+     margin-left: 24.5px;
+}
+
+.request-buttons input[type="submit"] {
+  background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    padding: 20px 40px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.attendance-category label {
+    font-weight: bold; /* テキストを太字にする */
 }
