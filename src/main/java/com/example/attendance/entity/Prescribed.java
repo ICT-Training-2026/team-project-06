@@ -6,7 +6,7 @@ import java.sql.Time;
 import lombok.Data;
 
 @Data
-public class StandardWorkTime {
+public class Prescribed {
 	private String monthlyHolidays;
 	private String monthlyAttendance;
 	private Time prescribedLabor;
