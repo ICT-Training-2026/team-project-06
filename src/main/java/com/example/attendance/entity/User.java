@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class User {
-    private String userId;
+    private String employeeId;
     private String name;
-    private String password;
     private String departmentId;
-    private String positionId;
-    private int maxTransferLeaveDays;
-    private int maxPaidLeaveDays;
+    private String jobId;
+    private String password;
+    private int paidVacation;
+    private int remainingVacation;
 
     public boolean loginCheck() {
         throw new UnsupportedOperationException();

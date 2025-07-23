@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 public class Application {
-    private String userId;
+    private String employeeId;
     private String categoryId;
-    private LocalDate date;
     private String comment;
+    private LocalDate dateApply;
 
     public boolean isValid() {
         throw new UnsupportedOperationException();

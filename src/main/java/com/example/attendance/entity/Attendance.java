@@ -1,14 +1,26 @@
 package com.example.attendance.entity;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import lombok.Data;
+
+@Data
 public class Attendance {
-	private String userId;
+	private String employeeId;
 	private LocalDate date;
-	private String categoryId;
 	private LocalTime startTime;
-	private LocalTime breakStar;
+	private LocalTime closingTime;
+	private LocalTime startBreakTime;
+	private LocalTime endBreakTime;
+	private Time workTime;
+	private Time breakTime;
+	private String categoryId;
+	private String statusId;
+	private boolean categoryStatus;
+
+	/*不要？
 	private LocalTime breakEnd;
 	private LocalTime endTime;
 	private int workDuration;
@@ -16,13 +28,15 @@ public class Attendance {
 	private int overtime;
 	private String workStatusld;
 	private boolean checked;
+	*/
 	public int calculateWorkTime() {
-		
+
 	};
+
 	public int calculateOvertime() {
-		
+
 	};
 	public boolean isValid() {
-		
+
 	};
 }
