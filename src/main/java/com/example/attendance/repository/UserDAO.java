@@ -1,5 +1,5 @@
 package com.example.attendance.repository;
-import com.example.attendance.model.User;
+import com.example.attendance.entity.User;
 
 public class UserDAO {
     public User findById(String userId) {

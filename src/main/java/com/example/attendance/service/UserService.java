@@ -1,5 +1,5 @@
 package com.example.attendance.service;
-import com.example.attendance.model.User;
+import com.example.attendance.entity.User;
 
 public class UserService {
     public User login(String userId, String password) {

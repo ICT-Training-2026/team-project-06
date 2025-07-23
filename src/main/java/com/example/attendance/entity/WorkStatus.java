@@ -1,4 +1,4 @@
-package com.example.attendance.model;
+package com.example.attendance.entity;
 
 public class WorkStatus {
 	

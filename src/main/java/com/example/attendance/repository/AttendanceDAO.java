@@ -2,7 +2,7 @@ package com.example.attendance.repository;
 
 import java.time.LocalDate;
 
-import com.example.attendance.model.Attendance;
+import com.example.attendance.entity.Attendance;
 
 public class AttendanceDAO {
 	public void insert(Attendance att) {

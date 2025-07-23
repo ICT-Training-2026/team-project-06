@@ -1,4 +1,4 @@
-package com.example.attendance.model;
+package com.example.attendance.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
