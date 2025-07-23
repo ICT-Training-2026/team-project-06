@@ -1,0 +1,93 @@
+
+CREATE TABLE account (
+	employee_id         CHARACTER(6) NOT NULL ,
+	name                VARCHAR(20)  NOT NULL ,
+	department_id       CHARACTER(4) NOT NULL ,
+	job_id           	CHARACTER(2) NOT NULL ,
+	password	    	TEXT(30)     NOT NULL ,
+    paid_vacation        INT(3)       NOT NULL ,
+    remaining_vacation   INT(3)       NOT NULL ,
+    PRIMARY KEY (employee_id),
+   	FOREIGN KEY  (department_id) REFERENCES department (department_id),
+    FOREIGN KEY  (job_id) REFERENCES position (job_id) 
+    			   	)
+    			   	
+    			   	
+CREATE TABLE department (
+	department_id   CHARACTER(1)  NOT NULL ,
+	department_name VARCHAR(3)    NOT NULL , 
+	PRIMARY KEY (department_id)
+						)
+						
+
+CREATE TABLE position (
+	job_id			CHARACTER(2) NOT NULL ,				
+    jod_name		CHARACTER(2) NOT NULL ,					
+	PRIMARY KEY (job_id)
+						)
+
+CREATE TABLE  category(
+	category_id			  CHARACTER(1) NOT NULL ,				
+    attendance_category	  CHARACTER(2) NOT NULL ,	
+    PRIMARY KEY (category_id) 					
+            		  )			
+            		  
+CREATE TABLE status (
+	status_id CHARACTER(1) NOT NULL,
+	working_status  CHARACTER(2) NOT NULL ,
+	PRIMARY KEY (status_id)
+						)
+       		  
+						
+CREATE TABLE attendance  (
+	employee_id			CHARACTER(6)             NOT NULL ,			
+    date				DATE		             NOT NULL ,	
+    start_time			DATETIME				 NULL ,
+    closing_time		DATETIME				 NULL ,	
+    startbreak_time			DATETIME				 NULL ,
+ 	endbreak_time		DATETIME				 NULL ,	
+   	worktime			TIME				     NULL ,
+  	breaktime			TIME			         NULL ,	
+   	category_id			CHARACTER(1)			 NOT NULL ,	
+	status_id			CHARACTER(1)			 NOT NULL ,	
+	category_status		BOOLEAN DEFAULT FALSE 	 NOT NULL ,				
+  	PRIMARY KEY (employee_id,date) ,	
+  	FOREIGN KEY  (employee_id) REFERENCES account (employee_id)  ,
+  	FOREIGN KEY  (category_id) REFERENCES category (category_id)  ,
+  	FOREIGN KEY  (status_id) REFERENCES status (status_id) 
+  						 )	
+  						 
+  	
+CREATE TABLE prescribed(
+	monthly_holidays	INT(2)	NOT NULL ,					
+	monthly_attendance	INT(2)	NOT NULL ,					
+	prescribed_labor	TIME	NOT NULL ,					
+	month				DATE	NOT NULL ,
+	PRIMARY KEY (month)
+                       )		
+
+
+CREATE TABLE  monthly_total(
+	employee_id			CHARACTER(6)	NOT NULL ,				
+    total_work			TIME 			NULL ,	
+	total_overtime		TIME 		    NULL ,		
+	take_vacation		TEXT(2)	        NULL ,		
+	month				DATE		NOT NULL ,		
+	PRIMARY KEY (employee_id,month) ,
+	FOREIGN KEY  (employee_id) REFERENCES account (employee_id) ,  
+	FOREIGN KEY  (month) REFERENCES prescribed (month)  	
+							)
+							
+	
+
+	CREATE TABLE application(
+	employee_id CHARACTER(6) NOT NULL ,
+	category_id CHARACTER(1) NOT NULL ,
+	comment CHARACTER(50)  NULL ,
+	date_apply DATE  NOT NULL ,
+	PRIMARY KEY (employee_id,date_apply),
+	FOREIGN KEY (employee_id) REFERENCES account (employee_id),
+	FOREIGN KEY (category_id) REFERENCES category (category_id)
+							)
+	
+	
