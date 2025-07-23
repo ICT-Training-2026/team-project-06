@@ -8,7 +8,7 @@ public class MonthlyWorkSummary {
 	private int transferLeaveDaysUsed;
 	private int maxPaidLeaveDays;
 	private int maxTransferLeaveDays;
-	public int calculateTotalWorkTime( List<Attendance> attendanceList) {
+	public int calculateTotalWorkTime(List<Attendance> attendanceList) {
 		
 	};
 	public int calculateOvertime(int standardWorkHours) {
