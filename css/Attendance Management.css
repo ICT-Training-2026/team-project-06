@@ -1,5 +1,159 @@
-.search-criteria {
-    border: 2px solid black; /* 枠の太さ、スタイル、色 */
-    padding: 20px; /* 内側の余白 */
-    margin-bottom: 20px; /* 下部の余白 */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+header {
+  background-color: #00b8e6;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+.logo-text {
+  font-weight: bold;
+  font-size: 14px;
+  margin-left: 5px;
+  color: brown;
+  line-height: 1.1;
+}
+.logo-text small {
+  font-weight: normal;
+  font-size: 9px;
+}
+.header-center {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+.header-right button {
+  margin-left: 10px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+main {
+  padding: 20px;
+}
+.search-box {
+  border: 2px solid #90cdfd;
+  padding: 15px;
+  width: 300px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.search-box label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.search-box select,
+.search-box input[type="text"],
+.search-box input[type="date"] {
+  margin-left: 10px;
+  background-color: #c5e9ff;
+  border: 1px solid #90cdfd;
+  border-radius: 3px;
+  height: 25px;
+}
+.search-box input[type="text"] {
+  width: 120px;
+  padding-left: 5px;
+}
+.search-box input[type="date"] {
+  width: 110px;
+  padding-left: 5px;
+}
+.search-btn {
+  background-color: #90cdfd;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.explanation {
+  border: 2px solid #90cdfd;
+  background-color: #c5e9ff;
+  width: 320px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+/* 検索説明を右に寄せる */
+main {
+  display: flex;
+  gap: 20px; /* 検索フォームと説明の間に余白 */
+  padding: 20px;
+}
+
+/* 検索フォームは幅固定 */
+.search-box {
+  border: 2px solid #90cdfd;
+  padding: 15px;
+  width: 300px;
+  border-radius: 5px;
+  margin-bottom: 0; /* mainでflex使うのでここは0 */
+  box-sizing: border-box;
+}
+
+/* 説明ボックスは幅320px */
+.explanation {
+  border: 2px solid #90cdfd;
+  background-color: #c5e9ff;
+  width: 320px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0; /* marginリセット */
+}
+
+/* ラベル内のチェックボックスを非表示にする */
+.search-box label input[type="checkbox"] {
+  display: none;
+}
+
+/* ラベルのテキストとフォーム要素を横並びにする */
+.search-box label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* テキストとフォームの間の余白調整 */
+.search-box label > *:not(input[type="checkbox"]) {
+  margin-left: 10px;
+}
+
+/* 検索ボタンをフォームの外に出す */
+.search-btn {
+  background-color: #90cdfd;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px; /* 上に余白 */
+  width: 100px;
+}
+
+/* フォームのスタイルを調整（検索ボタンを外に出すため） */
+.search-box form {
+  display: flex;
+  flex-direction: column;
 }
