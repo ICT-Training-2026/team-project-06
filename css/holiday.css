@@ -1,0 +1,47 @@
+.whole {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.holiday-box {
+    display: inline-block;
+    border: 3px solid #9EDDFF;
+    border-radius: 10px;
+    width: 600px;
+    font-size: 20px;
+    padding-left: 25px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    text-align: center; 
+    padding: 2px; 
+}
+
+input[type="text"] {
+  width: 400px;
+  height: 30px;
+  background-color: #FFFAD0; 
+  border: 3px solid #9EDDFF;
+  border-radius: 5px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+  text-align: center;
+  background-color: rgb(196, 255, 255);
+  border: 3px solid #9EDDFF;
+  border-radius: 7px;
+  padding: 20px 40px;
+  font-weight: bold;
+}
