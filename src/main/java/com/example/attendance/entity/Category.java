@@ -3,7 +3,7 @@ package com.example.attendance.entity;
 import lombok.Data;
 
 @Data
-public class WorkCategory {
+public class Category {
 
 	private String categoryId;
 	private String attendanceCategory;
