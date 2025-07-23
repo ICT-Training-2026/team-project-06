@@ -6,7 +6,7 @@ import java.sql.Time;
 import lombok.Data;
 
 @Data
-public class MonthlyWorkSummary {
+public class MonthlyTotal {
 	private String employeeId;
 	private Time totalWork;
 	private Time totalOvertime;
