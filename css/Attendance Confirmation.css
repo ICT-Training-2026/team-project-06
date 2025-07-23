@@ -1,0 +1,70 @@
+.whole {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirmation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 200px;
+    width: 800px;
+}
+
+.period {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 3px solid #9EDDFF;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form label, form input, form textarea {
+    margin-right: 10px;
+    font-size: 25px;
+}
+
+.fontp {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
+    padding-right: 15px;
+}
+
+.date form {
+    display: flex;
+    align-items: center;
+}
+
+.date input[type="date"] {
+    width: 220px;
+    height: 20px;
+    padding: 20px;
+}
+
+.buttons {
+    margin-left: 20px;
+}
+
+.btn {
+    text-align: center;
+    background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    width: 120px;
+    height: 80px;
+    font-size: 25px;
+}

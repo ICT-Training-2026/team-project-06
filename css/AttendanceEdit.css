@@ -4,7 +4,7 @@
 }
 .id-box {
   margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 27px;
 }
 .id-box input {
   padding: 5px;
@@ -16,7 +16,7 @@
 }
 .record-box {
   display: inline-block;
-  border:3px solid #9EDDFF;;
+  border:3px solid #9EDDFF;
   padding: 20px;
   border-radius: 10px;
 }
@@ -39,7 +39,7 @@
   border: 3px solid #9EDDFF;
 }
 .arrow {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
 }
 .btn-box {
@@ -51,6 +51,7 @@
   background-color: rgb(196, 255, 255);
   border: 3px solid #9EDDFF;
   border-radius: 7px;
-  padding: 20px 40px;
   font-weight: bold;
+  font-size: 20px;
+  width: 100px;
 }
