@@ -122,74 +122,95 @@
 </div>
 </div>
 
+
+
 <script>
   document.getElementById("search-btn").addEventListener("click", function () {
-    const department = document.getElementById("department").value;
-    const position = document.getElementById("position").value;
-    const employeeId = document.getElementById("employee-id").value;
-    const startDate = document.getElementById("start-date").value;
-    const endDate = document.getElementById("end-date").value;
+  const department = document.getElementById("department").value.trim();
+  const position = document.getElementById("position").value.trim();
+  const employeeId = document.getElementById("employee-id").value.trim();
+  const startDate = document.getElementById("start-date").value;
+  const endDate = document.getElementById("end-date").value;
 
-    // ダミーデータ（本来はここでサーバーAPI呼び出し）
-    const dummyData = [
-      {
-        date: "2025-07-01",
-        start_time: "09:00",
-        closing_time: "18:00",
-        worktime: "8:00",
-        breaktime: "1:00",
-        comment: "通常勤務"
-      },
-      {
-        date: "2025-07-02",
-        start_time: "09:15",
-        closing_time: "18:15",
-        worktime: "8:00",
-        breaktime: "1:00",
-        comment: "会議多め"
-      }
-    ];
+  // バリデーション
+  if (!department) {
+    alert("部署を選択してください。");
+    return;
+  }
 
-    // 結果表示部分
-    const resultsDiv = document.getElementById("results");
-    const tbody = document.querySelector("#results-table tbody");
+  if (!position) {
+    alert("役職を選択してください。");
+    return;
+  }
 
-    // テーブルをリセット
-    tbody.innerHTML = "";
+  if (!employeeId) {
+    alert("社員IDを入力してください。");
+    return;
+  }
 
-    // ダミーデータを結果テーブルに追加
-    dummyData.forEach(record => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${record.date}</td>
-        <td>${record.start_time}</td>
-        <td>${record.closing_time}</td>
-        <td>${record.worktime}</td>
-        <td>${record.breaktime}</td>
-        <td>${record.comment}</td>
-        <td><button class="edit-btn small-btn">編集</button></td>
-        <td><button class="confirm-btn small-btn">確定</button></td>
-      `;
-      tbody.appendChild(tr);
-    });
-      // 編集ボタンに遷移処理を追加
-setTimeout(() => {
-  document.querySelectorAll('.edit-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const row = btn.closest('tr');
-      const date = row.cells[0].textContent;
-      const employeeId = document.getElementById("employee-id").value;
+  if (!/^\d+$/.test(employeeId)) {
+    alert("数値を入力してください。");
+    return;
+  }
 
-      // aa.html にパラメータを付けて遷移
-      const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
-      window.location.href = url;
-    });
+  // ダミーデータ（ここでは社員IDを仮で使う）
+  const dummyData = [
+    {
+      date: "2025-07-01",
+      start_time: "09:00",
+      closing_time: "18:00",
+      worktime: "8:00",
+      breaktime: "1:00",
+      comment: "通常勤務"
+    },
+    {
+      date: "2025-07-02",
+      start_time: "09:15",
+      closing_time: "18:15",
+      worktime: "8:00",
+      breaktime: "1:00",
+      comment: "会議多め"
+    }
+  ];
+
+  const resultsDiv = document.getElementById("results");
+  const tbody = document.querySelector("#results-table tbody");
+  tbody.innerHTML = "";
+
+  dummyData.forEach(record => {
+    const tr = document.createElement("tr");
+    tr.setAttribute("data-employee-id", employeeId); // ← 社員IDを埋め込む
+    tr.innerHTML = `
+      <td>${record.date}</td>
+      <td>${record.start_time}</td>
+      <td>${record.closing_time}</td>
+      <td>${record.worktime}</td>
+      <td>${record.breaktime}</td>
+      <td>${record.comment}</td>
+      <td><button class="edit-btn small-btn">編集</button></td>
+      <td><button class="confirm-btn small-btn">確定</button></td>
+    `;
+    tbody.appendChild(tr);
   });
-}, 0);
-    // 検索結果表示エリアを表示する
-    resultsDiv.style.display = "block";
-    document.getElementById("output-btn").style.display = "block";
-  });
+
+  // 編集ボタンの遷移処理
+  setTimeout(() => {
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        const date = row.cells[0].textContent;
+        const employeeId = row.getAttribute('data-employee-id'); // ← ここで取得
+
+        const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
+        window.location.href = url;
+      });
+    });
+  }, 0);
+
+  resultsDiv.style.display = "block";
+  document.getElementById("output-btn").style.display = "block";
+});
+
 </script>
 
 </body>
