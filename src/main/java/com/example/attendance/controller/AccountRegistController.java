@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.Account;
-import com.example.demo.form.AccountRegistForm;
+import com.example.attendance.entity.Account;
+import com.example.attendance.form.AccountReistForm;
 import com.example.demo.serviceuser registrationService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,7 +42,7 @@ public class AccountRegistController {
     /** アカウント登録処理 */
     @PostMapping("/userRegistrationer")
     public String registerAccount(
-            @Validated @ModelAttributeuser registrationForm form,
+            @Validated @ModelAttribute AccountRegistForm form,
             BindingResult result,
             RedirectAttributes redirectAttributes) {
 
