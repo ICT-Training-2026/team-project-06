@@ -122,9 +122,8 @@
 </div>
 </div>
 
-
-
 <script>
+
   document.getElementById("search-btn").addEventListener("click", function () {
   const department = document.getElementById("department").value.trim();
   const position = document.getElementById("position").value.trim();
@@ -153,62 +152,61 @@
     return;
   }
 
-  // ダミーデータ（ここでは社員IDを仮で使う）
-  const dummyData = [
-    {
-      date: "2025-07-01",
-      start_time: "09:00",
-      closing_time: "18:00",
-      worktime: "8:00",
-      breaktime: "1:00",
-      comment: "通常勤務"
-    },
-    {
-      date: "2025-07-02",
-      start_time: "09:15",
-      closing_time: "18:15",
-      worktime: "8:00",
-      breaktime: "1:00",
-      comment: "会議多め"
-    }
-  ];
-
-  const resultsDiv = document.getElementById("results");
-  const tbody = document.querySelector("#results-table tbody");
-  tbody.innerHTML = "";
-
-  dummyData.forEach(record => {
-    const tr = document.createElement("tr");
-    tr.setAttribute("data-employee-id", employeeId); // ← 社員IDを埋め込む
-    tr.innerHTML = `
-      <td>${record.date}</td>
-      <td>${record.start_time}</td>
-      <td>${record.closing_time}</td>
-      <td>${record.worktime}</td>
-      <td>${record.breaktime}</td>
-      <td>${record.comment}</td>
-      <td><button class="edit-btn small-btn">編集</button></td>
-      <td><button class="confirm-btn small-btn">確定</button></td>
-    `;
-    tbody.appendChild(tr);
+  // APIへクエリパラメータ作成
+  const params = new URLSearchParams({
+    department: department,
+    position: position,
+    employeeId: employeeId,
+    startDate: startDate,
+    endDate: endDate
   });
 
-  // 編集ボタンの遷移処理
-  setTimeout(() => {
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const row = btn.closest('tr');
-        const date = row.cells[0].textContent;
-        const employeeId = row.getAttribute('data-employee-id'); // ← ここで取得
+  fetch(`/api/attendance?${params.toString()}`)
+    .then(res => {
+      if (!res.ok) throw new Error("データ取得に失敗しました");
+      return res.json();
+    })
+    .then(data => {
+      const resultsDiv = document.getElementById("results");
+      const tbody = document.querySelector("#results-table tbody");
+      tbody.innerHTML = "";
 
-        const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
-        window.location.href = url;
+      data.forEach(record => {
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-employee-id", record.employeeId);
+        tr.innerHTML = `
+          <td>${record.date}</td>
+          <td>${record.start_time}</td>
+          <td>${record.closing_time}</td>
+          <td>${record.worktime}</td>
+          <td>${record.breaktime}</td>
+          <td>${record.comment}</td>
+          <td><button class="edit-btn small-btn">編集</button></td>
+          <td><button class="confirm-btn small-btn">確定</button></td>
+        `;
+        tbody.appendChild(tr);
       });
-    });
-  }, 0);
 
-  resultsDiv.style.display = "block";
-  document.getElementById("output-btn").style.display = "block";
+      // 編集ボタンのイベント設定
+      setTimeout(() => {
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const row = btn.closest('tr');
+            const date = row.cells[0].textContent;
+            const employeeId = row.getAttribute('data-employee-id');
+
+            const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
+            window.location.href = url;
+          });
+        });
+      }, 0);
+
+      resultsDiv.style.display = "block";
+      document.getElementById("output-btn").style.display = "block";
+    })
+    .catch(error => {
+      alert(error.message);
+    });
 });
 
 </script>
