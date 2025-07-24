@@ -91,7 +91,9 @@ main {
   margin-bottom: 20px;
   width: 120px;
 }
-
+.output-btn{
+    text-align: right
+}
 .explanation {
   border: 2px solid #90cdfd;
   background-color: #cfd2d3;
@@ -168,3 +170,4 @@ b {
   margin: 0 5px;
   transition: background-color 0.3s ease;
 }
+
