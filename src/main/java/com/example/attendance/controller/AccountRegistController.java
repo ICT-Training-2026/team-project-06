@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.attendance.entity.Account;
 import com.example.attendance.form.AccountRegistForm;
-import com.example.demo.serviceuser registrationService;
+import com.example.attendance.service.AccountRegistrationService;
 
 import lombok.RequiredArgsConstructor;
 
