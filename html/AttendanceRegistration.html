@@ -1,52 +1,132 @@
 <!DOCTYPE html>
 <html lang="jp">
+
 <head>
     <meta charset="UTF-8">
     <title>Timinute</title>
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/Attendance Registration.css">
+    <link rel="stylesheet" href="../css/AttendanceRegistration.css">
 </head>
 
 <body>
 
-<header class="header">
-    <div class="logo-container">
-      <img src="../image/Timinute_logo.png" alt="画像">
-    </div>
-    <div class="welcome-text">
-      <p>お疲れ様です！<br>管理者さん</p>
-    </div>
-    <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
-    </div>
-</header>
+    <header class="header">
+        <div class="logo-container">
+            <img src="../image/Timinute_logo.png" alt="画像">
+        </div>
+        <div class="welcome-text">
+            <p>お疲れ様です！<br>管理者さん</p>
+        </div>
+        <div class="buttons">
+            <a href="userhome.html"><button class="headerbtn">HOME</button></a>
+            <a href="login.html"><button class="headerbtn">Logout</button></a>
+        </div>
+    </header>
 
-<div class="container">
-    <div class="left-content">
-        <div class="all">
-            <div class="date" id="date"></div>
-            <div class="time" id="time"></div>
-            <script src="../js/AttendanceRegistration.js"></script>
+    <div class="container">
+        <div class="left-content">
+            <div class="all">
+                <div class="date" id="date"></div>
+                <div class="time" id="time"></div>
+                <script src="../js/AttendanceRegistration.js"></script>
+            </div>
+            <div class="category">
+                <label>
+                    <input type="radio" name="option" value="1" checked>出勤
+                </label>
+                <label>
+                    <input type="radio" name="option" value="2">振出
+                </label>
+            </div>
         </div>
-        <div class="category">
-            <label>
-                <input type="radio" name="option" value="1" checked>出勤
-            </label>
-            <label>
-                <input type="radio" name="option" value="2">振出
-            </label>
+        <div class="button-grid">
+            <button class="roundbtn">出勤</button></a>
+            <button class="roundbtn">欠勤</button></a>
+            <button class="roundbtn">休憩開始</button></a>
+            <button class="roundbtn">休憩終了</button></a>
         </div>
     </div>
-    <div class="button-grid">
-        <a href="ClockIn.html"><button class="roundbtn">出勤</button></a>
-        <a href="ClockOut.html"><button class="roundbtn">欠勤</button></a>
-        <a href="StartBreak.html"><button class="roundbtn">休憩開始</button></a>
-        <a href="ENDBreak.html"><button class="roundbtn">休憩終了</button></a>
-    </div>
-</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 時計更新関数
+            function updateClock() {
+                const now = new Date();  // 現在の日時を取得する
+                const year = now.getFullYear();     // 年（例：2025）
+                const month = String(now.getMonth() + 1).padStart(2, '0');  // 1月-12月
+                const date = String(now.getDate()).padStart(2, '0');        // 1-31日まで
+                const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+                const day = dayNames[now.getDay()];  // 曜日（0〜6）
+                const hours = String(now.getHours()).padStart(2, '0');   // 00-23
+                const minutes = String(now.getMinutes()).padStart(2, '0'); // 59分
+                const seconds = String(now.getSeconds()).padStart(2, '0'); // 59秒
+
+                document.getElementById('date').textContent = `${year}年${month}月${date}日(${day})`;
+                document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+            }
+
+            // 初回実行
+            updateClock();
+            // 1秒ごとに更新
+            setInterval(updateClock, 1000);
+
+            // ボタンの処理
+            const buttons = document.querySelectorAll('.button-grid button');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault(); // デフォルトのリンク動作を防止
+
+                    const action = button.textContent;
+                    const selectedOption = document.querySelector('input[name="option"]:checked').value;
+
+                    // POSTリクエストを送信
+                    fetch('/api/attendance', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            action: action,
+                            option: selectedOption,
+                            timestamp: new Date().toISOString()
+                        })
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Success:', data);
+                            // POSTが成功したら、対応するページに遷移
+                            switch (action) {
+                                case '出勤':
+                                    const backUrl = encodeURIComponent(window.location.href); // 現在のページのURLを取得
+                                    window.location.href = `ClockIn.html?timestamp=${encodeURIComponent(new Date().toISOString())}&back=${backUrl}`;
+                                    break;
+                                case '欠勤':
+                                    window.location.href = 'ClockOut.html';
+                                    break;
+                                case '休憩開始':
+                                    window.location.href = 'StartBreak.html';
+                                    break;
+                                case '休憩終了':
+                                    window.location.href = 'ENDBreak.html';
+                                    break;
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                            alert('打刻登録に失敗しました'); // エラー時のアラート
+                        });
+                });
+            });
+        });
+    </script>
+
 
 </body>
+
 </html>
-
-
