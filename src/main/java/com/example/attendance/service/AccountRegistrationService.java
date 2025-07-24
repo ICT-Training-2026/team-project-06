@@ -4,6 +4,6 @@ package com.example.attendance.service;
 import com.example.attendance.entity.Account;
 public interface AccountRegistrationService {
 
-	void register(Account account);
+	void regist(Account account);
 	
 }

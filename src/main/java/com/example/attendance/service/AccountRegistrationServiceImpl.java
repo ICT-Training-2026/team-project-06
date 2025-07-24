@@ -13,7 +13,7 @@ public class AccountRegistrationServiceImpl implements AccountRegistrationServic
 
 	private final AccountRegistRepository repository;
 	@Override
-	public void register(Account account) {
+	public void regist(Account account) {
 		// TODO 自動生成されたメソッド・スタブ
 		repository.add(account);
 	}
