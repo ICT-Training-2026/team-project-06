@@ -1,5 +1,13 @@
 package com.example.attendance.repository;
 
-public class AccountRegistRepositoryImpl {
+import com.example.attendance.entity.Account;
+
+public class AccountRegistRepositoryImpl implements AccountRegistRepository {
+
+	@Override
+	public void add(Account acount) {
+		// TODO 自動生成されたメソッド・スタブ
+
+	}
 
 }
