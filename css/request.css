@@ -1,75 +1,86 @@
 .request {
     display: flex;
-    flex-direction: column; /* q—v‘f‚ğc‚É•À‚×‚é */
-    align-items: center; /* …•½•ûŒü‚Ì’†‰›‘µ‚¦ */
-    justify-content: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
-    min-height: 100vh; /* ƒrƒ…[ƒ|[ƒg‘S‘Ì‚Ì‚‚³‚É‘Î‰ */
+    flex-direction: column; /* å­è¦ç´ ã‚’ç¸¦ã«ä¸¦ã¹ã‚‹ */
+    align-items: center; /* æ°´å¹³æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    justify-content: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    margin-top: 50px;
+    /*min-height: 100vh; /* ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆå…¨ä½“ã®é«˜ã•ã«å¯¾å¿œ */
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* …•½•ûŒü‚Ì’†‰›‘µ‚¦ */
-    justify-content: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
-    min-height: 100vh; /* ƒrƒ…[ƒ|[ƒg‘S‘Ì‚Ì‚‚³‚É‘Î‰ */
+    align-items: center; /* æ°´å¹³æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    justify-content: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    margin-top: 50px;
+    /*min-height: 100vh; /* ãƒ“ãƒ¥ãƒ¼ãƒãƒ¼ãƒˆå…¨ä½“ã®é«˜ã•ã«å¯¾å¿œ */
 }
 
 .attendance-category, .date, .comment {
     display: flex;
-    align-items: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
-    justify-content: center; /* …•½•ûŒü‚Ì’†‰›‘µ‚¦ */
-    margin-bottom: 20px; /* ƒZƒNƒVƒ‡ƒ“ŠÔ‚Ì—]”’ */
-    width: 100%; /* e—v‘f‚Ì•‚É‡‚í‚¹‚é */
+    align-items: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    justify-content: center; /* æ°´å¹³æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    margin-bottom: 20px; /* ã‚»ã‚¯ã‚·ãƒ§ãƒ³é–“ã®ä½™ç™½ */
+    width: 100%; /* è¦ªè¦ç´ ã®å¹…ã«åˆã‚ã›ã‚‹ */
 }
 
 h2 {
-    font-size: 35px;
+    font-size: 30px;
     background-color: #00BFE9;
     padding: 40px;
-    width: 230px; /* ”wŒi‚Ì•‚ğw’è */
+    width: 200px; /* èƒŒæ™¯ã®å¹…ã‚’æŒ‡å®š */
     height: 45px;
     display: flex;
-    align-items: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
-    justify-content: center; /* …•½•ûŒü‚Ì’†‰›‘µ‚¦ */
+    align-items: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
+    justify-content: center; /* æ°´å¹³æ–¹å‘ã®ä¸­å¤®æƒãˆ */
     margin: 20px;
     border-radius: 7px;
 }
 
 form label, form input, form p, form textarea {
-    margin-right: 10px; /* —v‘fŠÔ‚Ì—]”’‚ğİ’è */
-    font-size: 35px;
+    margin-right: 10px; /* è¦ç´ é–“ã®ä½™ç™½ã‚’è¨­å®š */
+    font-size: 25px;
 }
 
 
 form label {
-    margin-right: 10px; /* ƒ‰ƒxƒ‹ŠÔ‚ÌŠÔŠu‚ğİ’è */
+    margin-right: 10px; /* ãƒ©ãƒ™ãƒ«é–“ã®é–“éš”ã‚’è¨­å®š */
 }
 
 
 .date form {
     display: flex;
-    align-items: center; /* ‚’¼•ûŒü‚Ì’†‰›‘µ‚¦ */
+    align-items: center; /* å‚ç›´æ–¹å‘ã®ä¸­å¤®æƒãˆ */
 }
 
 
 input[type="radio"] {
     transform: scale(3) translateY(-1.5px); 
-    margin-right: 20px; 
-    margin-left: 85px;
+    margin-right: 30px; 
+    margin-left: 95px;
     
 }
 
 .date input[type="date"] {
-    width: 280px; /* ‚±‚±‚Å•‚ğw’è‚µ‚Ü‚· */
-    padding: 20px; /* “à‘¤‚Ì—]”’‚ğw’è‚µ‚Ü‚· */
-    /* ‘¼‚ÌƒXƒ^ƒCƒ‹‚à•K—v‚É‰‚¶‚Ä’Ç‰Á‚Å‚«‚Ü‚· */
+    width: 280px; /* ã“ã“ã§å¹…ã‚’æŒ‡å®šã—ã¾ã™ */
+    padding: 20px; /* å†…å´ã®ä½™ç™½ã‚’æŒ‡å®šã—ã¾ã™ */
+    /* ä»–ã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚‚å¿…è¦ã«å¿œã˜ã¦è¿½åŠ ã§ãã¾ã™ */
+    background-color: #FFFAD0; 
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    margin-right: 10px;
 }
 
 .comment textarea {
-     width: 600px; /* ‚±‚±‚Å•‚ğw’è‚µ‚Ü‚· */
+     width: 600px; /* ã“ã“ã§å¹…ã‚’æŒ‡å®šã—ã¾ã™ */
      height: 100px; 
      padding: 20px;
-     margin-left: 24.5px;
+     margin-left: 18px;
+     margin-right: 10px;
+     margin-top: -10px;
+     background-color: #FFFAD0; 
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
 }
 
 .request-buttons input[type="submit"] {
@@ -79,8 +90,14 @@ input[type="radio"] {
     padding: 20px 40px;
     font-size: 25px;
     font-weight: bold;
+    
 }
 
 .attendance-category label {
-    font-weight: bold; /* ƒeƒLƒXƒg‚ğ‘¾š‚É‚·‚é */
+    font-weight: bold; /* ãƒ†ã‚­ã‚¹ãƒˆã‚’å¤ªå­—ã«ã™ã‚‹ */
+}
+
+form p{
+    font-weight: bold;
+    font-size: 25px;
 }

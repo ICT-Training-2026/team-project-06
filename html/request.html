@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Request Page</title>
+    <title>Timinute</title>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/request.css" />
 </head>
@@ -53,6 +53,7 @@
             <input type="date" id="end-date" name="end-date">
 
         </form>
+        
     </div>
 
     <div class="comment">
@@ -64,9 +65,64 @@
     </div>
 
     <div class="request-buttons">
-        <input type="submit" value="申請">
+        <input type="submit" value="申請" id="requestBtn">
     </div>
+
 </request>
 </body>
 
 </html>
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const submitButton = document.getElementById('requestBtn');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+
+    submitButton.addEventListener('click', function(event) {
+        event.preventDefault(); // フォームの送信を防ぐ
+
+        // 開始日または終了日が選択されていない場合のチェック
+        if (!startDateInput.value || !endDateInput.value) {
+            alert('日付を選択してください。'); // 日付が選択されていない場合にアラートを表示
+            return;
+        }
+
+        // 日付の比較
+        const startDate = new Date(startDateInput.value);
+        const endDate = new Date(endDateInput.value);
+
+        if (startDate > endDate) {
+            alert('開始日が終了日より後になっています。'); // 開始日が終了日より後の場合にアラートを表示
+            return;
+        }
+
+        // 送信データの準備
+        const data = {
+            startDate: startDateInput.value,
+            endDate: endDateInput.value,
+            attendance: document.querySelector('input[name="attendance"]:checked').value,
+            comment: document.getElementById('comment').value
+        };
+
+        // POSTリクエストを送信
+        fetch('/your-backend-endpoint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            alert('申請が完了しました！'); // 正常な日付の場合にアラートを表示
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('申請に失敗しました。もう一度お試しください。');
+        });
+    });
+});
+</script>

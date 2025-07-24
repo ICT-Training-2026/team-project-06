@@ -10,72 +10,147 @@
 
 <body>
 
-<header class="header">
-    <div class="logo-container">
-      <img src="../image/Timinute_logo.png" alt="画像">
-    </div>
-    <div class="welcome-text">
-      <p>お疲れ様です！<br>管理者さん</p>
-    </div>
-    <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
-    </div>
-  </header>
+    <header class="header">
+        <div class="logo-container">
+            <img src="../image/Timinute_logo.png" alt="画像">
+        </div>
+        <div class="welcome-text">
+            <p>お疲れ様です！<br>管理者さん</p>
+        </div>
+        <div class="buttons">
+            <a href="userhome.html"><button class="headerbtn">HOME</button></a>
+            <a href="login.html"><button class="headerbtn">Logout</button></a>
+        </div>
+    </header>
 
-<registration class="registration">
-    <h2>ユーザー登録</h2>
+    <registration class="registration">
+        <h2>ユーザー登録</h2>
+        <div class="record-box">
+            <div class="department">
+                <h3>部署</h3>
+                <form>
+                    <label for="department"></label>
+                    <select id="department" name="department">
+                        <option value="sales">営業</option>
+                        <option value="development">開発</option>
+                        <option value="administration">総務</option>
+                    </select>
+                    <br><br>
+                </form>
+            </div>
 
-    <div class="department">
-        <h3>部署</h3>
-        <form>
-            <label for="department">部署:</label>
-            <select id="department" name="department">
-                <option value="sales">営業</option>
-                <option value="development">開発</option>
-                <option value="administration">総務</option>
-            </select>
-            <br><br>
-        </form>
-    </div>
+            <div class="position">
+                <h3>役職</h3>
+                <form>
+                    <label for="department"></label>
+                    <select id="department" name="department">
+                        <option value="sales">社長</option>
+                        <option value="development">部長</option>
+                        <option value="administration">課長</option>
+                        <option value="administration">係長</option>
+                        <option value="administration">一般</option>
+                    </select>
+                    <br><br>
+                </form>
+            </div>
+            <div class="EmployeeID">
+                <h3>社員ID</h3>
+                <form>
+                    <label for="EmployeeID"></label><br>
+                    <textarea id="EmployeeID" name="EmployeeID" rows="0" cols="6"></textarea><br><br>
+                </form>
+            </div>
 
-    <div class="position">
-        <h3>役職</h3>
-        <form>
-            <label for="department">役職:</label>
-            <select id="department" name="department">
-                <option value="sales">社長</option>
-                <option value="development">部長</option>
-                <option value="administration">課長</option>
-                <option value="administration">係長</option>
-                <option value="administration">一般</option>
-            </select>
-            <br><br>
-        </form>
-    </div>
-    <div class="Employee ID">
-        <h3>社員ID</h3>
-        <form>
-            <label for="Employee ID">社員ID:</label><br>
-            <textarea id="Employee ID" name="Employee ID" rows="0" cols="6"></textarea><br><br>
-        </form>
-    </div>
+            <div class="name">
+                <h3>氏名</h3>
+                <form>
+                    <label for="name"></label><br>
+                    <textarea id="name" name="name" rows="1" cols="20"></textarea><br><br>
+                </form>
+            </div>
 
-    <div class="period">
-        <h3>氏名</h3>
-        <form>
-            <label for="name">氏名:</label><br>
-            <textarea id="name" name="name" rows="1" cols="20"></textarea><br><br>
-        </form>
-    </div>
+            <div class="pasword">
+                <h3>パスワード</h3>
+                <form>
+                    <label for="pasword"></label><br>
+                    <textarea id="pasword" name="pasword" rows="1" cols="20"></textarea><br><br>
+                </form>
+            </div>
+        </div>
 
-    <div class="registration-buttons">
-        <input type="submit" value="登録">
-    </div>
+        <div class="registration-buttons">
+            <input type="submit" id="registerBtn" value="登録">
+        </div>
+    </registration>
 
 
-</registration>
+ <script>
+  // 既存社員ID（仮のデータ）
+  const existingEmployeeIDs = ['E001', 'E002', 'E003'];
+
+  document.getElementById('registerBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    const employeeID = document.getElementById('EmployeeID').value.trim();
+    const name = document.getElementById('name').value.trim();
+    const password = document.getElementById('pasword').value.trim();
+    const department = document.querySelector('.department select').value;
+    const position = document.querySelector('.position select').value;
+
+    let errorMessages = [];
+
+    if (!employeeID) {
+      errorMessages.push('社員IDが入力されていません');
+    } else if (existingEmployeeIDs.includes(employeeID)) {
+      errorMessages.push('社員IDが間違っています');
+    }
+
+    if (!name) {
+      errorMessages.push('氏名を入力してください');
+    }
+
+    if (!password) {
+      errorMessages.push('パスワードを入力してください');
+    }
+
+    if (errorMessages.length > 0) {
+      alert(errorMessages.join('\n'));
+      return;
+    }
+
+    // バリデーションOKなら送信データ作成
+    const data = {
+      department: department,
+      position: position,
+      EmployeeID: employeeID,
+      name: name,
+      pasword: password
+    };
+
+    // fetchでPOST送信
+    fetch('/your-backend-endpoint', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json();
+    })
+    .then(data => {
+      console.log('Success:', data);
+      alert('登録が完了しました！');
+      window.location.href = 'userhome.html';
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      alert('申請に失敗しました。もう一度お試しください。');
+    });
+
+  });
+</script>
 
 </body>
-
 </html>
