@@ -66,12 +66,113 @@
         <input type="text">
       </div>
     </div>
-      <div class="btn-box">
-    <a href=".html"><button class="edit-btn" type="button">編集</button></a>
-    <!-- リンクは不要かも -->
-    <a href=".html"><button class="delete-btn" type="button">削除</button></a>
-    <!-- リンクは不要かも -->
-    </div>
+    
+<div class="btn-box">
+  <button class="edit-btn" type="button">編集</button>
+  <button class="delete-btn" type="button">削除</button>
+</div>
+<div class="back-btn-box">
+  <button class="back-btn" type="button" style="display:none;">もどる</button>
+</div>
+
+
   </main>
+<script>
+  function getQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    id: params.get('id') || '',
+    date: params.get('date') || ''
+  };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const { id, date } = getQueryParams();
+
+  if (!id || !date) {
+    alert("社員IDまたは日付の情報が不足しています");
+    return;
+  }
+  document.getElementById('employeeId').value = id;
+
+  // ここでfetch処理
+  fetch(`/api/attendance?id=${id}&date=${date}`)
+    .then(res => {
+      if (!res.ok) throw new Error("データ取得に失敗しました");
+      return res.json();
+    })
+    .then(data => {
+      const values = [
+        data.date,
+        data.start,
+        data.end,
+        data.work,
+        data.rest,
+        data.overtime
+      ];
+
+      const contentBoxes = document.querySelectorAll('.record-box .content');
+      let index = 0;
+      contentBoxes.forEach(box => {
+        const inputs = box.querySelectorAll('input');
+        if (inputs.length >= 1 && index < values.length) {
+          inputs[0].value = values[index];
+          index++;
+        }
+      });
+    })
+    .catch(error => {
+      alert(error.message);
+    });
+
+  const editButton = document.querySelector('.edit-btn');
+  const deleteButton = document.querySelector('.delete-btn');
+  const backBtn = document.querySelector('.back-btn');
+
+  if (editButton && deleteButton && backBtn) {
+   editButton.addEventListener('click', () => {
+  // 編集後の入力欄の値を取得
+  const contentDivs = document.querySelectorAll('.record-box .content');
+
+  const updatedData = {
+    id: document.getElementById('employeeId').value,
+    date: contentDivs[0].querySelectorAll('input')[0].value, // readonlyの日付
+    start: contentDivs[1].querySelectorAll('input')[1].value,
+    end: contentDivs[2].querySelectorAll('input')[1].value,
+    work: contentDivs[3].querySelectorAll('input')[1].value,
+    rest: contentDivs[4].querySelectorAll('input')[1].value,
+    overtime: contentDivs[5].querySelectorAll('input')[1].value,
+  };
+
+  // fetchでサーバーへ更新データを送信
+  fetch('/api/attendance', {
+    method: 'PUT',  // APIに合わせて変更してください
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedData),
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('更新に失敗しました');
+    return res.json();
+  })
+  .then(() => {
+    alert('編集が完了しました！');
+    editButton.style.display = 'none';
+    deleteButton.style.display = 'none';
+    backBtn.style.display = 'inline-block';
+  })
+  .catch(error => {
+    alert(error.message);
+  });
+});
+
+
+    backBtn.addEventListener('click', () => {
+      window.history.back();
+    });
+  }
+});
+</script>
 </body>
 </html>
