@@ -51,14 +51,23 @@ public class AccountRegistController {
         }
 
         // フォームの内容をエンティティに変換
+//        Account account = new Account();
+//        account.setEmployeeId(form.getEmployeeId());
+//        account.setName(form.getName());
+//        account.setDepartment(form.getDepartment());
+//        account.setEmail(form.getEmail());
+        
         Account account = new Account();
-        account.setEmployeeId(form.getEmployeeId());
-        account.setName(form.getName());
-        account.setDepartment(form.getDepartment());
-        account.setEmail(form.getEmail());
+        account.setEmployeeId(null);
+        account.setDepartmentId(null);
+        account.setJobId(null);
+        account.setName(null);
+		service.regist(account);
+		return "request";
+
 
         // サービス呼び出しでDB登録
-        service.regist(account);
+//        service.regist(account);
 
         redirectAttributes.addFlashAttribute("msg", "アカウント登録が完了しました。");
 
