@@ -1,5 +1,5 @@
 package com.example.attendance.repository;
 
-public interface AccountRegistRepository {
+public class AccountRegistRepositoryImpl {
 
 }
