@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountRegistController {
 
-    private final registrationService service;
+    private final AccountRegistrationService service;
 
     /** アカウント登録画面表示 */
     @GetMapping("/userRegistration")
