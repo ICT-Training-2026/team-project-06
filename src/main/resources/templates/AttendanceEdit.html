@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>Timinute</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/AttendanceEdit.css">
+</head>
+
+<body>
+
+    <header class="header">
+    <div class="logo-container">
+      <img src="../image/Timinute_logo.png" alt="画像">
+    </div>
+    <div class="welcome-text">
+      <p>お疲れ様です！<br>管理者さん</p>
+    </div>
+    <div class="buttons">
+      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
+      <a href="login.html"><button class="headerbtn">Logout</button></a>
+    </div>
+  </header>
+
+
+     <main class="main-content">
+    <div class="id-box">
+      <label for="employeeId">社員ID</label>
+      <input type="text" id="employeeId">
+    </div>
+    <div class="record-box">
+      <div class="content">
+        <label>日付</label>
+        <input type="text" value="[DBデータ]" readonly>
+      </div>
+      <div class="content">
+        <label>始業時刻</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>終業時刻</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>労働時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>休憩時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+      <div class="content">
+        <label>残業時間(分)</label>
+        <input type="text" value="[DBデータ]" readonly>
+        <span class="arrow">⇒</span>
+        <input type="text">
+      </div>
+    </div>
+      <div class="btn-box">
+    <a href=".html"><button class="edit-btn" type="button">編集</button></a>
+    <!-- リンクは不要かも -->
+    <a href=".html"><button class="delete-btn" type="button">削除</button></a>
+    <!-- リンクは不要かも -->
+    </div>
+  </main>
+</body>
+</html>

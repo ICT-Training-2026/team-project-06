@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timinute</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/user registration.css" />
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo-container">
+      <img src="../image/Timinute_logo.png" alt="画像">
+    </div>
+    <div class="welcome-text">
+      <p>お疲れ様です！<br>管理者さん</p>
+    </div>
+    <div class="buttons">
+      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
+      <a href="login.html"><button class="headerbtn">Logout</button></a>
+    </div>
+  </header>
+
+<registration class="registration">
+    <h2>ユーザー登録</h2>
+
+    <div class="department">
+        <h3>部署</h3>
+        <form>
+            <label for="department">部署:</label>
+            <select id="department" name="department">
+                <option value="sales">営業</option>
+                <option value="development">開発</option>
+                <option value="administration">総務</option>
+            </select>
+            <br><br>
+        </form>
+    </div>
+
+    <div class="position">
+        <h3>役職</h3>
+        <form>
+            <label for="department">役職:</label>
+            <select id="department" name="department">
+                <option value="sales">社長</option>
+                <option value="development">部長</option>
+                <option value="administration">課長</option>
+                <option value="administration">係長</option>
+                <option value="administration">一般</option>
+            </select>
+            <br><br>
+        </form>
+    </div>
+    <div class="Employee ID">
+        <h3>社員ID</h3>
+        <form>
+            <label for="Employee ID">社員ID:</label><br>
+            <textarea id="Employee ID" name="Employee ID" rows="0" cols="6"></textarea><br><br>
+        </form>
+    </div>
+
+    <div class="period">
+        <h3>氏名</h3>
+        <form>
+            <label for="name">氏名:</label><br>
+            <textarea id="name" name="name" rows="1" cols="20"></textarea><br><br>
+        </form>
+    </div>
+
+    <div class="registration-buttons">
+        <input type="submit" value="登録">
+    </div>
+
+
+</registration>
+
+</body>
+
+</html>

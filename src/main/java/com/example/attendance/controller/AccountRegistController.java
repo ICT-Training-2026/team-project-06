@@ -47,9 +47,9 @@ public class AccountRegistController {
         account.setJobId(null);
         account.setName(null);
 		service.regist(account);
-		//return "request";
 
-        redirectAttributes.addFlashAttribute("msg",  "アカウント登録が完了しました。");
+
+        redirectAttributes.addFlashAttribute("msg", "アカウント登録が完了しました。");
         return "redirect:/account-complete";
     }
     /** 完了画面表示 */

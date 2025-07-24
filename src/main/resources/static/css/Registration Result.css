@@ -1,0 +1,20 @@
+.whole {
+    text-align: center;
+    padding-top: 200px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    padding: 20px 40px;
+}
