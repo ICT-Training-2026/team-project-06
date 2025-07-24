@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>Timinute</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+<div class="Logo">
+    <img src="../image/Timinute_logo.png" alt="ロゴ画像">
+</div>
+
+<div class="usercontent">
+<div id="textinput">
+<div>
+    <h3>社員ID</h3>
+    <input type="text" class="textbox">
+</div>
+
+<div class="pw">
+    <h3>パスワード</h3>
+    <input type="text" class="textbox">
+</div>
+</div>
+
+<div>
+    <button class="btn" id="loginBtn" type="button">ログイン</button>
+</div>
+
+
+<!-- <div>
+    <a href="userhome.html"><button class="btn" type="button">ログイン</button></a>
+</div> -->
+
+<script>
+  document.getElementById("loginBtn").addEventListener("click", function () {
+    // 入力値を取得（後でバリデーション等で使えます）
+    const userId = document.querySelector(".textbox").value;
+    const password = document.querySelector(".pw .textbox").value;
+    console.log("Id:", userId);
+    console.log("Pw:", password);
+    // ここでバリデーション処理などを追加できます（例：空欄チェック）
+
+    if (userId === "" || password === "") {
+    alert("社員IDとパスワードを入力してください");
+    return;
+    }
+
+    // ページ遷移
+    window.location.href = "userhome.html";
+  });
+</script>
+
+</body>
+</html>
+

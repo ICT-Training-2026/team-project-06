@@ -3,6 +3,7 @@ package com.example.attendance.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -19,14 +20,20 @@ public class ApplicationController {
 
 	private final ApplicationService service;
 
-	//申請の可否はjavascript側で判断してもらうか, Postの値は応相談
-	@PostMapping("/confirm-application")
+	@GetMapping("/application")
+	private String request() {
+		return "request";
+	}
+
+
+	//申請の可否はjavascript側で判断してもらうか→攻撃の可能性
+	@PostMapping("/api/submit-request")
 	private String application(
 			@Validated @ModelAttribute ApplicationForm form,
 			BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "application";
+			return "request";
 		}
 
 		Application a = new Application();
@@ -36,6 +43,6 @@ public class ApplicationController {
 		a.setDateApply(null);
 		service.regist(a);
 
-		return "application";
+		return "request";
 	}
 }

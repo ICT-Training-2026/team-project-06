@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Timinute</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/request.css" />
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="../image/Timinute_logo.png" alt="画像">
+        </div>
+        <div class="welcome-text">
+            <p>お疲れ様です！<br>管理者さん</p>
+        </div>
+        <div class="buttons">
+            <a href="userhome.html"><button class="headerbtn">HOME</button></a>
+            <a href="login.html"><button class="headerbtn">Logout</button></a>
+        </div>
+    </header>
+
+    <request class="request">
+        <div class="attendance-category">
+            <h2>勤怠区分</h2>
+            <form>
+                <label>
+                    <input type="radio" name="attendance" value="振休">
+                    振休
+                </label>
+                <label>
+                    <input type="radio" name="attendance" value="年休">
+                    年休
+                </label>
+                <label>
+                    <input type="radio" name="attendance" value="欠勤">
+                    欠勤
+                </label>
+            </form>
+        </div>
+
+        <div class="date">
+            <h2>日付</h2>
+            <form>
+                <label for="start-date"></label>
+                <input type="date" id="start-date" name="start-date">
+                <p>~</p>
+
+
+                <label for="end-date"></label>
+                <input type="date" id="end-date" name="end-date">
+
+            </form>
+
+        </div>
+
+        <div class="comment">
+            <h2>コメント</h2>
+            <form>
+                <label for="comment"></label><br>
+                <textarea id="comment" name="comment" rows="0" cols="50"></textarea><br><br>
+            </form>
+        </div>
+
+        <div class="request-buttons">
+            <input type="submit" value="申請" id="requestBtn">
+        </div>
+
+    </request>
+</body>
+
+</html>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitButton = document.getElementById('requestBtn');
+        const startDateInput = document.getElementById('start-date');
+        const endDateInput = document.getElementById('end-date');
+
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault(); // フォームの送信を防ぐ
+
+            // 開始日または終了日が選択されていない場合のチェック
+            if (!startDateInput.value || !endDateInput.value) {
+                alert('日付を選択してください。'); // 日付が選択されていない場合にアラートを表示
+                return;
+            }
+
+            // 日付の比較
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (startDate > endDate) {
+                alert('開始日が終了日より後になっています。'); // 開始日が終了日より後の場合にアラートを表示
+                return;
+            }
+
+            // 送信データの準備
+            const data = {
+                startDate: startDateInput.value,
+                endDate: endDateInput.value,
+                attendance: document.querySelector('input[name="attendance"]:checked').value,
+                comment: document.getElementById('comment').value
+            };
+
+            // すべての必須項目が入力されているかチェック
+            if (data.startDate && data.endDate && data.attendance) {
+                alert('申請を送信します'); // ①のアラート表示
+
+                // POSTリクエストの送信
+                fetch('/api/submit-request', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        console.log('Success:', result);
+                        alert('申請が正常に送信されました。');
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        alert('申請の送信中にエラーが発生しました。');
+                    });
+            } else {
+                alert('すべての必須項目を入力してください。');
+            }
+        });
+    });
+</script>

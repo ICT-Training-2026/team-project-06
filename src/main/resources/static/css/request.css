@@ -1,0 +1,103 @@
+.request {
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    align-items: center; /* 水平方向の中央揃え */
+    justify-content: center; /* 垂直方向の中央揃え */
+    margin-top: 50px;
+    /*min-height: 100vh; /* ビューポート全体の高さに対応 */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平方向の中央揃え */
+    justify-content: center; /* 垂直方向の中央揃え */
+    margin-top: 50px;
+    /*min-height: 100vh; /* ビューポート全体の高さに対応 */
+}
+
+.attendance-category, .date, .comment {
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
+    margin-bottom: 20px; /* セクション間の余白 */
+    width: 100%; /* 親要素の幅に合わせる */
+}
+
+h2 {
+    font-size: 30px;
+    background-color: #00BFE9;
+    padding: 40px;
+    width: 200px; /* 背景の幅を指定 */
+    height: 45px;
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+    justify-content: center; /* 水平方向の中央揃え */
+    margin: 20px;
+    border-radius: 7px;
+}
+
+form label, form input, form p, form textarea {
+    margin-right: 10px; /* 要素間の余白を設定 */
+    font-size: 25px;
+}
+
+
+form label {
+    margin-right: 10px; /* ラベル間の間隔を設定 */
+}
+
+
+.date form {
+    display: flex;
+    align-items: center; /* 垂直方向の中央揃え */
+}
+
+
+input[type="radio"] {
+    transform: scale(3) translateY(-1.5px); 
+    margin-right: 30px; 
+    margin-left: 95px;
+    
+}
+
+.date input[type="date"] {
+    width: 280px; /* ここで幅を指定します */
+    padding: 20px; /* 内側の余白を指定します */
+    /* 他のスタイルも必要に応じて追加できます */
+    background-color: #FFFAD0; 
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    margin-right: 10px;
+}
+
+.comment textarea {
+     width: 600px; /* ここで幅を指定します */
+     height: 100px; 
+     padding: 20px;
+     margin-left: 18px;
+     margin-right: 10px;
+     margin-top: -10px;
+     background-color: #FFFAD0; 
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+}
+
+.request-buttons input[type="submit"] {
+  background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    border-radius: 7px;
+    padding: 20px 40px;
+    font-size: 25px;
+    font-weight: bold;
+    
+}
+
+.attendance-category label {
+    font-weight: bold; /* テキストを太字にする */
+}
+
+form p{
+    font-weight: bold;
+    font-size: 25px;
+}
