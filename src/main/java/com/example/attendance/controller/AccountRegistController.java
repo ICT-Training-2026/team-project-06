@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.attendance.entity.Account;
-import com.example.attendance.form.AccountReistForm;
+import com.example.attendance.form.AccountRegistForm;
 import com.example.demo.serviceuser registrationService;
 
 import lombok.RequiredArgsConstructor;

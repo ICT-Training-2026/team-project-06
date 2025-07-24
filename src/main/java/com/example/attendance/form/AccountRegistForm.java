@@ -1,4 +1,4 @@
-package com.example.demo.form;
+package com.example.attendance.form;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
