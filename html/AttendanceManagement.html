@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>Timinute</title>
     <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/Attendance Management.css" />
+    <link rel="stylesheet" href="../css/AttendanceManagement.css" />
 </head>
 
 <body>
@@ -122,8 +122,6 @@
 </div>
 </div>
 
-
-
 <script>
   document.getElementById("search-btn").addEventListener("click", function () {
     const department = document.getElementById("department").value;
@@ -183,7 +181,7 @@ setTimeout(() => {
       const employeeId = document.getElementById("employee-id").value;
 
       // aa.html にパラメータを付けて遷移
-      const url = `aa.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
+      const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
       window.location.href = url;
     });
   });
