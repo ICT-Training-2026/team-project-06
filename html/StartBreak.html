@@ -24,12 +24,44 @@
 
 
 <div class="whole">
-<h1>時間はいる</h1>
+<h1 id="clockInTime">時間はいる</h1>
 
 <h2>休憩を開始しました</h2>
 
-<a href="AttendanceRegistration.html"><button class="btn" type="button">もどる</button></a>
+<button class="btn" type="button" id="StartBtn">もどる</button></a>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // URLからタイムスタンプパラメータを取得
+      const urlParams = new URLSearchParams(window.location.search);
+      let timestamp = urlParams.get('timestamp');
+
+      // テスト用: タイムスタンプがない場合は現在時刻を使用
+      if (!timestamp) {
+        timestamp = new Date().toISOString();
+        console.log('テストモード: 現在時刻を使用します');
+      }
+
+      // タイムスタンプを日本時間の時刻文字列に変換
+      const date = new Date(timestamp);
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        timeZone: 'Asia/Tokyo'
+      };
+      const formattedTime = new Intl.DateTimeFormat('ja-JP', options).format(date);
+
+      // h1要素のテキストを変更
+      document.getElementById('clockInTime').textContent = formattedTime;
+
+      // 戻るボタンのイベントリスナーを設定
+      document.getElementById('StartBtn').addEventListener('click', function () {
+        window.location.href = 'AttendanceRegistration.html';
+      });
+    });
+  </script>
 
 </body>
 </html>

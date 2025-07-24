@@ -41,7 +41,7 @@
         </div>
         <div class="button-grid">
             <button class="roundbtn">出勤</button></a>
-            <button class="roundbtn">欠勤</button></a>
+            <button class="roundbtn">退勤</button></a>
             <button class="roundbtn">休憩開始</button></a>
             <button class="roundbtn">休憩終了</button></a>
         </div>
@@ -103,8 +103,8 @@
                             // POSTが成功したら、対応するページに遷移
                             switch (action) {
                                 case '出勤':
-                                    const backUrl = encodeURIComponent(window.location.href); // 現在のページのURLを取得
-                                    window.location.href = `ClockIn.html?timestamp=${encodeURIComponent(new Date().toISOString())}&back=${backUrl}`;
+
+                                    window.location.href = 'ClockIn.html';
                                     break;
                                 case '欠勤':
                                     window.location.href = 'ClockOut.html';

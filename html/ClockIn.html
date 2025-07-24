@@ -28,7 +28,7 @@
 
     <h2>出勤しました</h2>
 
-    <button class="btn" type="button" id="backBtn">もどる</button></a>
+    <button class="btn" type="button" id="InBtn">もどる</button></a>
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -56,7 +56,7 @@
       document.getElementById('clockInTime').textContent = formattedTime;
 
       // 戻るボタンのイベントリスナーを設定
-      document.getElementById('backBtn').addEventListener('click', function () {
+      document.getElementById('InBtn').addEventListener('click', function () {
         window.location.href = 'AttendanceRegistration.html';
       });
     });
