@@ -8,35 +8,15 @@ import lombok.Data;
 
 @Data
 public class Attendance {
-	private String employeeId;
-	private LocalDate date;
-	private LocalTime startTime;
-	private LocalTime closingTime;
-	private LocalTime startBreakTime;
-	private LocalTime endBreakTime;
-	private Time workTime;
-	private Time breakTime;
-	private String categoryId;
-	private String statusId;
-	private boolean categoryStatus;
-
-	/*不要？
-	private LocalTime breakEnd;
-	private LocalTime endTime;
-	private int workDuration;
-	private int breakDuration;
-	private int overtime;
-	private String workStatusld;
-	private boolean checked;
-	*/
-	public int calculateWorkTime() {
-
-	};
-
-	public int calculateOvertime() {
-
-	};
-	public boolean isValid() {
-
-	};
+    private String employeeId;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime closingTime;
+    private LocalTime startBreakTime;
+    private LocalTime endBreakTime;
+    private Time workTime;
+    private Time breakTime;
+    private String categoryId;
+    private String statusId;
+    private boolean categoryStatus;
 }
