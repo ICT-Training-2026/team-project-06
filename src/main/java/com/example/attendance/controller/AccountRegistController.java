@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.attendance.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountRegistController {
 
-    private finaluser registrationService service;
+    private final registrationService service;
 
     /** アカウント登録画面表示 */
     @GetMapping("/user registration")
@@ -29,7 +29,7 @@ public class AccountRegistController {
     /** 入力確認画面へ遷移 */
     @PostMapping("/account-check")
     public String checkAccountRegist(
-            @Validated @ModelAttributeuser registrationForm form,
+            @Validated @ModelAttribute AccountRegistForm form,
             BindingResult result) {
 
         if (result.hasErrors()) {
