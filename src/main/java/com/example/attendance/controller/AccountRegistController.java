@@ -21,9 +21,9 @@ public class AccountRegistController {
     private final registrationService service;
 
     /** アカウント登録画面表示 */
-    @GetMapping("/user registration")
+    @GetMapping("/userRegistration")
     public String showAccountRegistForm(@ModelAttribute AccountRegistForm form) {
-        return "user registration";
+        return "userRegistration";
     }
 
     /** 入力確認画面へ遷移 */
@@ -33,21 +33,21 @@ public class AccountRegistController {
             BindingResult result) {
 
         if (result.hasErrors()) {
-            return "user registration";
+            return "userRegistration";
         }
 
-        return "user registration";
+        return "userRegistration";
     }
 
     /** アカウント登録処理 */
-    @PostMapping("/user registrationer")
+    @PostMapping("/userRegistrationer")
     public String registerAccount(
             @Validated @ModelAttributeuser registrationForm form,
             BindingResult result,
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            return "user registration";
+            return "userRegistration";
         }
 
         // フォームの内容をエンティティに変換
