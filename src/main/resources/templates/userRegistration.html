@@ -44,12 +44,13 @@
         <form>
           <label for="department"></label>
           <select id="department" name="department">
-            <option value="sales">社長</option>
-            <option value="development">部長</option>
-            <option value="administration">課長</option>
-            <option value="administration">係長</option>
-            <option value="administration">一般</option>
+            <option value="president">社長</option>
+            <option value="manager">部長</option>
+            <option value="sectionChief">課長</option>
+            <option value="assistantManager">係長</option>
+            <option value="staff">一般</option>
           </select>
+
           <br><br>
         </form>
       </div>
@@ -57,7 +58,7 @@
         <h3>社員ID</h3>
         <form>
           <label for="EmployeeID"></label><br>
-          <textarea id="EmployeeID" name="EmployeeID" rows="0" cols="6"></textarea><br><br>
+          <textarea id="employeeId" name="employeeId" rows="0" cols="6"></textarea><br><br>
         </form>
       </div>
 
@@ -69,11 +70,11 @@
         </form>
       </div>
 
-      <div class="pasword">
+      <div class="password">
         <h3>パスワード</h3>
         <form>
-          <label for="pasword"></label><br>
-          <textarea id="pasword" name="pasword" rows="1" cols="20"></textarea><br><br>
+          <label for="password"></label><br>
+          <textarea id="password" name="password" rows="1" cols="20"></textarea><br><br>
         </form>
       </div>
     </div>
@@ -86,22 +87,22 @@
 
   <script>
     // 既存社員ID（仮のデータ）
-    const existingEmployeeIDs = ['E001', 'E002', 'E003'];
+    const existingEmployeeIds = ['E001', 'E002', 'E003'];
 
     document.getElementById('registerBtn').addEventListener('click', function (e) {
       e.preventDefault();
 
-      const employeeID = document.getElementById('EmployeeID').value.trim();
+      const employeeId = document.getElementById('employeeId').value.trim();
       const name = document.getElementById('name').value.trim();
-      const password = document.getElementById('pasword').value.trim();
+      const password = document.getElementById('password').value.trim();
       const department = document.querySelector('.department select').value;
       const position = document.querySelector('.position select').value;
 
       let errorMessages = [];
 
-      if (!employeeID) {
+      if (!employeeId) {
         errorMessages.push('社員IDが入力されていません');
-      } else if (existingEmployeeIDs.includes(employeeID)) {
+      } else if (existingEmployeeIds.includes(employeeId)) {
         errorMessages.push('社員IDが間違っています');
       }
 
@@ -122,35 +123,34 @@
 
       // バリデーションOKなら送信データ作成
       const data = {
-        department: department,
-        position: position,
-        EmployeeID: employeeID,
+        departmentId: department,
+        jobId: position,
+        employeeId: employeeId,
         name: name,
-        pasword: password
+        password: password
       };
 
       // fetchでPOST送信
-      fetch('/your-backend-endpoint', {
+      fetch('/userRegistrationer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
-        .then(response => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.json();
-        })
-        .then(data => {
-          console.log('Success:', data);
-          alert('登録が完了しました！');
-          window.location.href = 'userhome.html';
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          alert('申請に失敗しました。もう一度お試しください。');
-        });
-
+	  .then(response => {
+	    if (!response.ok) throw new Error('ネットワークエラー');
+	    return response.text();
+	  })
+	  .then(data => {
+	    console.log('Success:', data);
+	    alert('登録が完了しました！');
+		window.location.href = '/userRegistration'; //遷移できるように修正
+	  })
+	  .catch((error) => {
+	    console.error('Error:', error);
+	    alert('申請に失敗しました。もう一度お試しください。');
+	  });
     });
   </script>
 
