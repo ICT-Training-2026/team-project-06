@@ -3,27 +3,33 @@
   text-align: center;
 }
 .id-box {
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 30px;
 }
 .id-box input {
   padding: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 0;
+  margin-bottom: 0;
   width: 250px;
-  background-color: #FFFAD0; 
+  background-color: #FFFAD0;
   border: 3px solid #9EDDFF;
+}
+.id-box label {
+  margin-right: 15px;
 }
 .record-box {
   display: inline-block;
-  border:3px solid #9EDDFF;;
+  border:3px solid #9EDDFF;
   padding: 20px;
   border-radius: 10px;
+  font-size: 22px;
 }
  .content {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* 左揃えに変更 */
+  justify-content: flex-start;
   margin-bottom: 10px;
 }
 .content label {
@@ -39,18 +45,26 @@
   border: 3px solid #9EDDFF;
 }
 .arrow {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
 }
 .btn-box {
   margin-top: 30px;
 }
-.edit-btn, .delete-btn {
+.edit-btn, .delete-btn,.back-btn {
   padding: 10px 20px;
-  margin: 0 15px;
+  margin: 0 35px;
   background-color: rgb(196, 255, 255);
   border: 3px solid #9EDDFF;
   border-radius: 7px;
-  padding: 20px 40px;
   font-weight: bold;
+  font-size: 20px;
+  width: 120px;
+  height: 70px;
+}
+
+.parent-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

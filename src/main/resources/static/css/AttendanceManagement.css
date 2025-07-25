@@ -1,0 +1,173 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px; 
+  padding: 20px;
+}
+
+.search-box {
+  border: 3px solid #9EDDFF;
+  width: 450px;
+  height: 250px;
+  border-radius: 5px;
+  margin-bottom: 0; 
+  box-sizing: border-box;
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+.searchcontent {
+  padding-top: 15px;
+}
+
+.searchcontent label {
+  padding-bottom: 5px;
+}
+
+.search-box label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.label-text {
+  width: 80px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.search-box select,
+.search-box input[type="text"],
+.search-box input[type="date"] {
+  width: 150px;
+  height: 35px;
+  margin-left: 10px;
+  background-color: #FFFAD0; 
+  border: 3px solid #9EDDFF;
+  border-radius: 3px;
+  height: 27px;
+}
+
+.search-box input[type="text"] {
+  width: 150px; /* 社員IDの幅を設定 */
+  padding-left: 5px;
+  background-color: #FFFAD0;
+  border: 3px solid #9EDDFF;
+  border-radius: 3px;
+}
+
+/* .search-box input[type="text"] {
+  width: 120px;
+  padding-left: 5px;
+} */
+
+.search-box input[type="date"] {
+  width: 130px; /* 期間の幅を設定 */
+  padding-left: 5px;
+  background-color: #FFFAD0;
+  border: 3px solid #9EDDFF;
+  border-radius: 3px;
+}
+/* .search-box input[type="date"] {
+  width: 110px;
+  padding-left: 5px;
+} */
+
+.search-btn {
+  border: 3px solid #9EDDFF;
+  background-color: rgb(196, 255, 255);
+  border-radius: 10px;
+  padding: 8px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100px;
+  margin-left: 280px;
+  font-size: 17px;
+  display: block;  /* 横幅いっぱいでなく、縦に積む */
+  margin: 40px auto 100px 20px; /* 上15pxマージン、左右中央寄せ */
+  margin-bottom: 20px;
+  width: 120px;
+}
+.output-btn{
+    text-align: right
+}
+.explanation {
+  border: 2px solid #90cdfd;
+  background-color: #cfd2d3;
+  width: 550px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  line-height: 1.5;
+  margin-left: 0;
+}
+
+b {
+  font-size: 22px;
+}
+
+.textcontent {
+  padding-top: 20px;
+  padding-left: 30px;
+  font-size: 21px;
+}
+
+.cb {
+  margin-right: 3px;
+}
+
+.search-box input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#results {
+  width: 95%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid #9EDDFF;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  display: none; /* 初期非表示 */
+  margin-top: 50px; /* 検索結果の上に40pxの余白 */
+}
+
+#results table {
+  width: 100%;
+  border-collapse: collapse;
+
+  
+}
+
+#results th,
+#results td {
+  border: 1px solid #9EDDFF;
+  padding: 8px;
+  text-align: center;
+}
+
+.whole {
+  height: auto;
+  overflow: visible;
+}
+
+
+/* 編集・確定ボタンの共通スタイル */
+.edit-btn, .confirm-btn {
+  border: 0px;
+  background-color: rgb(196, 255, 255);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
