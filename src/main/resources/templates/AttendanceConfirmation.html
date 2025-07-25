@@ -15,11 +15,11 @@
       <img src="../image/Timinute_logo.png" alt="画像">
     </div>
     <div class="welcome-text">
-      <p>お疲れ様です！<br>管理者さん</p>
+      <p>お疲れ様です！<br>○○さん</p>
     </div>
     <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
+		<a href="/userhome"><button class="headerbtn">HOME</button></a>
+		<a href="/login"><button class="headerbtn">Logout</button></a>
     </div>
   </header>
 
@@ -43,7 +43,28 @@
         <button class="btn" id="searchBtn">検索</button>
       </div>
     </confirmation>
+	
   </div>
+	<div id="resultContainer">
+  	  <table id="resultTable">
+  	    <thead>
+  	      <tr>
+  	        <th>日付</th>
+  	        <th>出勤時刻</th>
+  	        <th>退勤時刻</th>
+  	        <th>休憩開始</th>
+  	        <th>休憩終了</th>
+  	        <th>勤務時間</th>
+  	        <th>休憩時間</th>
+  	        <th>勤務区分</th>
+  	        <th>状態</th>
+  	      </tr>
+  	    </thead>
+  	    <tbody>
+  	      <!-- ここにデータを追加 -->
+  	    </tbody>
+  	  </table>
+  	</div>
 
 
   <script>
@@ -75,10 +96,10 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('開始日が終了日より後になっています。');
     } else {
       // 日付が正しく選択されている場合
-      alert('検索を開始します。\n開始日: ' + startDateValue + '\n終了日: ' + endDateValue);
+      //alert('検索を開始します。\n開始日: ' + startDateValue + '\n終了日: ' + endDateValue);
 
       // バックエンドにPOSTリクエストを送信
-      fetch('/api/search', {
+      fetch('/attendance/api/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,11 +110,51 @@ document.addEventListener('DOMContentLoaded', function () {
         })
       })
       .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        // ここで検索結果を処理します
-        alert('検索が完了しました。結果を確認してください。');
-      })
+	  .then(data => {
+	    console.log('Success:', data);
+	    //alert('検索が完了しました。結果を確認してください。');
+
+	    const tableBody = document.querySelector("#resultTable tbody");
+	    tableBody.innerHTML = ""; // 既存行をクリア
+
+	    if (data.length === 0) {
+	      tableBody.innerHTML = "<tr><td colspan='9'>該当データがありません</td></tr>";
+	      return;
+	    }
+
+		// 勤務区分のマッピング
+		const categoryMap = {
+		  0: '出勤',
+		  1: '振出',
+		  2: '振休',
+		  3: '年休',
+		  4: '休日',
+		  5: '欠勤'
+		};
+
+		// 状態のマッピング
+		const statusMap = {
+		  0: '出勤',
+		  1: '退勤',
+		  2: '休憩'
+		};
+		
+	    data.forEach(item => {
+	      const row = document.createElement("tr");
+	      row.innerHTML = `
+	        <td>${item.date || ""}</td>
+	        <td>${item.startTime || ""}</td>
+	        <td>${item.closingTime || ""}</td>
+	        <td>${item.startBreakTime || ""}</td>
+	        <td>${item.endBreakTime || ""}</td>
+	        <td>${item.workTime || ""}</td>
+	        <td>${item.breakTime || ""}</td>
+			<td>${categoryMap[item.categoryId] ?? item.categoryId}</td>
+			<td>${statusMap[item.statusId] ?? item.statusId}</td>
+	      `;
+	      tableBody.appendChild(row);
+	    });
+	  })
       .catch((error) => {
         console.error('Error:', error);
         alert('検索中にエラーが発生しました。');

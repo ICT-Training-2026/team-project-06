@@ -125,34 +125,32 @@
 
 
 <script>
-  document.getElementById("search-btn").addEventListener("click", function () {
-  const department = document.getElementById("department").value.trim();
-  const position = document.getElementById("position").value.trim();
-  const employeeId = document.getElementById("employee-id").value.trim();
-  const startDate = document.getElementById("start-date").value;
-  const endDate = document.getElementById("end-date").value;
+	document.getElementById("search-btn").addEventListener("click", function () {
+	  const department = document.getElementById("department").value.trim();
+	  const position = document.getElementById("position").value.trim();
+	  const employeeId = document.getElementById("employee-id").value.trim();
+	  let startDate = document.getElementById("start-date").value;
+	  let endDate = document.getElementById("end-date").value;
 
-  // バリデーション
-  if (!department) {
-    alert("部署を選択してください。");
-    return;
-  }
+	  // 期間が未入力の場合は、前月の1日～末日を設定
+	  if (!startDate || !endDate) {
+	    const today = new Date();
+	    const firstDayLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+	    const lastDayLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 
-  if (!position) {
-    alert("役職を選択してください。");
-    return;
-  }
+	    const formatDate = (d) => d.toLocaleDateString('sv-SE');
+	    startDate = formatDate(firstDayLastMonth);
+	    endDate = formatDate(lastDayLastMonth);
+	  }
 
-  if (!employeeId) {
-    alert("社員IDを入力してください。");
-    return;
-  }
-
-  if (!/^\d+$/.test(employeeId)) {
-    alert("数値を入力してください。");
-    return;
-  }
-
+	  // 以下の行は動作確認用
+	  console.log("部署:", department);
+	  console.log("役職:", position);
+	  console.log("社員ID:", employeeId);
+	  console.log("開始日:", startDate);
+	  console.log("終了日:", endDate);
+	  
+	  
   // ダミーデータ（ここでは社員IDを仮で使う）
   const dummyData = [
     {

@@ -1,6 +1,9 @@
 package com.example.attendance.service;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.example.attendance.entity.Attendance;
 
 public interface AttendanceService {
     void recordStart(String employeeId, String categoryId);
@@ -8,4 +11,7 @@ public interface AttendanceService {
     void recordBreakEnd(String employeeId);
     void recordEnd(String employeeId);
     void approve(String employeeId, LocalDate date);
+    Attendance findByEmployeeIdAndDate(String employeeId, LocalDate date);
+    List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end);
+
 }

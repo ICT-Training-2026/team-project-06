@@ -2,6 +2,7 @@ package com.example.attendance.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,9 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendance.setEmployeeId(employeeId);
         attendance.setDate(LocalDate.now());
         attendance.setStartTime(LocalTime.now().withNano(0));
-        attendance.setCategoryId(categoryId);      // 前端传入
-        attendance.setStatusId("0");              // 出勤状态
-        attendance.setCategoryStatus(false);       // 默认未确认
+        attendance.setCategoryId(categoryId);     
+        attendance.setStatusId("0");             
+        attendance.setCategoryStatus(false);      
 
         attendanceDAO.insert(attendance);
     }
@@ -49,7 +50,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             today.setEndBreakTime(endBreakTime);
             today.setStatusId("0");
 
-            // ⏱️ 计算 breaktime（休憩时长）
+            // ⏱️ 計算breaktime
             java.time.Duration breakDuration = java.time.Duration.between(today.getStartBreakTime(), endBreakTime);
             today.setBreakTime(java.sql.Time.valueOf(LocalTime.MIDNIGHT.plus(breakDuration)));
 
@@ -65,10 +66,10 @@ public class AttendanceServiceImpl implements AttendanceService {
             today.setClosingTime(closingTime);
             today.setStatusId("1");
 
-            // ⏱️ 计算总工时（退勤 - 出勤）
+            // ⏱️ 計算worktime（退勤 - 出勤）
             java.time.Duration totalDuration = java.time.Duration.between(today.getStartTime(), closingTime);
 
-            // ⏱️ 如果有休憩时间，减去
+            // ⏱️ 休憩時間あるなら、マイナス
             java.time.Duration breakDuration = java.time.Duration.ZERO;
             if (today.getStartBreakTime() != null && today.getEndBreakTime() != null) {
                 breakDuration = java.time.Duration.between(today.getStartBreakTime(), today.getEndBreakTime());
@@ -88,5 +89,15 @@ public class AttendanceServiceImpl implements AttendanceService {
             attendance.setCategoryStatus(true);
             attendanceDAO.update(attendance);
         }
+    }
+    
+    @Override
+    public Attendance findByEmployeeIdAndDate(String employeeId, LocalDate date) {
+        return attendanceDAO.findByEmployeeIdAndDate(employeeId, date);
+    }
+    
+    @Override
+    public List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end) {
+        return attendanceDAO.findByEmployeeIdAndPeriod(employeeId, start, end);
     }
 }

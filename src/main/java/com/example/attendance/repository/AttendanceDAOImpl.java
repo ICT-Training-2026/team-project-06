@@ -18,6 +18,9 @@ public class AttendanceDAOImpl implements AttendanceDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
+    private static final String SELECT_PERIOD_SQL =
+    	    "SELECT * FROM attendance WHERE employee_id = ? AND date BETWEEN ? AND ?";
 
     private static final String SELECT_SQL = "SELECT * FROM attendance WHERE employee_id = ? AND date = ?";
 
@@ -29,6 +32,12 @@ public class AttendanceDAOImpl implements AttendanceDAO {
     	    "UPDATE attendance SET start_time = ?, closing_time = ?, startbreak_time = ?, endbreak_time = ?, " +
     	    "worktime = ?, breaktime = ?, status_id = ?, category_status = ? WHERE employee_id = ? AND date = ?";
 
+    
+    @Override
+    public List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end) {
+        return jdbcTemplate.query(SELECT_PERIOD_SQL, (rs, rowNum) -> mapRow(rs), employeeId, start, end);
+    }
+    
     @Override
     public Attendance findByEmployeeIdAndDate(String employeeId, LocalDate date) {
         List<Attendance> results = jdbcTemplate.query(SELECT_SQL, (rs, rowNum) -> mapRow(rs), employeeId, date);
@@ -37,15 +46,6 @@ public class AttendanceDAOImpl implements AttendanceDAO {
 
     @Override
     public void insert(Attendance attendance) {
-        // 输出插入前的字段值
-        System.out.println("===== 插入 Attendance 数据 =====");
-        System.out.println("employeeId     : " + attendance.getEmployeeId());
-        System.out.println("date           : " + attendance.getDate());
-        System.out.println("startTime      : " + attendance.getStartTime());
-        System.out.println("categoryId     : " + attendance.getCategoryId());
-        System.out.println("statusId       : " + attendance.getStatusId());
-        System.out.println("categoryStatus : " + attendance.isCategoryStatus());
-        System.out.println("===== 插入开始 =====");
         jdbcTemplate.update(INSERT_SQL,
                 attendance.getEmployeeId(),
                 attendance.getDate(),

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>Timinute</title>
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	<link rel="stylesheet" th:href="@{/css/AttendanceRegistration.css}">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo-container">
+      <img src="../image/Timinute_logo.png" alt="画像">
+    </div>
+    <div class="welcome-text">
+      <p>お疲れ様です！<br>○○さん</p>
+    </div>
+    <div class="buttons">
+		<a href="/userhome"><button class="headerbtn">HOME</button></a>
+		<a href="/login"><button class="headerbtn">Logout</button></a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="left-content">
+        <div class="all">
+            <div class="date" id="date"></div>
+            <div class="time" id="time"></div>
+        </div>
+        <div class="category">
+            <label>
+                <input type="radio" name="option" value="0" checked>出勤
+            </label>
+            <label>
+                <input type="radio" name="option" value="1">振出
+            </label>
+        </div>
+    </div>
+	<div class="button-grid">
+	    <button class="roundbtn" data-action="start">出勤</button>
+	    <button class="roundbtn" data-action="breakStart">休憩開始</button>
+	    <button class="roundbtn" data-action="breakEnd">休憩終了</button>
+	    <button class="roundbtn" data-action="end">退勤</button>
+	</div>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		console.log("✅ DOMContentLoaded 起動成功");
+	    const btns = {
+	        clockIn: document.querySelector("[data-action='start']"),
+	        breakStart: document.querySelector("[data-action='breakStart']"),
+	        breakEnd: document.querySelector("[data-action='breakEnd']"),
+	        clockOut: document.querySelector("[data-action='end']")
+	    };
+		console.log("clockIn:", btns.clockIn);
+		console.log("breakStart:", btns.breakStart);
+		console.log("breakEnd:", btns.breakEnd);
+		console.log("clockOut:", btns.clockOut);
+
+	    const employeeId = "yao001";  //  ログイン中のID。今は固定値として使用
+	    const endpoints = {
+			start: { url: "/attendance/start", method: "POST", next: "/attendance/clockin-page" },
+		    breakStart: { url: "/attendance/breakStart", method: "POST", next: "/attendance/breakstart-page" },
+		    breakEnd: { url: "/attendance/breakEnd", method: "POST", next: "/attendance/breakend-page" },
+		    end: { url: "/attendance/end", method: "POST", next: "/attendance/clockout-page" }
+	    };
+
+		// 初期状態を sessionStorage から復元
+		const stage = sessionStorage.getItem("stage");
+
+		if (stage === "clockInDone") {
+		    setButtonState(["breakStart", "clockOut"]);
+		} else if (stage === "breakStarted") {
+		    setButtonState(["breakEnd"]);
+		} else if (stage === "breakEnded") {
+		    setButtonState(["clockOut"]);
+		} else {
+		    // 初期状態（未出勤）
+		    setButtonState(["clockIn"]);
+		}
+		console.log("✅ setButtonState(['start']) 実行済み");
+
+
+		function setButtonState(enabledKeys = []) {
+			console.log("🔧 setButtonState 呼び出し:", enabledKeys);
+			
+		    Object.keys(btns).forEach(key => {
+		        const btn = btns[key];
+		        const isEnabled = enabledKeys.includes(key); 
+		        btn.disabled = !isEnabled;
+		        //btn.classList.toggle("disabled", btn.disabled);
+				console.log(`  → ${key} ボタン: ${isEnabled ? "有効" : "無効"}`);
+		    });
+		}
+
+	    function showError(msg) {
+	        alert("エラー: " + msg);
+	    }
+
+	    function getCategoryId() {
+	        return document.querySelector('input[name="option"]:checked')?.value || "0";
+	    }
+
+		function doAction(actionKey, onSuccess) {
+		    const { url, method, next } = endpoints[actionKey];
+
+		    const formData = new URLSearchParams();
+		    formData.append("employeeId", employeeId);
+		    if (actionKey === "start") {
+		        formData.append("categoryId", getCategoryId());
+		    }
+
+		    fetch(url, {
+		        method,
+		        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+		        body: formData.toString()
+		    })
+		    .then(res => {
+		        if (!res.ok) return res.text().then(text => { throw new Error(text); });
+
+		        const now = new Date().toLocaleString("ja-JP", { hour12: false });
+		        sessionStorage.setItem("lastTime", now);
+
+		        // 保存 stage 
+		        if (actionKey === "start") {
+		            sessionStorage.setItem("stage", "clockInDone");
+		        } else if (actionKey === "breakStart") {
+		            sessionStorage.setItem("stage", "breakStarted");
+		        } else if (actionKey === "breakEnd") {
+		            sessionStorage.setItem("stage", "breakEnded");
+		        } else if (actionKey === "end") {
+		            sessionStorage.setItem("stage", "clockOutDone");
+		        }
+
+		        if (typeof onSuccess === "function") {
+		            onSuccess();
+		        }
+
+		        window.location.href = next;
+		    })
+		    .catch(err => {
+		        console.error("APIエラー", err);
+		        showError(err.message || "不明なエラーが発生しました。");
+		    });
+		}
+
+	    // ボタンイベント
+		btns.clockIn.addEventListener("click", () => {
+		    doAction("start", () => {
+		        setButtonState(["breakStart", "clockOut"]);
+		    });
+		});
+
+	    btns.breakStart.addEventListener("click", () => {
+	        doAction("breakStart");
+	        setButtonState(["breakEnd"]);
+	    });
+
+	    btns.breakEnd.addEventListener("click", () => {
+	        doAction("breakEnd");
+	        setButtonState(["clockOut"]);
+	    });
+
+	    btns.clockOut.addEventListener("click", () => {
+	        doAction("end");
+	        setButtonState(["clockIn"]);
+	    });
+
+	    // 現在時刻表示
+	    const dateEl = document.getElementById("date");
+	    const timeEl = document.getElementById("time");
+	    function updateClock() {
+	        const now = new Date();
+	        dateEl.textContent = now.toLocaleDateString("ja-JP");
+	        timeEl.textContent = now.toLocaleTimeString("ja-JP");
+	    }
+	    updateClock();
+	    setInterval(updateClock, 1000);
+	});
+</script>
+</body>
+</html>
+
+
+
+

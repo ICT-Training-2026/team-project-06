@@ -70,3 +70,28 @@ h3 {
     height: 80px;
     font-size: 25px;
 }
+
+#resultContainer {
+  width: 95%;
+  max-width: 1100px;
+  margin: 50px auto 0 auto;
+  border: 3px solid #9EDDFF;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#resultTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#resultTable th,
+#resultTable td {
+  border: 1px solid #9EDDFF;
+  padding: 8px;
+  text-align: center;
+}
