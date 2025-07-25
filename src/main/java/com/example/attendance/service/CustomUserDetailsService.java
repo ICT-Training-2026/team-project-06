@@ -10,14 +10,14 @@ import com.example.attendance.entity.Account;
 import com.example.attendance.repository.LoginRepository;
 
 @Service
-public class LoginService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private LoginRepository loginRepository;
+    private LoginRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String employeeId) throws UsernameNotFoundException {
-        Account account = loginRepository.findByEmployeeId(employeeId);
+        Account account = accountRepository.findByEmployeeId(employeeId);
         if (account == null) {
             throw new UsernameNotFoundException("User not found with employeeId: " + employeeId);
         }
@@ -26,10 +26,5 @@ public class LoginService implements UserDetailsService {
                 .password(account.getPassword())
                 .roles("USER")
                 .build();
-    }
-
-    public void registerNewLogin(Account account) {
-        // パスワードのハッシュ化などの処理を行う
-        loginRepository.save(account);
     }
 }
