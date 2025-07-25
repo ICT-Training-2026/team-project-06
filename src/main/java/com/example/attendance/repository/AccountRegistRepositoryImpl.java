@@ -16,14 +16,15 @@ private final JdbcTemplate jdbcTemplate;
 	@Override
 	public void add(Account acount) {
 		String sql = "INSERT INTO application"
-			+ "(employee_id, department_id, job_id, name)"
-			+ "VALUES (?, ?, ?, ?)";
+			+ "(employee_id, department_id, job_id, name, password)"
+			+ "VALUES (?, ?, ?, ?, ?)";
 		
 			jdbcTemplate.update(sql,
 			acount.getEmployeeId(),
 			acount.getDepartmentId(),
 			acount.getJobId(),
-			acount.getName()
+			acount.getName(),
+			acount.getPassword()
 			);
 	}
 }

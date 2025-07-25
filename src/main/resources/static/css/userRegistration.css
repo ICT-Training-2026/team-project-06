@@ -75,7 +75,7 @@
     margin-left: -100px;
 }
 
-.pasword h3{
+.password h3{
      margin-left: -100px;
 }
 
@@ -123,7 +123,7 @@
     border-radius: 7px;
 } 
 
-.pasword textarea{
+.password textarea{
     font-size: 20px;
     width: 170px; /* プルダウンの幅を指定 */
     padding: 5px; /* プルダウンの内側の余白を指定 */
