@@ -10,7 +10,7 @@ public class AccountRegistForm {
 
     @NotBlank(message = "社員IDは必須です。")
     @Size(min = 6, max = 6, message = "社員IDは6文字で指定してください。")
-    private String employeeId;
+    private int employeeId;
 
     @NotBlank(message = "氏名は必須です。")
     @Size(min = 1, max = 20, message = "氏名は1文字から20文字で指定してください。")

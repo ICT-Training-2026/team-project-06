@@ -7,3 +7,4 @@ public interface AccountRegistrationService {
 	void regist(Account account);
 	
 }
+
