@@ -1,87 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="jp">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Timinute</title>
-<link rel="stylesheet" th:href="@{/css/login.css}">
+    <title>Login</title>
 </head>
-
 <body>
-
-	<div class="Logo">
-		<img th:src="@{/image/Timinute_logo.png}" alt="ロゴ画像">
-	</div>
-
-	<div class="usercontent">
-
-		<form th:action="@{/login}" method="post">
-			<div th:if="${loginError}" class="error">
-				ログインに失敗しました。ユーザー名とパスワードを確認してください。</div>
-			<div th:if="${param.error}" class="alert alert-danger">ユーザー名かパスワードが違います</div>
-			<div th:if="${param.logout}" class="alert alert-info">
-				ログアウト済みです。</div>
-			<div id="textinput">
-				<div>
-					<h3>社員ID</h3>
-					<input type="text" class="textbox" name="username">
-				</div>
-			</div>
-
-			<div class="pw">
-				<h3>パスワード</h3>
-				<input type="text" class="textbox" name="password">
-			</div>
-			<button class="btn" id="loginBtn" type="submit">ログイン</button>
-		</form>
-	</div>
-
-	<!-- <div>
-    <a href="userhome.html"><button class="btn" type="button">ログイン</button></a>
-</div> -->
-
-	<script>
-		document.getElementById("loginBtn").addEventListener(
-				"click",
-				function(event) {
-					event.preventDefault(); // デフォルトのフォーム送信を防止
-
-					const userId = document
-							.querySelector("input[name='username']").value;
-					const password = document
-							.querySelector("input[name='password']").value;
-
-					if (userId === "" || password === "") {
-						alert("社員IDとパスワードを入力してください");
-					} else {
-						// バリデーションが成功した場合、フォームを送信
-						document.querySelector("form").submit();
-					}
-				});
-		<!--
-		document
-				.getElementById("loginBtn")
-				.addEventListener(
-						"click",
-						function() {
-							// 入力値を取得（後でバリデーション等で使えます）
-							const userId = document.querySelector(".textbox").value;
-							const password = document
-									.querySelector(".pw .textbox").value;
-							console.log("Id:", userId);
-							console.log("Pw:", password);
-							// ここでバリデーション処理などを追加できます（例：空欄チェック）
-
-							if (userId === "" || password === "") {
-								alert("社員IDとパスワードを入力してください");
-								return;
-							}
-
-							// ページ遷移はthymeleafで担当します
-							// window.location.href = "userhome.html";
-						});
-		-->
-	</script>
-
+    <h2>Login</h2>
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label for="username">Employee ID:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+    </form>
+    <p th:if="${param.error}" style="color: red;">Invalid employee ID or password</p>
+    <p th:if="${param.logout}" style="color: green;">You have been logged out</p>
 </body>
 </html>
-
