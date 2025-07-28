@@ -7,10 +7,15 @@ import lombok.Data;
 
 @Data
 public class Prescribed {
-	private String monthlyHolidays;
-	private String monthlyAttendance;
-	private Time prescribedLabor;
-	private Date month;
+    private Date date;
+    private String description;
+
+    private String employeeId;
+    private Time totalWork;
+    private Time totalOvertime;
+    private Date month;
+    private int takeVacation;
+	
 
 	/*不要？
 	private String yearMonth;

@@ -1,5 +1,7 @@
 package com.example.attendance.form;
 
+import java.sql.Date;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -55,4 +57,7 @@ public class HolidayForm {
     @Min(value = 0, message = "3月の出勤日数は0以上の値を入力してください。")
     @Max(value = 31, message = "3月の出勤日数は31以下の値を入力してください。")
     private Integer marchDays = 0;
+
+    private Date date;
+    private String description;
 }

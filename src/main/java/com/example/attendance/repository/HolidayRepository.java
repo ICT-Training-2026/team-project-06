@@ -6,5 +6,5 @@ import com.example.attendance.entity.Prescribed;
 
 @Repository
 public interface HolidayRepository {
-	public void save(Prescribed holiday);
+	public void add(Prescribed holiday);
 }

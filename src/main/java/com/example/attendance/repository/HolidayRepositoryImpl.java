@@ -14,7 +14,7 @@ public class HolidayRepositoryImpl implements HolidayRepository {
 private final JdbcTemplate jdbcTemplate;
 
 @Override
-public void save(Prescribed holiday) {
+public void add(Prescribed holiday) {
 	String sql = "INSERT INTO holiday"
         + "(employee_id, total_work, total_overtime, take_vacation, month)"
         + "VALUES (?, ?, ?, ?, ?)";

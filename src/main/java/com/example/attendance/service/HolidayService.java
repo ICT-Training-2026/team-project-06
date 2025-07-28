@@ -4,6 +4,6 @@ import com.example.attendance.entity.Prescribed;
 
 public interface HolidayService {
 	
-	void setHoliday(Prescribed holiday);
+	void register(Prescribed holiday);
 
 }

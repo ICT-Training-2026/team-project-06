@@ -14,9 +14,9 @@ public class HolidayServicelmpl implements HolidayService {
     private final HolidayRepository repository;
 
     @Override
-    public void setHoliday(Prescribed holiday) {
+    public void register(Prescribed holiday) {
         
-        repository.save(holiday);
+        repository.add(holiday);
     }
 
 }
