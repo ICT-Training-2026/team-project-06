@@ -24,6 +24,7 @@ public class LoginRepositoryImpl implements LoginRepository {
 
     @Override
     public Account findByEmployeeId(String employeeId) {
+    	System.out.println("Repoまで来たわよ");
         String sql = "SELECT employee_id, name, department_id, job_id, password, paid_vacation, remaining_vacation " +
                      "FROM account " +
                      "WHERE employee_id = ?";
