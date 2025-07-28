@@ -55,6 +55,8 @@ public class AccountRegistController {
             account.setJobId(form.getJobId());
             account.setName(form.getName());
             account.setPassword(form.getPassword());
+            account.setPaidVacation(0);
+            account.setRemainingVacation(0);
             // :チェックマーク_緑: ステップ4: 挿入予定の内容を表示（念のため）
             System.out.println("挿入対象のアカウント情報: " + account);
             // :チェックマーク_緑: ステップ5: DBに登録

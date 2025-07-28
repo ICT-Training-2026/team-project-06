@@ -31,9 +31,10 @@
         <form>
           <label for="department"></label>
           <select id="department" name="department">
-            <option value="sales">営業</option>
+			<option value="administration">総務</option>
+			<option value="sales">営業</option>
             <option value="development">開発</option>
-            <option value="administration">総務</option>
+            
           </select>
           <br><br>
         </form>
@@ -44,11 +45,15 @@
         <form>
           <label for="department"></label>
           <select id="department" name="department">
-            <option value="president">社長</option>
-            <option value="manager">部長</option>
-            <option value="sectionChief">課長</option>
-            <option value="assistantManager">係長</option>
-            <option value="staff">一般</option>
+			<option value="staff">一般</option>
+			<option value="assistantManager">係長</option>
+			<option value="sectionChief">課長</option>
+			<option value="manager">部長</option>
+            
+            
+            
+            
+            
           </select>
 
           <br><br>
@@ -89,55 +94,69 @@
     // 既存社員ID（仮のデータ）
     const existingEmployeeIds = ['E001', 'E002', 'E003'];
 
-    document.getElementById('registerBtn').addEventListener('click', function (e) {
-      e.preventDefault();
+	document.getElementById('registerBtn').addEventListener('click', function (e) {
+	  e.preventDefault();
 
-      const employeeId = document.getElementById('employeeId').value.trim();
-      const name = document.getElementById('name').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const department = document.querySelector('.department select').value;
-      const position = document.querySelector('.position select').value;
+	  const employeeId = document.getElementById('employeeId').value.trim();
+	  const name = document.getElementById('name').value.trim();
+	  const password = document.getElementById('password').value.trim();
+	  const department = document.querySelector('.department select').value;
+	  const position = document.querySelector('.position select').value;
 
-      let errorMessages = [];
+	  // 役職に対応するIDをマッピング
+	  const departmentMapping = {
+		'administration': '0',
+		'sales': '1',
+	    'development': '2'
+	  };
 
-      if (!employeeId) {
-        errorMessages.push('社員IDが入力されていません');
-      } else if (existingEmployeeIds.includes(employeeId)) {
-        errorMessages.push('社員IDが間違っています');
-      }
+	  const positionMapping = {
+		'staff': '0',
+		'assistantManager': '1',
+		'sectionChief': '2',
+	    'manager': '3'
+	  };
 
-      if (!name) {
-        errorMessages.push('氏名を入力してください');
-      }
+	  let errorMessages = [];
 
-      if (!password) {
-        errorMessages.push('パスワードを入力してください');
-      } else if (password.length < 10 || password.length > 30) {
-        errorMessages.push('パスワード設定条件を満たしていません。10文字以上30文字以下で登録してください。');
-      }
+	  if (!employeeId) {
+	    errorMessages.push('社員IDが入力されていません');
+	  } else if (existingEmployeeIds.includes(employeeId)) {
+	    errorMessages.push('社員IDが間違っています');
+	  }
 
-      if (errorMessages.length > 0) {
-        alert(errorMessages.join('\n'));
-        return;
-      }
+	  if (!name) {
+	    errorMessages.push('氏名を入力してください');
+	  }
 
-      // バリデーションOKなら送信データ作成
-      const data = {
-        departmentId: department,
-        jobId: position,
-        employeeId: employeeId,
-        name: name,
-        password: password
-      };
+	  if (!password) {
+	    errorMessages.push('パスワードを入力してください');
+	  } else if (password.length < 10 || password.length > 30) {
+	    errorMessages.push('パスワード設定条件を満たしていません。10文字以上30文字以下で登録してください。');
+	  }
 
-      // fetchでPOST送信
-      fetch('/userRegistrationer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
+	  if (errorMessages.length > 0) {
+	    alert(errorMessages.join('\n'));
+	    return;
+	  }
+
+	  // バリデーションOKなら送信データ作成
+	  const data = {
+	    departmentId: departmentMapping[department], // マッピングされたIDを使用
+	    jobId: positionMapping[position], // マッピングされたIDを使用
+	    employeeId: employeeId,
+	    name: name,
+	    password: password
+	  };
+
+	  // fetchでPOST送信
+	  fetch('/userRegistrationer', {
+	    method: 'POST',
+	    headers: {
+	      'Content-Type': 'application/json'
+	    },
+	    body: JSON.stringify(data)
+	  })
 	  .then(response => {
 	    if (!response.ok) throw new Error('ネットワークエラー');
 	    return response.text();
@@ -145,13 +164,13 @@
 	  .then(data => {
 	    console.log('Success:', data);
 	    alert('登録が完了しました！');
-		window.location.href = '/userRegistration'; //遷移できるように修正
+	    window.location.href = '/userRegistration'; // 遷移できるように修正
 	  })
 	  .catch((error) => {
 	    console.error('Error:', error);
 	    alert('申請に失敗しました。もう一度お試しください。');
 	  });
-    });
+	});
   </script>
 
 </body>
