@@ -19,4 +19,7 @@ public class Attendance {
     private String categoryId;
     private String statusId;
     private boolean categoryStatus;
+    private String name;
+    private String departmentId;
+    private String jobId;
 }

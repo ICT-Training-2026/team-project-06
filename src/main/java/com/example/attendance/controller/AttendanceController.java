@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.attendance.entity.Attendance;
@@ -70,4 +71,42 @@ public class AttendanceController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("無効な請求");
         }
     }
+    
+    @PostMapping("/adminsearch")
+    @ResponseBody
+    public ResponseEntity<?> adminSearch(@RequestBody Map<String, String> request) {
+        try {
+            String department = request.get("department");
+            String position = request.get("position");
+            String employeeId = request.get("employeeId");
+            String startDateStr = request.get("startDate");
+            String endDateStr = request.get("endDate");
+
+            System.out.println("✅ adminSearch() 呼び出し");
+            System.out.println("部署: " + department);
+            System.out.println("役職: " + position);
+            System.out.println("社員ID: " + employeeId);
+            System.out.println("開始日: " + startDateStr);
+            System.out.println("終了日: " + endDateStr);
+
+            LocalDate startDate = (startDateStr != null && !startDateStr.isEmpty()) ? LocalDate.parse(startDateStr) : null;
+            LocalDate endDate = (endDateStr != null && !endDateStr.isEmpty()) ? LocalDate.parse(endDateStr) : null;
+
+            List<Attendance> result = attendanceService.adminSearch(department, position, employeeId, startDate, endDate);
+
+            System.out.println("✅ 検索結果件数: " + result.size());
+            for (Attendance a : result) {
+                System.out.println("➡ " + a);
+            }
+
+            return ResponseEntity.ok(result);
+
+        } catch (Exception e) {
+            System.out.println("❌ adminSearch 例外: " + e.getMessage());
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("サーバーエラーが発生しました");
+        }
+    }
+
+
 }

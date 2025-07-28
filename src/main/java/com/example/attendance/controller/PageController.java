@@ -13,22 +13,22 @@ public class PageController {
     
     @GetMapping("/attendance/clockin-page")
     public String showClockInPage() {
-        return "ClockIn"; // 对应 templates/ClockIn.html
+        return "ClockIn"; // templates/ClockIn.html
     }
 
     @GetMapping("/attendance/clockout-page")
     public String showClockOutPage() {
-        return "ClockOut"; // 对应 templates/ClockOut.html
+        return "ClockOut"; // templates/ClockOut.html
     }
 
     @GetMapping("/attendance/breakstart-page")
     public String showBreakStartPage() {
-        return "StartBreak"; // 如果你有 StartBreak.html
+        return "StartBreak"; //  StartBreak.html
     }
 
     @GetMapping("/attendance/breakend-page")
     public String showBreakEndPage() {
-        return "ENDBreak"; // 对应 templates/ENDBreak.html
+        return "ENDBreak"; //  templates/ENDBreak.html
     }
     
     // ホーム画面
@@ -53,5 +53,11 @@ public class PageController {
     @GetMapping("/attendance/management")
     public String showAttendanceManagementPage() {
         return "AttendanceManagement"; 
+    }
+    
+    // 勤怠管理画面
+    @GetMapping("/attendance/edit")
+    public String showAttendanceEditPage() {
+        return "AttendanceEdit"; 
     }
 }

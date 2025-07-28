@@ -100,4 +100,10 @@ public class AttendanceServiceImpl implements AttendanceService {
     public List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end) {
         return attendanceDAO.findByEmployeeIdAndPeriod(employeeId, start, end);
     }
+    
+    @Override
+    public List<Attendance> adminSearch(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate) {
+        return attendanceDAO.findByConditions(department, position, employeeId, startDate, endDate);
+    }
+
 }

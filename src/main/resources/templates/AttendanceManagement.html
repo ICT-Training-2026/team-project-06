@@ -32,9 +32,9 @@
             <span class="label-text">部署</span>
             <select id="department">
               <option value="">選択してください</option>
-              <option value="sales">営業</option>
-              <option value="dev">開発</option>
-              <option value="hr">総務</option>
+              <option value="1">営業</option>
+              <option value="2">開発</option>
+              <option value="0">総務</option>
             </select>
           </label>
         </div>
@@ -44,11 +44,11 @@
             <span class="label-text">役職</span>
             <select id="position">
               <option value="">選択してください</option>
-              <option value="President">社長</option>
-              <option value="Director">部長</option>
-              <option value="Manager">課長</option>
-              <option value="Supervisor">係長</option>
-              <option value="Staff">一般</option>
+              <option value="0">社長</option>
+              <option value="1">部長</option>
+              <option value="2">課長</option>
+              <option value="3">係長</option>
+              <option value="4">一般</option>
             </select>
           </label>
         </div>
@@ -85,30 +85,23 @@
   <h2>検索結果</h2>
   <table id="results-table">
   <thead>
-    <tr>
-      <th>日付</th>
-      <th>始業時間</th>
-      <th>終業時間</th>
-      <th>労働時間</th>
-      <th>休憩時間</th>
-      <th>コメント</th>
-      <th>編集</th>
-      <th>確定</th>
-    </tr>
+	<tr>
+	  <th>社員ID</th>
+	  <th>名前</th>
+	  <th>部署</th>
+	  <th>役職</th>
+	  <th>日付</th>
+	  <th>始業時間</th>
+	  <th>終業時間</th>
+	  <th>労働時間</th>
+	  <th>休憩時間</th>
+	  <th>コメント</th>
+	  <th>編集</th>
+	  <th>確定</th>
+	</tr>
   </thead>
 
-  <tbody>
-    <tr>
-      <td>2025-07-01</td>
-      <td>09:00</td>
-      <td>18:00</td>
-      <td>8:00</td>
-      <td>1:00</td>
-      <td>通常勤務</td>
-      <td><button class="edit-btn small-btn">編集</button></td>
-      <td><button class="confirm-btn small-btn">確定</button></td>
-    </tr>
-  </tbody>
+  <tbody></tbody>
 </table>
 
 <div class="buttons-container">
@@ -125,91 +118,125 @@
 
 
 <script>
-	document.getElementById("search-btn").addEventListener("click", function () {
-	  const department = document.getElementById("department").value.trim();
-	  const position = document.getElementById("position").value.trim();
-	  const employeeId = document.getElementById("employee-id").value.trim();
-	  let startDate = document.getElementById("start-date").value;
-	  let endDate = document.getElementById("end-date").value;
+document.getElementById("search-btn").addEventListener("click", function () {
+  console.log("✅ 検索ボタンがクリックされました");
 
-	  // 期間が未入力の場合は、前月の1日～末日を設定
-	  if (!startDate || !endDate) {
-	    const today = new Date();
-	    const firstDayLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-	    const lastDayLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+  const department = document.getElementById("department").value.trim();
+  const position = document.getElementById("position").value.trim();
+  const employeeId = document.getElementById("employee-id").value.trim();
+  let startDate = document.getElementById("start-date").value;
+  let endDate = document.getElementById("end-date").value;
 
-	    const formatDate = (d) => d.toLocaleDateString('sv-SE');
-	    startDate = formatDate(firstDayLastMonth);
-	    endDate = formatDate(lastDayLastMonth);
-	  }
+  // 期間補完
+  if (!startDate || !endDate) {
+    const today = new Date();
+    const firstDayLastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+    const lastDayLastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
 
-	  // 以下の行は動作確認用
-	  console.log("部署:", department);
-	  console.log("役職:", position);
-	  console.log("社員ID:", employeeId);
-	  console.log("開始日:", startDate);
-	  console.log("終了日:", endDate);
-	  
-	  
-  // ダミーデータ（ここでは社員IDを仮で使う）
-  const dummyData = [
-    {
-      date: "2025-07-01",
-      start_time: "09:00",
-      closing_time: "18:00",
-      worktime: "8:00",
-      breaktime: "1:00",
-      comment: "通常勤務"
+    const formatDate = (d) => d.toLocaleDateString('sv-SE');
+    startDate = formatDate(firstDayLastMonth);
+    endDate = formatDate(lastDayLastMonth);
+  }
+
+  console.log("✅ 入力値:");
+  console.log("部署:", department);
+  console.log("役職:", position);
+  console.log("社員ID:", employeeId);
+  console.log("開始日:", startDate);
+  console.log("終了日:", endDate);
+
+  // fetch開始
+  console.log("📡 サーバーへfetchリクエスト送信");
+
+  fetch("/attendance/adminsearch", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
     },
-    {
-      date: "2025-07-02",
-      start_time: "09:15",
-      closing_time: "18:15",
-      worktime: "8:00",
-      breaktime: "1:00",
-      comment: "会議多め"
-    }
-  ];
+    body: JSON.stringify({
+      department,
+      position,
+      employeeId,
+      startDate,
+      endDate
+    })
+  })
+    .then(response => {
+      console.log("📥 レスポンス受信 status:", response.status);
+      if (!response.ok) {
+        throw new Error(`HTTPエラー: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("✅ JSON変換完了 data:", data);
+      console.log("typeof data:", typeof data);
+      console.log("Array.isArray(data):", Array.isArray(data));
 
-  const resultsDiv = document.getElementById("results");
-  const tbody = document.querySelector("#results-table tbody");
-  tbody.innerHTML = "";
+      if (!Array.isArray(data)) {
+        throw new Error("❌ データ形式エラー：配列ではありません");
+      }
 
-  dummyData.forEach(record => {
-    const tr = document.createElement("tr");
-    tr.setAttribute("data-employee-id", employeeId); // ← 社員IDを埋め込む
-    tr.innerHTML = `
-      <td>${record.date}</td>
-      <td>${record.start_time}</td>
-      <td>${record.closing_time}</td>
-      <td>${record.worktime}</td>
-      <td>${record.breaktime}</td>
-      <td>${record.comment}</td>
-      <td><button class="edit-btn small-btn">編集</button></td>
-      <td><button class="confirm-btn small-btn">確定</button></td>
-    `;
-    tbody.appendChild(tr);
-  });
+      const resultsDiv = document.getElementById("results");
+      const tbody = document.querySelector("#results-table tbody");
+      tbody.innerHTML = "";
+      console.log("📄 表 tbody クリア済み");
 
-  // 編集ボタンの遷移処理
-  setTimeout(() => {
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const row = btn.closest('tr');
-        const date = row.cells[0].textContent;
-        const employeeId = row.getAttribute('data-employee-id'); // ← ここで取得
+      if (data.length === 0) {
+        console.log("⚠️ データなし");
+        tbody.innerHTML = `<tr><td colspan="12">該当するデータがありません。</td></tr>`;
+      } else {
+        console.log(`✅ ${data.length} 件のデータを描画開始`);
+        data.forEach(record => {
+          console.log("📌 record:", record);
 
-        const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(employeeId)}`;
-        window.location.href = url;
-      });
+          const tr = document.createElement("tr");
+          tr.setAttribute("data-employee-id", record.employeeId);
+
+          tr.innerHTML = `
+            <td>${record.employeeId}</td>
+            <td>${record.name}</td>
+            <td>${record.departmentId}</td>
+            <td>${record.jobId}</td>
+            <td>${record.date}</td>
+            <td>${record.startTime}</td>
+            <td>${record.closingTime}</td>
+            <td>${record.workTime}</td>
+            <td>${record.breakTime}</td>
+            <td>${record.comment || ""}</td>
+            <td><button class="edit-btn small-btn">編集</button></td>
+            <td><button class="confirm-btn small-btn">確定</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        console.log("✅ 表描画完了");
+      }
+
+      resultsDiv.style.display = "block";
+      document.getElementById("output-btn").style.display = "block";
+      console.log("✅ 表と出力ボタン表示");
+
+      setTimeout(() => {
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const row = btn.closest('tr');
+            const date = row.cells[4].textContent;
+            const empId = row.getAttribute('data-employee-id');
+            const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(empId)}`;
+            console.log("🔗 編集ボタン: 遷移先URL:", url);
+            window.location.href = url;
+          });
+        });
+      }, 0);
+    })
+    .catch(error => {
+      console.error("❌ 検索失敗:", error);
+      alert("検索に失敗しました。サーバーまたはデータ形式に問題があります。");
     });
-  }, 0);
-
-  resultsDiv.style.display = "block";
-  document.getElementById("output-btn").style.display = "block";
 });
-
 </script>
+
 
 </body>
 </html>

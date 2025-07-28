@@ -1,8 +1,9 @@
 main {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 40px; 
+  gap: 40px;
   padding: 20px;
 }
 

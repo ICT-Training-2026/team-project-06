@@ -11,4 +11,6 @@ public interface AttendanceDAO {
     List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end);
     void insert(Attendance attendance);
     void update(Attendance attendance);
+    List<Attendance> findByConditions(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate);
+
 }

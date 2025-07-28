@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,4 +86,59 @@ public class AttendanceDAOImpl implements AttendanceDAO {
         attendance.setCategoryStatus(rs.getBoolean("category_status"));
         return attendance;
     }
+    
+    @Override
+    public List<Attendance> findByConditions(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate) {
+        StringBuilder sql = new StringBuilder("SELECT a.*, ac.name, ac.department_id, ac.job_id FROM attendance a JOIN account ac ON a.employee_id = ac.employee_id WHERE 1=1");
+        List<Object> params = new ArrayList<>();
+        if (department != null && !department.isEmpty()) {
+            sql.append(" AND ac.department_id = ?");
+            params.add(department);
+        }
+        if (position != null && !position.isEmpty()) {
+            sql.append(" AND ac.job_id = ?");
+            params.add(position);
+        }
+        if (employeeId != null && !employeeId.isEmpty()) {
+            sql.append(" AND a.employee_id = ?");
+            params.add(employeeId);
+        }
+        if (startDate != null) {
+            sql.append(" AND a.date >= ?");
+            params.add(startDate);
+        }
+        if (endDate != null) {
+            sql.append(" AND a.date <= ?");
+            params.add(endDate);
+        }
+
+        System.out.println("実行されるSQL:");
+        System.out.println(sql.toString());
+        System.out.println("バインドされるパラメータ:");
+        for (Object p : params) {
+            System.out.println(p);
+        }
+
+        return jdbcTemplate.query(sql.toString(), params.toArray(), (rs, rowNum) -> {
+            Attendance att = new Attendance();
+            att.setEmployeeId(rs.getString("employee_id"));
+            att.setDate(rs.getDate("date").toLocalDate());
+            att.setStartTime(rs.getTime("start_time") != null ? rs.getTime("start_time").toLocalTime() : null);
+            att.setClosingTime(rs.getTime("closing_time") != null ? rs.getTime("closing_time").toLocalTime() : null);
+            att.setStartBreakTime(rs.getTime("startbreak_time") != null ? rs.getTime("startbreak_time").toLocalTime() : null);
+            att.setEndBreakTime(rs.getTime("endbreak_time") != null ? rs.getTime("endbreak_time").toLocalTime() : null);
+            att.setWorkTime(rs.getTime("worktime"));      
+            att.setBreakTime(rs.getTime("breaktime"));    
+            att.setCategoryId(rs.getString("category_id"));
+            att.setStatusId(rs.getString("status_id"));
+            att.setCategoryStatus(rs.getBoolean("category_status"));
+            att.setName(rs.getString("name"));
+            att.setDepartmentId(rs.getString("department_id"));
+            att.setJobId(rs.getString("job_id"));
+            return att;
+        });
+
+    }
+
+
 }
