@@ -17,8 +17,8 @@
       <p>お疲れ様です！<br>管理者さん</p>
     </div>
     <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
+		<a href="/adminhome"><button class="headerbtn">HOME</button></a>
+		<a href="/login"><button class="headerbtn">Logout</button></a>
     </div>
   </header>
 
@@ -33,45 +33,112 @@
     <div class="record-box">
       <div class="content">
         <label>日付</label>
-        <input type="text" value="[DBデータ]" readonly>
+        <input type="text" id="date" value="[DBデータ]" readonly>
       </div>
       <div class="content">
         <label>始業時刻</label>
-        <input type="text" value="[DBデータ]" readonly>
+        <input type="text" id="startTimeLeft" value="[DBデータ]" readonly>
         <span class="arrow">⇒</span>
-        <input type="text">
+        <input type="text" id="startTimeRight">
       </div>
       <div class="content">
         <label>終業時刻</label>
-        <input type="text" value="[DBデータ]" readonly>
+        <input type="text" id="closingTimeLeft" value="[DBデータ]" readonly>
         <span class="arrow">⇒</span>
-        <input type="text">
+        <input type="text" id="closingTimeRight">
       </div>
       <div class="content">
         <label>労働時間(分)</label>
-        <input type="text" value="[DBデータ]" readonly>
+        <input type="text" id="workTimeLeft" value="[DBデータ]" readonly>
         <span class="arrow">⇒</span>
-        <input type="text">
+        <input type="text" id="workTimeRight">
       </div>
       <div class="content">
         <label>休憩時間(分)</label>
-        <input type="text" value="[DBデータ]" readonly>
+        <input type="text" id="breakTimeLeft" value="[DBデータ]" readonly>
         <span class="arrow">⇒</span>
-        <input type="text">
-      </div>
-      <div class="content">
-        <label>残業時間(分)</label>
-        <input type="text" value="[DBデータ]" readonly>
-        <span class="arrow">⇒</span>
-        <input type="text">
+        <input type="text" id="breakTimeRight">
       </div>
     </div>
       <div class="btn-box">
-    <a href=".html"><button class="edit-btn" type="button">編集</button></a>
-    <!-- リンクは不要かも -->
-    <a href=".html"><button class="delete-btn" type="button">削除</button></a>
-    <!-- リンクは不要かも -->
+	<button class="edit-btn" type="button" id="edit-button">編集</button>
+	<button class="delete-btn" type="button" id="delete-button">削除</button>
     </div>
   </main>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const empId = urlParams.get('employeeId');
+    const date = urlParams.get('date');
+    const startTime = urlParams.get('startTime');
+    const closingTime = urlParams.get('closingTime');
+    const workTime = urlParams.get('workTime');
+    const breakTime = urlParams.get('breakTime');
+
+    document.getElementById('employeeId').value = empId || '';
+    document.getElementById('date').value = date || '';
+    document.getElementById('startTimeLeft').value = startTime || '';
+    document.getElementById('closingTimeLeft').value = closingTime || '';
+    document.getElementById('workTimeLeft').value = workTime || '';
+    document.getElementById('breakTimeLeft').value = breakTime || '';
+
+    // ✅ 编辑按钮事件监听
+    document.getElementById('edit-button').addEventListener('click', () => {
+      const updatedStart = document.getElementById('startTimeRight').value.trim();
+      const updatedEnd = document.getElementById('closingTimeRight').value.trim();
+      const updatedWork = document.getElementById('workTimeRight').value.trim();
+      const updatedBreak = document.getElementById('breakTimeRight').value.trim();
+
+      if (!updatedStart && !updatedEnd && !updatedWork && !updatedBreak) {
+        history.back();  // ✅ 没有输入则返回前一页
+        return;
+      }
+
+      fetch('/attendance/update', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          employeeId: empId,
+          date: date,
+          startTime: updatedStart || null,
+          closingTime: updatedEnd || null,
+          workTime: updatedWork || null,
+          breakTime: updatedBreak || null
+        })
+      }).then(res => {
+        if (res.ok) {
+          alert("更新成功！");
+          history.back();
+        } else {
+          alert("更新失败！");
+        }
+      });
+    });
+
+    // ✅ 削除按钮事件监听
+    document.getElementById('delete-button').addEventListener('click', () => {
+      if (confirm("本当にこの勤怠記録を削除しますか？")) {
+        fetch('/attendance/delete', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            employeeId: empId,
+            date: date
+          })
+        }).then(res => {
+          if (res.ok) {
+            alert("削除成功！");
+            history.back();
+          } else {
+            alert("削除失敗！");
+          }
+        });
+      }
+    });
+  });
+  </script>
+
+
 </body>
 </html>

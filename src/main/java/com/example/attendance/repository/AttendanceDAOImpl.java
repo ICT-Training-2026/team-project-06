@@ -137,8 +137,14 @@ public class AttendanceDAOImpl implements AttendanceDAO {
             att.setJobId(rs.getString("job_id"));
             return att;
         });
-
     }
+    
+    @Override
+    public void delete(String employeeId, LocalDate date) {
+        String sql = "DELETE FROM attendance WHERE employee_id = ? AND date = ?";
+        jdbcTemplate.update(sql, employeeId, date);
+    }
+
 
 
 }

@@ -12,5 +12,5 @@ public interface AttendanceDAO {
     void insert(Attendance attendance);
     void update(Attendance attendance);
     List<Attendance> findByConditions(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate);
-
+    void delete(String employeeId, LocalDate date);
 }

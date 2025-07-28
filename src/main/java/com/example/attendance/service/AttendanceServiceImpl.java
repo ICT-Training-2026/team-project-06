@@ -106,4 +106,30 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceDAO.findByConditions(department, position, employeeId, startDate, endDate);
     }
 
+    @Override
+    public void updateAttendance(String employeeId, LocalDate date, String startTime, String closingTime, String workTime, String breakTime) {
+        Attendance original = attendanceDAO.findByEmployeeIdAndDate(employeeId, date);
+        if (original == null) return;
+
+        if (startTime != null && !startTime.isEmpty()) {
+            original.setStartTime(LocalTime.parse(startTime));
+        }
+        if (closingTime != null && !closingTime.isEmpty()) {
+            original.setClosingTime(LocalTime.parse(closingTime));
+        }
+        if (workTime != null && !workTime.isEmpty()) {
+            original.setWorkTime(java.sql.Time.valueOf(LocalTime.MIDNIGHT.plusMinutes(Long.parseLong(workTime))));
+        }
+        if (breakTime != null && !breakTime.isEmpty()) {
+            original.setBreakTime(java.sql.Time.valueOf(LocalTime.MIDNIGHT.plusMinutes(Long.parseLong(breakTime))));
+        }
+
+        attendanceDAO.update(original);
+    }
+
+    @Override
+    public void deleteAttendance(String employeeId, LocalDate date) {
+        attendanceDAO.delete(employeeId, date);
+    }
+
 }

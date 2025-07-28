@@ -18,8 +18,8 @@
       <p>お疲れ様です！<br />管理者さん</p>
     </div>
     <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
+		<a href="/adminhome"><button class="headerbtn">HOME</button></a>
+		<a href="/login"><button class="headerbtn">Logout</button></a>
     </div>
 </header>
 
@@ -193,6 +193,7 @@ document.getElementById("search-btn").addEventListener("click", function () {
           const tr = document.createElement("tr");
           tr.setAttribute("data-employee-id", record.employeeId);
 
+		  const isConfirmed = record.categoryStatus === true;
           tr.innerHTML = `
             <td>${record.employeeId}</td>
             <td>${record.name}</td>
@@ -205,7 +206,11 @@ document.getElementById("search-btn").addEventListener("click", function () {
             <td>${record.breakTime}</td>
             <td>${record.comment || ""}</td>
             <td><button class="edit-btn small-btn">編集</button></td>
-            <td><button class="confirm-btn small-btn">確定</button></td>
+			<td>
+			  <button class="confirm-btn small-btn" ${isConfirmed ? "disabled" : ""}>
+			    ${isConfirmed ? "確定済" : "確定"}
+			  </button>
+			</td>
           `;
           tbody.appendChild(tr);
         });
@@ -220,14 +225,91 @@ document.getElementById("search-btn").addEventListener("click", function () {
       setTimeout(() => {
         document.querySelectorAll('.edit-btn').forEach(btn => {
           btn.addEventListener('click', () => {
-            const row = btn.closest('tr');
-            const date = row.cells[4].textContent;
-            const empId = row.getAttribute('data-employee-id');
-            const url = `AttendanceEdit.html?date=${encodeURIComponent(date)}&id=${encodeURIComponent(empId)}`;
-            console.log("🔗 編集ボタン: 遷移先URL:", url);
+			const row = btn.closest('tr');
+			const empId = row.cells[0].textContent.trim();         // 社員ID
+			const date = row.cells[4].textContent.trim();           // 日付
+			const startTime = row.cells[5].textContent.trim();      // 始業時間
+			const closingTime = row.cells[6].textContent.trim();    // 終業時間
+			const workTime = row.cells[7].textContent.trim();       // 労働時間
+			const breakTime = row.cells[8].textContent.trim();      // 休憩時間
+			
+			const url = `/attendance/edit?employeeId=${encodeURIComponent(empId)}`
+			          + `&date=${encodeURIComponent(date)}`
+			          + `&startTime=${encodeURIComponent(startTime)}`
+			          + `&closingTime=${encodeURIComponent(closingTime)}`
+			          + `&workTime=${encodeURIComponent(workTime)}`
+					  + `&breakTime=${encodeURIComponent(breakTime)}`;  
+	        console.log("🔗 編集ボタン: 遷移先URL:", url);
             window.location.href = url;
           });
         });
+		
+		document.querySelectorAll('.confirm-btn').forEach(btn => {
+		  btn.addEventListener('click', () => {
+		    const row = btn.closest('tr');
+		    const empId = row.cells[0].textContent.trim();
+		    const date = row.cells[4].textContent.trim();
+
+		    if (!confirm("この勤怠情報を確定してもよろしいですか？")) return;
+
+		    fetch("/attendance/approve", {
+		      method: "POST",
+		      headers: {
+		        "Content-Type": "application/json"
+		      },
+		      body: JSON.stringify({
+		        employeeId: empId,
+		        date: date
+		      })
+		    })
+		    .then(res => {
+		      if (!res.ok) throw new Error("確定に失敗しました");
+		      return res.text();
+		    })
+		    .then(msg => {
+		      alert("✅ 確定しました！");
+		      // 任意でボタン無効化など：
+		      btn.disabled = true;
+		      btn.textContent = "確定済";
+		    })
+		    .catch(err => {
+		      console.error("❌ 確定エラー:", err);
+		      alert("確定に失敗しました。再度お試しください。");
+		    });
+		  });
+		});
+		
+		document.getElementById("output-btn").addEventListener("click", function () {
+		  const table = document.getElementById("results-table");
+		  const rows = Array.from(table.querySelectorAll("tr"));
+
+		  let csvContent = "";
+
+		  rows.forEach((row, rowIndex) => {
+		    const cells = Array.from(row.querySelectorAll("th, td"));
+		    const rowData = cells.map(cell => {
+		      let text = cell.textContent.trim();
+		      // 如果内容中有逗号或双引号，需要转义
+		      if (text.includes(",") || text.includes('"')) {
+		        text = '"' + text.replace(/"/g, '""') + '"';
+		      }
+		      return text;
+		    }).join(",");
+		    csvContent += rowData + "\n";
+		  });
+
+		  // 创建 blob 对象并下载
+		  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+		  const url = URL.createObjectURL(blob);
+		  const link = document.createElement("a");
+		  link.href = url;
+		  link.download = "attendance_export.csv";
+		  document.body.appendChild(link);
+		  link.click();
+		  document.body.removeChild(link);
+		});
+
+
       }, 0);
     })
     .catch(error => {

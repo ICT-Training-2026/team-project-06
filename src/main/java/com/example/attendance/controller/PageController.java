@@ -31,10 +31,16 @@ public class PageController {
         return "ENDBreak"; //  templates/ENDBreak.html
     }
     
-    // ホーム画面
+    // userホーム画面
     @GetMapping("/userhome")
     public String showUserHome() {
         return "userhome"; // resources/templates/userhome.html
+    }
+    
+    // adminホーム画面
+    @GetMapping("/adminhome")
+    public String showAdminHome() {
+        return "managerhome"; // resources/templates/managerhome.html
     }
     
     // ログイン画面
@@ -55,9 +61,27 @@ public class PageController {
         return "AttendanceManagement"; 
     }
     
-    // 勤怠管理画面
+    // 勤怠編集画面
     @GetMapping("/attendance/edit")
     public String showAttendanceEditPage() {
         return "AttendanceEdit"; 
+    }
+    
+    // user登録画面
+    @GetMapping("/userregistration")
+    public String showUserRegistrationPage() {
+        return "userRegistration"; 
+    }
+    
+    // 休日登録画面
+    @GetMapping("/holiday")
+    public String showHolidayPage() {
+        return "holiday"; 
+    }
+    
+    // 申請画面
+    @GetMapping("/application")
+    public String showApplicationPage() {
+        return "request"; 
     }
 }

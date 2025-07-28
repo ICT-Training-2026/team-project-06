@@ -108,5 +108,54 @@ public class AttendanceController {
         }
     }
 
+    @PostMapping("/update")
+    public ResponseEntity<?> updateAttendance(@RequestBody Map<String, String> request) {
+        try {
+            String employeeId = request.get("employeeId");
+            LocalDate date = LocalDate.parse(request.get("date"));
+
+            // 空文字 -> null（保持原值）
+            String startTime = request.get("startTime");
+            String closingTime = request.get("closingTime");
+            String workTime = request.get("workTime");
+            String breakTime = request.get("breakTime");
+
+            attendanceService.updateAttendance(employeeId, date, startTime, closingTime, workTime, breakTime);
+            return ResponseEntity.ok("更新成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("更新失敗");
+        }
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteAttendance(@RequestBody Map<String, String> request) {
+        try {
+            String employeeId = request.get("employeeId");
+            LocalDate date = LocalDate.parse(request.get("date"));
+
+            attendanceService.deleteAttendance(employeeId, date);
+            return ResponseEntity.ok("削除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("削除失敗");
+        }
+    }
+    
+    @PostMapping("/approve")
+    public ResponseEntity<?> approveAttendance(@RequestBody Map<String, String> request) {
+        try {
+            String employeeId = request.get("employeeId");
+            LocalDate date = LocalDate.parse(request.get("date"));
+            
+            attendanceService.approve(employeeId, date);
+            return ResponseEntity.ok("確定成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("確定失敗");
+        }
+    }
+
+
 
 }
