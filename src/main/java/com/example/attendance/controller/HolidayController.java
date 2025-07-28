@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.attendance.entity.Prescribed;
 import com.example.attendance.form.HolidayForm;
-import com.example.attendance.service.HolidayRegistrationService;
+import com.example.attendance.service.HolidayService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class HolidayController {
 
-    private final HolidayRegistrationService service;
+    private final HolidayService service;
 
     /** 休日登録画面表示 */
     @GetMapping("/holidayRegistration")
