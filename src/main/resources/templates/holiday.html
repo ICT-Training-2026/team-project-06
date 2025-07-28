@@ -5,16 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Timinute</title>
-    <link rel="stylesheet" href="@{/css/header.css}">
-    <link rel="stylesheet" href="@{/css/holiday.css}" />
+<!--    <link rel="stylesheet" href="@{/css/header.css}">-->
+<!--    <link rel="stylesheet" href="@{/css/holiday.css}" />-->
 
+		<link rel="stylesheet" th:href="@{/css/header.css}">
+ 		<link rel="stylesheet" th:href="@{/css/holiday.css}">
 </head>
 
 <body>
 
     <header class="header">
         <div class="logo-container">
-            <img src="@{/image/Timinute_logo.png}" alt="画像">
+<!--            <img src="@{/image/Timinute_logo.png}" alt="画像">-->
+		<img th:src="@{/image/Timinute_logo.png}" alt="画像">
         </div>
         <div class="welcome-text">
             <p>お疲れ様です！<br>管理者さん</p>
