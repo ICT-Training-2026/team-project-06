@@ -31,10 +31,10 @@
         <form>
           <label for="department"></label>
           <select id="department" name="department">
-			<option value="administration">総務</option>
 			<option value="sales">営業</option>
-            <option value="development">開発</option>
-            
+			<option value="development">開発</option>
+			<option value="administration">総務</option>
+
           </select>
           <br><br>
         </form>
@@ -49,10 +49,6 @@
 			<option value="assistantManager">係長</option>
 			<option value="sectionChief">課長</option>
 			<option value="manager">部長</option>
-            
-            
-            
-            
             
           </select>
 
@@ -105,9 +101,9 @@
 
 	  // 役職に対応するIDをマッピング
 	  const departmentMapping = {
-		'administration': '0',
-		'sales': '1',
-	    'development': '2'
+		'sales': '0',
+		'development': '1',
+		'administration': '2'
 	  };
 
 	  const positionMapping = {
