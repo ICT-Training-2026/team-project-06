@@ -86,6 +86,12 @@
 			<scope>test</scope>
 		</dependency>
 
+				<!-- セッションの利用-->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
+
     </dependencies>
 
 	<!-- ビルド用プラグイン（jar作成やspring-boot:run用） -->

@@ -1,57 +1,57 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
 <head>
-    <meta charset="UTF-8">
-    <title>Timinute</title>
-    <link rel="stylesheet" href="../css/login.css">
+<meta charset="UTF-8">
+<title>Timinute</title>
+<link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 
 <body>
 
-<div class="Logo">
-    <img src="../image/Timinute_logo.png" alt="ロゴ画像">
-</div>
+	<div class="Logo">
+		<img th:src="@{/image/Timinute_logo.png}" alt="ロゴ画像">
+	</div>
 
-<div class="usercontent">
-<div id="textinput">
-<div>
-    <h3>社員ID</h3>
-    <input type="text" class="textbox">
-</div>
+	<div class="usercontent">
+		<form th:action="@{/login}" method="post">
+			<div id="textinput">
+				<div>
+					<h3>社員ID</h3>
+					<input type="text" class="textbox" name="username">
+				</div>
 
-<div class="pw">
-    <h3>パスワード</h3>
-    <input type="text" class="textbox">
-</div>
-</div>
+				<div class="pw">
+					<h3>パスワード</h3>
+					<input type="password" class="textbox" name="password">
+				</div>
+			</div>
 
-<div>
-    <button class="btn" id="loginBtn" type="button">ログイン</button>
-</div>
+			<div>
+				<button class="btn" id="loginBtn" type="submit">ログイン</button>
+			</div>
+		</form>
+	</div>
 
+	<script>
+		document.getElementById("loginBtn").addEventListener(
+				"click",
+				function(event) {
+					event.preventDefault(); // フォームのデフォルト送信を防止
 
-<!-- <div>
-    <a href="userhome.html"><button class="btn" type="button">ログイン</button></a>
-</div> -->
+					const userId = document
+							.querySelector("input[name='username']").value;
+					const password = document
+							.querySelector("input[name='password']").value;
 
-<script>
-  document.getElementById("loginBtn").addEventListener("click", function () {
-    // 入力値を取得（後でバリデーション等で使えます）
-    const userId = document.querySelector(".textbox").value;
-    const password = document.querySelector(".pw .textbox").value;
-    console.log("Id:", userId);
-    console.log("Pw:", password);
-    // ここでバリデーション処理などを追加できます（例：空欄チェック）
+					if (userId === "" || password === "") {
+						alert("社員IDとパスワードを入力してください");
+						return;
+					}
 
-    if (userId === "" || password === "") {
-    alert("社員IDとパスワードを入力してください");
-    return;
-    }
-
-    // ページ遷移
-    window.location.href = "userhome.html";
-  });
-</script>
+					// フォームを送信
+					document.querySelector("form").submit();
+				});
+	</script>
 
 </body>
 </html>

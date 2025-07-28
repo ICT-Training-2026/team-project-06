@@ -1,35 +1,28 @@
 package com.example.attendance.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.attendance.entity.Account;
-import com.example.attendance.service.LoginService;
-
+@Component
 @Controller
 public class LoginController {
 
-    @Autowired
-    private LoginService loginService;
+	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @GetMapping("/login")
     public String loginForm() {
+    	logger.info("login");
         return "login";
     }
 
-    @GetMapping("/register")
-    public String registerForm(Model model) {
-        model.addAttribute("account", new Account());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerAccount(@ModelAttribute("account") Account account) {
-        loginService.registerNewLogin(account);
-        return "redirect:/login";
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        logger.info("loginError");
+        return "login";
     }
 }

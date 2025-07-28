@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
 <head>
     <meta charset="UTF-8">
     <title>Timinute</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/userhome.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/userhome.css}">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <a href="login.html"><button class="headerbtn">Logout</button></a>
         </div>
     </header>
-    
+
     <div class="userhomebtn">
         <a href="Attendance Registration.html"><button class="btn" type="button">登録</button></a>
         <a href="request.html"><button class="btn" type="button">申請</button></a>

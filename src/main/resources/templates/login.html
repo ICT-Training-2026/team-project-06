@@ -13,29 +13,51 @@
 	</div>
 
 	<div class="usercontent">
-		<div id="textinput">
-			<div>
-				<h3>社員ID</h3>
-				<input type="text" class="textbox">
+
+		<form th:action="@{/login}" method="post">
+			<div th:if="${loginError}" class="error">
+				ログインに失敗しました。ユーザー名とパスワードを確認してください。</div>
+			<div th:if="${param.error}" class="alert alert-danger">ユーザー名かパスワードが違います</div>
+			<div th:if="${param.logout}" class="alert alert-info">
+				ログアウト済みです。</div>
+			<div id="textinput">
+				<div>
+					<h3>社員ID</h3>
+					<input type="text" class="textbox" name="username">
+				</div>
 			</div>
-		</div>
 
-		<div class="pw">
-			<h3>パスワード</h3>
-			<input type="text" class="textbox">
-		</div>
+			<div class="pw">
+				<h3>パスワード</h3>
+				<input type="text" class="textbox" name="password">
+			</div>
+			<button class="btn" id="loginBtn" type="submit">ログイン</button>
+		</form>
 	</div>
-
-	<div>
-		<button class="btn" id="loginBtn" type="button">ログイン</button>
-	</div>
-
 
 	<!-- <div>
     <a href="userhome.html"><button class="btn" type="button">ログイン</button></a>
 </div> -->
 
 	<script>
+		document.getElementById("loginBtn").addEventListener(
+				"click",
+				function(event) {
+					event.preventDefault(); // デフォルトのフォーム送信を防止
+
+					const userId = document
+							.querySelector("input[name='username']").value;
+					const password = document
+							.querySelector("input[name='password']").value;
+
+					if (userId === "" || password === "") {
+						alert("社員IDとパスワードを入力してください");
+					} else {
+						// バリデーションが成功した場合、フォームを送信
+						document.querySelector("form").submit();
+					}
+				});
+		<!--
 		document
 				.getElementById("loginBtn")
 				.addEventListener(
@@ -54,9 +76,10 @@
 								return;
 							}
 
-							// ページ遷移
-							window.location.href = "userhome.html";
+							// ページ遷移はthymeleafで担当します
+							// window.location.href = "userhome.html";
 						});
+		-->
 	</script>
 
 </body>

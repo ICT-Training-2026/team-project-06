@@ -13,11 +13,11 @@ import com.example.attendance.repository.LoginRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private LoginRepository accountRepository;
+    private LoginRepository loginRepository;
 
     @Override
     public UserDetails loadUserByUsername(String employeeId) throws UsernameNotFoundException {
-        Account account = accountRepository.findByEmployeeId(employeeId);
+        Account account = loginRepository.findByEmployeeId(employeeId);
         if (account == null) {
             throw new UsernameNotFoundException("User not found with employeeId: " + employeeId);
         }
