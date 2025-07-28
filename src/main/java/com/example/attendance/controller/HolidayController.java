@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.attendance.entity.Holiday;
+import com.example.attendance.entity.Prescribed;
 import com.example.attendance.form.HolidayForm;
 import com.example.attendance.service.HolidayRegistrationService;
 
@@ -36,10 +36,10 @@ public class HolidayController {
             return "holidayRegistration";
         }
 
-        Holiday holiday = new Holiday();
-        holiday.setDate(form.getDate());
-        holiday.setDescription(form.getDescription());
-        service.register(holiday);
+        Prescribed prescribed = new Prescribed();
+        prescribed.setDate(form.getDate());
+        prescribed.setDescription(form.getDescription());
+        service.register(prescribed);
 
         redirectAttributes.addFlashAttribute("msg", "休日登録が完了しました。");
         return "redirect:/holiday-complete";
