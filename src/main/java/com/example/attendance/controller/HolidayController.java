@@ -21,7 +21,7 @@ public class HolidayController {
     private final HolidayService service;
 
     /** 休日登録画面表示 */
-    @GetMapping("/holidayRegistration")
+    @GetMapping("/holiday")
     public String showHolidayRegistrationForm(@ModelAttribute HolidayForm form) {
         return "holidayRegistration";
     }
