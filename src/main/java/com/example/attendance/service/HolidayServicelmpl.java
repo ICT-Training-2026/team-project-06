@@ -1,13 +1,22 @@
 package com.example.attendance.service;
 
-import com.example.attendance.entity.Prescribed;
+import org.springframework.stereotype.Service;
 
-public class HolidayServicelmpl implements HolidayService {
+import com.example.attendance.entity.Holiday;
+import com.example.attendance.repository.HolidayRepository;
 
-	@Override
-	public void setHoliday(Prescribed holiday) {
-		// TODO 自動生成されたメソッド・スタブ
+import lombok.RequiredArgsConstructor;
 
-	}
+@Service
+@RequiredArgsConstructor
+public class HolidayServiceImpl implements HolidayService {
+
+    private final HolidayRepository repository;
+
+    @Override
+    public void setHoliday(Holiday holiday) {
+        // TODO 自動生成されたメソッド・スタブ
+        repository.save(holiday);
+    }
 
 }
