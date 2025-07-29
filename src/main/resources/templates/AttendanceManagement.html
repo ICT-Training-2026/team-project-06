@@ -118,6 +118,20 @@
 
 
 <script>
+	const departmentMap = {
+	  "0": "総務",
+	  "1": "営業",
+	  "2": "開発"
+	};
+
+	const positionMap = {
+	  "0": "社長",
+	  "1": "部長",
+	  "2": "課長",
+	  "3": "係長",
+	  "4": "一般"
+	};
+	
 document.getElementById("search-btn").addEventListener("click", function () {
   console.log("✅ 検索ボタンがクリックされました");
 
@@ -197,8 +211,8 @@ document.getElementById("search-btn").addEventListener("click", function () {
           tr.innerHTML = `
             <td>${record.employeeId}</td>
             <td>${record.name}</td>
-            <td>${record.departmentId}</td>
-            <td>${record.jobId}</td>
+			<td>${departmentMap[record.departmentId] || record.departmentId}</td>
+			<td>${positionMap[record.jobId] || record.jobId}</td>
             <td>${record.date}</td>
             <td>${record.startTime}</td>
             <td>${record.closingTime}</td>
@@ -267,7 +281,7 @@ document.getElementById("search-btn").addEventListener("click", function () {
 		      return res.text();
 		    })
 		    .then(msg => {
-		      alert("✅ 確定しました！");
+		      alert("確定しました！");
 		      // 任意でボタン無効化など：
 		      btn.disabled = true;
 		      btn.textContent = "確定済";
@@ -278,44 +292,42 @@ document.getElementById("search-btn").addEventListener("click", function () {
 		    });
 		  });
 		});
-		
-		document.getElementById("output-btn").addEventListener("click", function () {
-		  const table = document.getElementById("results-table");
-		  const rows = Array.from(table.querySelectorAll("tr"));
-
-		  let csvContent = "";
-
-		  rows.forEach((row, rowIndex) => {
-		    const cells = Array.from(row.querySelectorAll("th, td"));
-		    const rowData = cells.map(cell => {
-		      let text = cell.textContent.trim();
-		      // 如果内容中有逗号或双引号，需要转义
-		      if (text.includes(",") || text.includes('"')) {
-		        text = '"' + text.replace(/"/g, '""') + '"';
-		      }
-		      return text;
-		    }).join(",");
-		    csvContent += rowData + "\n";
-		  });
-
-		  // 创建 blob 对象并下载
-		  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-		  const url = URL.createObjectURL(blob);
-		  const link = document.createElement("a");
-		  link.href = url;
-		  link.download = "attendance_export.csv";
-		  document.body.appendChild(link);
-		  link.click();
-		  document.body.removeChild(link);
-		});
-
-
       }, 0);
     })
     .catch(error => {
       console.error("❌ 検索失敗:", error);
       alert("検索に失敗しました。サーバーまたはデータ形式に問題があります。");
     });
+});
+
+document.getElementById("output-btn").addEventListener("click", function () {
+  const table = document.getElementById("results-table");
+  const rows = Array.from(table.querySelectorAll("tr"));
+
+  let csvContent = "";
+
+  rows.forEach((row, rowIndex) => {
+    const cells = Array.from(row.querySelectorAll("th, td"));
+    const rowData = cells.map(cell => {
+      let text = cell.textContent.trim();
+      // 如果内容中有逗号或双引号，需要转义
+      if (text.includes(",") || text.includes('"')) {
+        text = '"' + text.replace(/"/g, '""') + '"';
+      }
+      return text;
+    }).join(",");
+    csvContent += rowData + "\n";
+  });
+
+  // 创建 blob 对象并下载
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "attendance_export.csv";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 });
 </script>
 
