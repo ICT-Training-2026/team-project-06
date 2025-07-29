@@ -32,19 +32,19 @@ public class PageController {
     }
     
     // userホーム画面
-    @GetMapping("/userhomepage")
+    @GetMapping("/userhome")
     public String showUserHome() {
         return "userhome"; // resources/templates/userhome.html
     }
     
     // adminホーム画面
-    @GetMapping("/adminhomepage")
+    @GetMapping("/adminhome")
     public String showAdminHome() {
         return "managerhome"; // resources/templates/managerhome.html
     }
     
     // ログイン画面
-    @GetMapping("/loginpage")
+    @GetMapping("/login")
     public String showLoginPage() {
         return "login"; // resources/templates/login.html
     }

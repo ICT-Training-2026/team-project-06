@@ -15,17 +15,14 @@ private final JdbcTemplate jdbcTemplate;
 
 @Override
 public void add(Prescribed holiday) {
-	String sql = "INSERT INTO holiday"
-        + "(employee_id, total_work, total_overtime, take_vacation, month)"
-        + "VALUES (?, ?, ?, ?, ?)";
-	
-	
-		jdbcTemplate.update(sql,
-            holiday.getEmployeeId(),
-            holiday.getTotalWork(),
-            holiday.getTotalOvertime(),
-            holiday.getTakeVacation(),
-            holiday.getMonth()
-		);
-	}
+    String sql = "INSERT INTO prescribed"
+        + "(monthly_attendance, prescribed_labor, month)"
+        + "VALUES (?, ?, ?)";
+
+    jdbcTemplate.update(sql,
+    	    holiday.getMonthlyAttendance(),
+    	    holiday.getPrescribedLabor(),  
+    	    holiday.getMonth()
+    	);
+}
 }

@@ -1,4 +1,13 @@
-.submit {
+.managerhomebtn {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    margin-top: 250px;
+    gap: 100px;
+}
+
+.btn {
     background-color: rgb(196, 255, 255);/*ボタンの色*/
     border: 3px solid #9eddff;
     border-radius: 7px;

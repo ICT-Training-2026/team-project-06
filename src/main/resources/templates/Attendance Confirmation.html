@@ -2,7 +2,6 @@
 <html lang="ja">
 
 <head>
-<<<<<<< HEAD
     <meta charset="UTF-8">
     <title>Header Page</title>
     <link rel="stylesheet" href="../css/header.css">
@@ -41,109 +40,6 @@
 
     </div>
 </confirmation>
-=======
-  <meta charset="UTF-8">
-  <title>Timinute</title>
-  <link rel="stylesheet" href="../css/header.css">
-  <link rel="stylesheet" href="../css/Attendance Confirmation.css" />
-</head>
-
-<body>
-
-  <header class="header">
-    <div class="logo-container">
-      <img src="../image/Timinute_logo.png" alt="画像">
-    </div>
-    <div class="welcome-text">
-      <p>お疲れ様です！<br>管理者さん</p>
-    </div>
-    <div class="buttons">
-      <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-      <a href="login.html"><button class="headerbtn">Logout</button></a>
-    </div>
-  </header>
-
-  <div class="whole">
-    <confirmation class="confirmation">
-      <div class="period">
-        <div class="date">
-          <h3>期間</h3>
-          <form>
-            <label for="start-date"></label>
-            <input type="date" id="start-date" name="start-date">
-            <div class="fontp">
-              <p>~</p>
-            </div>
-            <label for="end-date"></label>
-            <input type="date" id="end-date" name="end-date">
-          </form>
-        </div>
-      </div>
-      <div class="buttons">
-        <button class="btn" id="searchBtn">検索</button>
-      </div>
-    </confirmation>
-  </div>
-
-
-  <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('dateForm');
-  const startDateInput = document.getElementById('start-date');
-  const endDateInput = document.getElementById('end-date');
-  const errorMessage = document.getElementById('error-message');
-  const searchButton = document.getElementById('searchBtn');
-
-  searchButton.addEventListener('click', function (event) {
-    event.preventDefault(); // ボタンのデフォルトの動作を防ぐ
-
-    // 開始日と終了日の値を取得
-    const startDateValue = startDateInput.value;
-    const endDateValue = endDateInput.value;
-
-    // 日付が選択されていない場合のチェック
-    if (!startDateValue || !endDateValue) {
-      alert('日付を選択してください。');
-      return;
-    }
-
-    // 日付の比較
-    const startDate = new Date(startDateValue);
-    const endDate = new Date(endDateValue);
-
-    if (startDate > endDate) {
-      alert('開始日が終了日より後になっています。');
-    } else {
-      // 日付が正しく選択されている場合
-      alert('検索を開始します。\n開始日: ' + startDateValue + '\n終了日: ' + endDateValue);
-
-      // バックエンドにPOSTリクエストを送信
-      fetch('/api/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          startDate: startDateValue,
-          endDate: endDateValue
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        // ここで検索結果を処理します
-        alert('検索が完了しました。結果を確認してください。');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('検索中にエラーが発生しました。');
-      });
-    }
-  });
-});
-</script>
-
->>>>>>> refs/heads/ApplicationBranch
 </body>
 
 </html>
