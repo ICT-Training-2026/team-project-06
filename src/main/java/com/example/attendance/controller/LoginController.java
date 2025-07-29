@@ -12,9 +12,4 @@ public class LoginController {
 		return "login";
 	}
 
-	@GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        // ここでログインユーザーの情報を取得し、モデルに追加
-        return "dashboard";
-    }
 }

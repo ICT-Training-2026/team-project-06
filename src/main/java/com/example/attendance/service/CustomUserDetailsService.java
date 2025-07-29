@@ -1,3 +1,5 @@
+//多分未使用,結合時削除
+/*
 package com.example.attendance.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +29,4 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .roles("USER")
                 .build();
     }
-}
+}*/

@@ -1,14 +1,19 @@
 package com.example.attendance.service;
-import com.example.attendance.entity.User;
+import org.springframework.stereotype.Service;
 
+import com.example.attendance.entity.Account;
+import com.example.attendance.repository.LoginRepository;
+
+import lombok.RequiredArgsConstructor;
+
+
+@Service
+@RequiredArgsConstructor
 public class UserService {
-    public User login(String userId, String password) {
-        // 登录逻辑（暂未实现）
-        throw new UnsupportedOperationException();
-    }
 
-    public User getUserInfo(String userId) {
-        // 获取用户信息逻辑（暂未实现）
-        throw new UnsupportedOperationException();
+    private final LoginRepository loginRepository;
+
+    public Account findByEmployeeId(String employeeId) {
+        return loginRepository.findByEmployeeId(employeeId);
     }
 }

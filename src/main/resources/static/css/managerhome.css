@@ -1,7 +1,7 @@
 .managerhomebtn {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     text-align: center;
     margin-top: 250px;
     gap: 100px;
@@ -14,4 +14,28 @@
     font-size: 22px;
     height: 120px;
     width: 220px;
+}
+
+.managerhomebtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* ボタン間の間隔 */
+    margin-top: 50px; /* ヘッダーとの間隔 */
+}
+
+.managerhomebtn .btn {
+    width: 150px; /* ボタンの幅を少し広げる */
+    height: 80px; /* ボタンの高さを少し高くする */
+    font-size: 18px;
+    background-color: rgb(196, 255, 255);
+    border: 3px solid #9EDDFF;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.managerhomebtn .btn:hover {
+    background-color: #9EDDFF;
+    color: white;
 }

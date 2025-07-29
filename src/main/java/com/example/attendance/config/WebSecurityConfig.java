@@ -1,5 +1,6 @@
 package com.example.attendance.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -15,22 +16,27 @@ import com.example.attendance.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 	    http
-	        .authorizeHttpRequests(authz -> authz
-	            .requestMatchers("/login").permitAll()
-	            .anyRequest().authenticated()
-	        )
-	        .formLogin(form -> form
-	            .loginPage("/login")
-	            .defaultSuccessUrl("/userhome", true)
-	            .failureUrl("/login?error=true")
-	            .permitAll()
-	        )
-	        .logout(logout -> logout
-	        	.logoutSuccessUrl("/login?logout=true")
-				.permitAll()
+	    	.authorizeHttpRequests(authz -> authz
+	    		.requestMatchers("/managerhome").hasRole("ADMIN")
+                .requestMatchers("/userhome").authenticated()
+                .anyRequest().permitAll()
+            )
+	    	.formLogin(form -> form
+                .loginPage("/login")
+                .successHandler(successHandler)
+                .permitAll()
+            )
+	    	.logout(logout -> logout
+	    		.logoutUrl("/logout")
+	    		.logoutSuccessUrl("/login?logout")
+	    		.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
 	        );
 
 	    return http.build();
