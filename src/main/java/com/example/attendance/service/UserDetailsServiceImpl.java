@@ -1,9 +1,10 @@
 package com.example.attendance.service;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,29 +17,24 @@ import com.example.attendance.repository.LoginRepository;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final LoginRepository loginRepository;
-	private static final Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+
+	private static final List<String> ADMIN_IDS = Arrays.asList("adm001", "adm002");
 
 	@Override
 	public UserDetails loadUserByUsername(String employeeId) throws UsernameNotFoundException {
-		logger.debug("Attempting to load user: {}", employeeId);
 		Account account = loginRepository.findByEmployeeId(employeeId);
-
 		if (account == null) {
-			logger.warn("User not found: {}", employeeId);
-			throw new UsernameNotFoundException("User " + employeeId + " was not found in the database");
+			throw new UsernameNotFoundException("User not found");
 		}
-
-		logger.debug("User found: {}", account.getEmployeeId());
-		// ここでパスワードをログに出力するのはセキュリティ上問題があるため、実際の運用では避けてください
-		logger.debug("Password: {}", account.getPassword());
-
-		return new User(account.getEmployeeId(), account.getPassword(),
-				Collections.singletonList(new SimpleGrantedAuthority("USER")));
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		if (ADMIN_IDS.contains(employeeId)) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+		return new User(account.getEmployeeId(), account.getPassword(), authorities);
 	}
 }

@@ -1,46 +1,57 @@
 package com.example.attendance.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.example.attendance.service.UserDetailsServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-        .csrf(csrf -> csrf.disable())  // APIの場合はCSRFを無効にすることもあります
-        .authorizeHttpRequests(requests -> requests
-            .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/image/**").permitAll()
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form
-            .loginPage("/login")
-            .loginProcessingUrl("/login")
-            .usernameParameter("employee_id")  // もし必要な場合
-            .passwordParameter("password")
-            .defaultSuccessUrl("/userhome", true)
-            .permitAll()
-        )
-        .logout(logout -> logout.permitAll());
+	    http
+	    	.authorizeHttpRequests(authz -> authz
+	    		.requestMatchers("/managerhome").hasRole("ADMIN")
+                .requestMatchers("/userhome").authenticated()
+                .anyRequest().permitAll()
+            )
+	    	.formLogin(form -> form
+                .loginPage("/login")
+                .successHandler(successHandler)
+                .permitAll()
+            )
+	    	.logout(logout -> logout
+	    		.logoutUrl("/logout")
+	    		.logoutSuccessUrl("/login?logout")
+	    		.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+	        );
 
-    return http.build();
-}
+	    return http.build();
+	}
 
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
-	/*以下はハッシュ化用のせてーい
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}*/
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider(UserDetailsServiceImpl accountService) {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(accountService);
+		authProvider.setPasswordEncoder(passwordEncoder());
+		return authProvider;
+	}
 }

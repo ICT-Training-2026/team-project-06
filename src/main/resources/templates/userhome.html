@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="jp">
 <head>
-    <meta charset="UTF-8">
-    <title>Timinute</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/userhome.css}">
+<meta charset="UTF-8">
+<title>Timinute</title>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/userhome.css}">
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="logo-container">
-        <img src="../image/Timinute_logo.png" alt="画像">
-        </div>
-        <div class="welcome-text">
-        <p>お疲れ様です！<br>管理者さん</p>
-        </div>
-        <div class="buttons">
-        <a href="userhome.html"><button class="headerbtn">HOME</button></a>
-        <a href="login.html"><button class="headerbtn">Logout</button></a>
-        </div>
-    </header>
+	<header class="header">
+		<div class="logo-container">
+			<img th:src="@{/image/Timinute_logo.png}" alt="Timinute Logo">
+		</div>
+		<div class="welcome-text">
+			<p>
+				お疲れ様です！<br>
+				<span th:text="${userName}">ユーザー</span>さん
+			</p>
+		</div>
+		<div class="buttons">
+			<a th:href="@{/userhome}"><button class="headerbtn">HOME</button></a>
+			<form th:action="@{/logout}" method="post" style="display: inline;">
+				<button class="headerbtn" type="submit">Logout</button>
+			</form>
+		</div>
+	</header>
 
-    <div class="userhomebtn">
-        <a href="Attendance Registration.html"><button class="btn" type="button">登録</button></a>
-        <a href="request.html"><button class="btn" type="button">申請</button></a>
-        <a href="Attendance Confirmation.html"><button class="btn" type="button">勤怠確認</button></a>
-</div>
+	<div class="userhomebtn">
+		<a th:href="@{/attendance-registration}"><button class="btn"
+				type="button">登録</button></a> <a th:href="@{/request}"><button
+				class="btn" type="button">申請</button></a> <a
+			th:href="@{/attendance-confirmation}"><button class="btn"
+				type="button">勤怠確認</button></a>
+	</div>
 </body>
 </html>
