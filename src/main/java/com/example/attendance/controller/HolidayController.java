@@ -24,8 +24,6 @@ public class HolidayController {
 
     private final HolidayService service;
 
-
-
     /** 休日登録処理 */
     @PostMapping("/holiday-register")
     @ResponseBody
