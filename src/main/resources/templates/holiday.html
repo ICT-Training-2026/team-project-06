@@ -1,23 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <title>Timinute</title>
-<!--    <link rel="stylesheet" href="@{/css/header.css}">-->
-<!--    <link rel="stylesheet" href="@{/css/holiday.css}" />-->
-
-		<link rel="stylesheet" th:href="@{/css/header.css}">
- 		<link rel="stylesheet" th:href="@{/css/holiday.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/holiday.css}">
 </head>
-
 <body>
-
     <header class="header">
         <div class="logo-container">
-<!--            <img src="@{/image/Timinute_logo.png}" alt="画像">-->
-		<img th:src="@{/image/Timinute_logo.png}" alt="画像">
+            <img th:src="@{/image/Timinute_logo.png}" alt="画像">
         </div>
         <div class="welcome-text">
             <p>お疲れ様です！<br>管理者さん</p>
@@ -31,54 +23,19 @@
     <div class="whole">
         <div id="holidayTable" class="holiday-box">
             <table>
-                <tr>
-                    <td>4月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>5月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>6月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>7月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>8月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>9月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>10月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>11月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>12月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>1月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>2月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
-                <tr>
-                    <td>3月</td>
-                    <td><input type="text" placeholder=""></td>
-                </tr>
+                <!-- 各月の入力フィールド -->
+                <tr><td>4月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>5月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>6月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>7月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>8月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>9月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>10月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>11月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>12月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>1月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>2月</td><td><input type="text" placeholder=""></td></tr>
+                <tr><td>3月</td><td><input type="text" placeholder=""></td></tr>
             </table>
         </div>
     </div>
@@ -86,65 +43,74 @@
     <div class="button-container">
         <button class="btn" type="button" id="holidayBtn">登録</button>
     </div>
+	
+	<div id="message" class="message-box" style="display:none;">
+	    <h1>休日登録が完了しました</h1>
+	    <p>休日の登録が正常に完了しました。</p>
+	</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const registerButton = document.getElementById('holidayBtn');
-            const holidayTable = document.getElementById('holidayTable');
+	<script>
+		document.addEventListener('DOMContentLoaded', function () {
+		    const registerButton = document.getElementById('holidayBtn');
+		    const holidayTable = document.getElementById('holidayTable');
+		    const messageBox = document.getElementById('message');
 
-            registerButton.addEventListener('click', function () {
-                const inputs = holidayTable.querySelectorAll('input');
-                let allFilled = true;
-                let allValid = true;
-                let emptyMonths = [];
-                let invalidMonths = [];
-                let holidayData = {};
+		    registerButton.addEventListener('click', function () {
+		        const inputs = holidayTable.querySelectorAll('input');
+		        let allFilled = true;
+		        let allValid = true;
+		        let emptyMonths = [];
+		        let invalidMonths = [];
+		        let holidayData = {};
 
-                inputs.forEach(input => {
-                    const month = input.closest('tr').querySelector('td:first-child').textContent;
-                    const value = input.value.trim();
-                    if (value === '') {
-                        allFilled = false;
-                        emptyMonths.push(month);
-                    } else {
-                        const numValue = parseInt(value, 10);
-                        if (isNaN(numValue) || numValue < 1 || numValue > 99) {
-                            allValid = false;
-                            invalidMonths.push(month);
-                        } else {
-                            holidayData[month] = numValue;
-                        }
-                    }
-                });
+		        inputs.forEach(input => {
+		            const month = input.closest('tr').querySelector('td:first-child').textContent;
+		            const value = input.value.trim();
+		            if (value === '') {
+		                allFilled = false;
+		                emptyMonths.push(month);
+		            } else {
+		                const numValue = parseInt(value, 10);
+		                if (isNaN(numValue) || numValue < 1 || numValue > 99) {
+		                    allValid = false;
+		                    invalidMonths.push(month);
+		                } else {
+		                    holidayData[month] = numValue;
+		                }
+		            }
+		        });
 
-                if (!allFilled) {
-                    alert('休日日数が入力されていない月があります: ' + emptyMonths.join(', '));
-                } else if (!allValid) {
-                    alert('休日日数が上限を超えています: ' + invalidMonths.join(', '));
-                } else {
-                    alert('登録を更新します'); // 新しいアラートを追加
-
-                    // POSTリクエストを送信
-                    fetch('/api/register-holidays', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(holidayData)
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Success:', data);
-                            alert('登録が完了しました');
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                            alert('登録中にエラーが発生しました');
-                        });
-                }
-            });
-        });
-    </script>
+		        if (!allFilled) {
+		            alert('休日日数が入力されていない月があります: ' + emptyMonths.join(', '));
+		        } else if (!allValid) {
+		            alert('休日日数が上限を超えています: ' + invalidMonths.join(', '));
+		        } else {
+		            fetch('/holiday-register', {
+		                method: 'POST',
+		                headers: {
+		                    'Content-Type': 'application/json',
+		                },
+		                body: JSON.stringify(holidayData)
+		            })
+		            .then(response => {
+		                if (!response.ok) {
+		                    throw new Error('Network response was not ok ' + response.statusText);
+		                }
+		                return response.json();
+		            })
+					.then(data => {
+					    console.log('Success:', data);
+					    alert(data.message); // 登録成功メッセージを表示
+					    // 【変更点】OKを押したら /adminhome にリダイレクト
+					    window.location.href = "/adminhome";
+					})
+		            .catch((error) => {
+		                console.error('Error:', error);
+		                alert('登録中にエラーが発生しました: ' + error.message);
+		            });
+		        }
+		    });
+		});
+	</script>
 </body>
-
 </html>
