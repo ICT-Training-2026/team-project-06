@@ -1,31 +1,42 @@
 <!DOCTYPE html>
-<html lang="jp">
+<html xmlns:th="http://www.thymeleaf.org" lang="jp">
 <head>
-    <meta charset="UTF-8">
-    <title>Timinute</title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/managerhome.css">
+<meta charset="UTF-8">
+<title>Timinute</title>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/managerhome.css}">
 </head>
 
 <body>
+	<header class="header">
+		<div class="logo-container">
+			<img th:src="@{/image/Timinute_logo.png}" alt="Timinute Logo">
+		</div>
+		<div class="welcome-text">
+			<p>
+				お疲れ様です！<br>管理者さん
+			</p>
+		</div>
+		<div class="buttons">
+			<a th:href="@{/managerhome}"><button class="headerbtn">HOME</button></a>
+			<form th:action="@{/logout}" method="post" style="display: inline;">
+				<button class="headerbtn" type="submit">Logout</button>
+			</form>
+		</div>
+	</header>
 
-<header class="header">
-    <div class="logo-container">
-      <img src="../image/Timinute_logo.png" alt="画像">
-    </div>
-    <div class="welcome-text">
-      <p>お疲れ様です！<br>管理者さん</p>
-    </div>
-    <div class="buttons">
-      <a href="/adminhome"><button class="headerbtn">HOME</button></a>
-      <a href="/login"><button class="headerbtn">Logout</button></a>
-    </div>
-  </header>
-
-    <div class="managerhomebtn">
-        <a href="/attendance/management"><button class="btn" type="button">検索</button></a>
-        <a href="/userregistration"><button class="btn" type="button">ユーザー<br>登録</button></a>
-        <a href="/holiday"><button class="btn" type="button">年間休日<br>登録</button></a>
-    </div>
+	<div class="managerhomebtn">
+		<a th:href="@{/search}">
+			<button class="btn" type="button">検索</button>
+		</a> <a th:href="@{/user-registration}">
+			<button class="btn" type="button">
+				ユーザー<br>登録
+			</button>
+		</a> <a th:href="@{/holiday-registration}">
+			<button class="btn" type="button">
+				年間休日<br>登録
+			</button>
+		</a>
+	</div>
 </body>
 </html>
