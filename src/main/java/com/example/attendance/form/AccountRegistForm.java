@@ -14,13 +14,13 @@ public class AccountRegistForm {
 
     @NotBlank(message = "氏名は必須です。")
     @Size(min = 1, max = 20, message = "氏名は1文字から20文字で指定してください。")
-    private String fullName;
+    private String name;
 
     @NotBlank(message = "部署を選択してください。")
-    private String department;
+    private String departmentId;
 
     @NotBlank(message = "役職を選択してください。")
-    private String position;
+    private String jobId;
 
     @NotBlank(message = "パスワードは必須です。")
     @Size(min = 10, max = 30, message = "パスワードは10文字から30文字で指定してください。")
