@@ -1,8 +1,10 @@
 package com.example.attendance.controller;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,9 +58,14 @@ public class AttendanceController {
     }
     
     @PostMapping("/api/search")
-    public ResponseEntity<?> searchAttendanceRecords(@RequestBody Map<String, String> request) {
+    public ResponseEntity<?> searchAttendanceRecords(@RequestBody Map<String, String> request, HttpServletRequest requestObj) {
         try {
-            String employeeId = "yao001"; // あとはsessionから取得
+            HttpSession session = requestObj.getSession(false); // false にすることで未ログイン時に null を返す
+            if (session == null || session.getAttribute("employeeId") == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ログイン情報が見つかりません");
+            }
+
+            String employeeId = (String) session.getAttribute("employeeId");
 
             LocalDate startDate = LocalDate.parse(request.get("startDate"));
             LocalDate endDate = LocalDate.parse(request.get("endDate"));

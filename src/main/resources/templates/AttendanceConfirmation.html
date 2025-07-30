@@ -15,7 +15,10 @@
       <img src="../image/Timinute_logo.png" alt="画像">
     </div>
     <div class="welcome-text">
-      <p>お疲れ様です！<br>○○さん</p>
+		<p>
+			お疲れ様です！<br>
+			<span th:text="${session.Name}">ユーザー</span>さん
+		</p>
     </div>
     <div class="buttons">
 		<a href="/userhomepage"><button class="headerbtn">HOME</button></a>

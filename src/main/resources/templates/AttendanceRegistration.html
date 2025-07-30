@@ -14,7 +14,10 @@
       <img src="../image/Timinute_logo.png" alt="画像">
     </div>
     <div class="welcome-text">
-      <p>お疲れ様です！<br>○○さん</p>
+		<p>
+			お疲れ様です！<br>
+			<span th:text="${session.Name}">ユーザー</span>さん
+		</p>
     </div>
     <div class="buttons">
 		<a href="/userhomepage"><button class="headerbtn">HOME</button></a>
@@ -47,7 +50,7 @@
 	</div>
 </div>
 
-<script>
+<script th:inline="javascript">
 	document.addEventListener("DOMContentLoaded", function () {
 		console.log("✅ DOMContentLoaded 起動成功");
 	    const btns = {
@@ -61,7 +64,9 @@
 		console.log("breakEnd:", btns.breakEnd);
 		console.log("clockOut:", btns.clockOut);
 
-	    const employeeId = "yao001";  //  ログイン中のID。今は固定値として使用
+	    const employeeId = /*[[${session.employeeId}]]*/ "";
+		console.log("ログイン中の社員ID:", employeeId);
+		
 	    const endpoints = {
 			start: { url: "/attendance/start", method: "POST", next: "/attendance/clockin-page" },
 		    breakStart: { url: "/attendance/breakStart", method: "POST", next: "/attendance/breakstart-page" },
