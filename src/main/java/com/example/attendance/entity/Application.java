@@ -1,5 +1,5 @@
 package com.example.attendance.entity;
-import java.time.LocalDate;
+import java.sql.Date;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ public class Application {
     private String employeeId;
     private String categoryId;
     private String comment;
-    private LocalDate dateApply;
+    private Date dateApply;
 
     public boolean isValid() {
         throw new UnsupportedOperationException();

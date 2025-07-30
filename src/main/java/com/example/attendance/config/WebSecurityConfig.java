@@ -19,28 +19,36 @@ public class WebSecurityConfig {
     @Autowired
     private CustomAuthenticationSuccessHandler successHandler;
 
-	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http
-	    	.authorizeHttpRequests(authz -> authz
-	    		.requestMatchers("/managerhome").hasRole("ADMIN")
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/managerhome").hasRole("ADMIN")
                 .requestMatchers("/userhome").authenticated()
+                .requestMatchers(
+                    "/attendance/start",
+                    "/attendance/breakStart",
+                    "/attendance/breakEnd",
+                    "/attendance/end"
+                ).permitAll()
                 .anyRequest().permitAll()
             )
-	    	.formLogin(form -> form
+            .formLogin(form -> form
                 .loginPage("/login")
                 .successHandler(successHandler)
                 .permitAll()
             )
-	    	.logout(logout -> logout
-	    		.logoutUrl("/logout")
-	    		.logoutSuccessUrl("/login?logout")
-	    		.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID")
-	        );
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+            )
+            .csrf(csrf -> csrf.disable());
 
-	    return http.build();
-	}
+        return http.build();
+    }
+
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

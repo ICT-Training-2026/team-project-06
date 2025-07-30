@@ -48,7 +48,7 @@ public class PageController {
     }
     
     // ログイン画面
-    @GetMapping("/loginpage")
+    @GetMapping("/login")
     public String showLoginPage() {
         return "login"; // resources/templates/login.html
     }
