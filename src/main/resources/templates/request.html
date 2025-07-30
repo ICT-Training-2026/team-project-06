@@ -85,6 +85,11 @@
 
             if (startDateInput.value && endDateInput.value && categoryInput) {
                 alert('申請を送信します');
+				const commentText = commentInput.value.trim();
+				if (commentText.length > 50) {
+				    alert('コメントは50文字以内で入力してください。');
+				    return;
+				}
 
                 const formData = new FormData(form);
 

@@ -33,9 +33,9 @@
         <form>
           <label for="department"></label>
           <select id="department" name="department">
-			<option value="sales">営業</option>
-			<option value="development">開発</option>
-			<option value="administration">総務</option>
+			<option value="1">営業</option>
+			<option value="2">開発</option>
+			<option value="0">総務</option>
           </select>
           <br><br>
         </form>
@@ -45,11 +45,12 @@
         <h3>役職</h3>
         <form>
           <label for="department"></label>
-          <select id="department" name="department">
-			<option value="staff">一般</option>
-			<option value="assistantManager">係長</option>
-			<option value="sectionChief">課長</option>
-			<option value="manager">部長</option>
+          <select id="position" name="position">
+			<option value="4">一般</option>
+			<option value="3">係長</option>
+			<option value="2">課長</option>
+			<option value="1">部長</option>
+			<option value="0">社長</option>
             
           </select>
 
@@ -100,20 +101,6 @@
 	  const department = document.querySelector('.department select').value;
 	  const position = document.querySelector('.position select').value;
 
-	  // 役職に対応するIDをマッピング
-	  const departmentMapping = {
-		'sales': '0',
-		'development': '1',
-		'administration': '2'
-	  };
-
-	  const positionMapping = {
-		'staff': '0',
-		'assistantManager': '1',
-		'sectionChief': '2',
-	    'manager': '3'
-	  };
-
 	  let errorMessages = [];
 
 	  if (!employeeId) {
@@ -139,8 +126,8 @@
 
 	  // バリデーションOKなら送信データ作成
 	  const data = {
-	    departmentId: departmentMapping[department], // マッピングされたIDを使用
-	    jobId: positionMapping[position], // マッピングされたIDを使用
+		departmentId: department, 
+	  	jobId: position,
 	    employeeId: employeeId,
 	    name: name,
 	    password: password
