@@ -9,10 +9,5 @@ public interface ApplicationService {
 
 	void regist(Application application);
 
-	/*
-    public void apply(String userId, String categoryId, String date, String comment) {
-        throw new UnsupportedOperationException();
-    }
-    */
-
+	void updateVacation(String categoryId, String employeeId);
 }

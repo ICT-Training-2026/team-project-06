@@ -60,6 +60,9 @@ public class ApplicationController {
             a.setDateApply(new Date(calendar.getTimeInMillis()));
             service.regist(a);
 
+            // 休暇の更新処理を呼び出し
+            service.updateVacation(form.getCategoryId(), employeeId);
+
             calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
 
