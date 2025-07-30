@@ -81,6 +81,7 @@ import com.example.attendance.entity.Application;
 import com.example.attendance.form.ApplicationForm;
 import com.example.attendance.service.ApplicationService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -96,11 +97,18 @@ public class ApplicationController {
 
     @PostMapping("/api/submit-request")
     @ResponseBody
-    public ResponseEntity<String> application(@Validated @ModelAttribute ApplicationForm form, BindingResult result) {
+    public ResponseEntity<String> application(@Validated @ModelAttribute ApplicationForm form, BindingResult result, HttpSession session) {
         System.out.println("Received form: " + form);
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body("エラー: フォームの検証に失敗しました。");
         }
+
+        // セッションから employeeId を取得
+        String employeeId = (String) session.getAttribute("employeeId");
+        if (employeeId == null) {
+            return ResponseEntity.badRequest().body("エラー: ユーザーIDが見つかりません。");
+        }
+
 
         Date startDate = form.getStartDate();
         Date endDate = form.getEndDate();
@@ -110,7 +118,7 @@ public class ApplicationController {
 
         while (!calendar.getTime().after(endDate)) {
             Application a = new Application();
-            a.setEmployeeId("111111"); // 仮置き
+            a.setEmployeeId(employeeId); // 仮置き
             a.setCategoryId(form.getCategoryId());
             a.setComment(form.getComment());
             a.setDateApply(new Date(calendar.getTimeInMillis()));
