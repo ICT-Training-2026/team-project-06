@@ -54,7 +54,7 @@ public class AttendanceController {
     public void recordEnd(@RequestParam String employeeId) {
         attendanceService.recordEnd(employeeId);
     }
-    
+
     @PostMapping("/api/search")
     public ResponseEntity<?> searchAttendanceRecords(@RequestBody Map<String, String> request) {
         try {
@@ -65,13 +65,13 @@ public class AttendanceController {
 
             List<Attendance> results = attendanceService.findByEmployeeIdAndPeriod(employeeId, startDate, endDate);
 
-            return ResponseEntity.ok(results); 
+            return ResponseEntity.ok(results);
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("無効な請求");
         }
     }
-    
+
     @PostMapping("/adminsearch")
     @ResponseBody
     public ResponseEntity<?> adminSearch(@RequestBody Map<String, String> request) {
@@ -141,13 +141,13 @@ public class AttendanceController {
             return ResponseEntity.status(500).body("削除失敗");
         }
     }
-    
+
     @PostMapping("/approve")
     public ResponseEntity<?> approveAttendance(@RequestBody Map<String, String> request) {
         try {
             String employeeId = request.get("employeeId");
             LocalDate date = LocalDate.parse(request.get("date"));
-            
+
             attendanceService.approve(employeeId, date);
             return ResponseEntity.ok("確定成功");
         } catch (Exception e) {

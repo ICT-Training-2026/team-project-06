@@ -15,7 +15,10 @@
       <img src="../image/Timinute_logo.png" alt="画像">
     </div>
     <div class="welcome-text">
-      <p>お疲れ様です！<br>○○さん</p>
+		<p>
+			お疲れ様です！<br>
+			<span th:text="${session.Name}">ユーザー</span>さん
+		</p>
     </div>
     <div class="buttons">
 		<a href="/userhomepage"><button class="headerbtn">HOME</button></a>
@@ -45,7 +48,7 @@
         <button class="btn" id="searchBtn">検索</button>
       </div>
     </confirmation>
-	
+
   </div>
 	<div id="resultContainer">
   	  <table id="resultTable">
@@ -140,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		  1: '退勤',
 		  2: '休憩'
 		};
-		
+
 	    data.forEach(item => {
 	      const row = document.createElement("tr");
 	      row.innerHTML = `
