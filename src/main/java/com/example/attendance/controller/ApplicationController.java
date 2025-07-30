@@ -36,14 +36,14 @@
 //		if (result.hasErrors()) {
 //			return "request?error";
 //		}
-//		
+//
 //		Date startDate = form.getStartDate();
 //		Date endDate = form.getEndDate();
 //
 //		Calendar calendar = Calendar.getInstance();
 //		calendar.setTime(startDate);
 //
-//		
+//
 //	    while (!calendar.getTime().after(endDate)) {
 //	        Application a = new Application();
 //	        a.setEmployeeId("111111"); // 仮置き
