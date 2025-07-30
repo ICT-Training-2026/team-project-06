@@ -36,7 +36,11 @@ VALUES
 ('104493','木村 悠輝','2','2','b2tJIkJwBl','19','11'),
 ('263448','松本 純子','2','1','mtqQjxVwo7','19','11'),
 ('227533','杉山 陽之介','2','1','H3Qx7vifSq','20','20'),
-('743457','岡田 真実','2','0','t3RN5YfBs9','20','20'),
+('743457','岡田 真実','2','0','t3RN5YfBs9','20','20');
+
+INSERT INTO account (employee_id, name, department_id, job_id, password, paid_vacation,remaining_vacation)
+VALUES ('adm001', '管理者1', '2', '3', 'manageadmin', '0','0'),
+VALUES ('adm002,  '管理者2', '2', '3', 'manageadmin', '0','0');
 
 
 INSERT INTO category (category_id, attendance_category) VALUES
