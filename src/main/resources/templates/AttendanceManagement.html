@@ -19,7 +19,9 @@
     </div>
     <div class="buttons">
 		<a href="/adminhome"><button class="headerbtn">HOME</button></a>
-		<a href="/login"><button class="headerbtn">Logout</button></a>
+		<form th:action="@{/logout}" method="post" style="display: inline;">
+			<button class="headerbtn" type="submit">Logout</button>
+		</form>
     </div>
 </header>
 

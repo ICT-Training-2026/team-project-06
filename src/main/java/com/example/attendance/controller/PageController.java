@@ -1,7 +1,11 @@
 package com.example.attendance.controller;
 
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.attendance.form.ApplicationForm;
 
 @Controller
 public class PageController {
@@ -32,7 +36,7 @@ public class PageController {
     }
     
     // userホーム画面
-    @GetMapping("/userhome")
+    @GetMapping("/userhomepage")
     public String showUserHome() {
         return "userhome"; // resources/templates/userhome.html
     }
@@ -44,7 +48,7 @@ public class PageController {
     }
     
     // ログイン画面
-    @GetMapping("/login")
+    @GetMapping("/loginpage")
     public String showLoginPage() {
         return "login"; // resources/templates/login.html
     }
@@ -80,8 +84,9 @@ public class PageController {
     }
     
     // 申請画面
-    @GetMapping("/application")
-    public String showApplicationPage() {
-        return "request"; 
+    @GetMapping("/applicationpage")
+    public String showApplicationPage(Model model) {
+    	model.addAttribute("applicationForm", new ApplicationForm());
+    	return "request";
     }
 }
