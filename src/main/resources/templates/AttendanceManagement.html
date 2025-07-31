@@ -97,7 +97,7 @@
 	  <th>終業時間</th>
 	  <th>労働時間</th>
 	  <th>休憩時間</th>
-	  <th>コメント</th>
+	  <th>コメント</th> 
 	  <th>編集</th>
 	  <th>確定</th>
 	</tr>
@@ -210,24 +210,25 @@ document.getElementById("search-btn").addEventListener("click", function () {
           tr.setAttribute("data-employee-id", record.employeeId);
 
 		  const isConfirmed = record.categoryStatus === true;
-          tr.innerHTML = `
-            <td>${record.employeeId}</td>
-            <td>${record.name}</td>
-			<td>${departmentMap[record.departmentId] || record.departmentId}</td>
-			<td>${positionMap[record.jobId] || record.jobId}</td>
-            <td>${record.date}</td>
-            <td>${record.startTime}</td>
-            <td>${record.closingTime}</td>
-            <td>${record.workTime}</td>
-            <td>${record.breakTime}</td>
-            <td>${record.comment || ""}</td>
-            <td><button class="edit-btn small-btn">編集</button></td>
-			<td>
-			  <button class="confirm-btn small-btn" ${isConfirmed ? "disabled" : ""}>
-			    ${isConfirmed ? "確定済" : "確定"}
-			  </button>
-			</td>
-          `;
+		  tr.innerHTML = `
+		    <td>${record.employeeId}</td>
+		    <td>${record.name}</td>
+		    <td>${departmentMap[record.departmentId] || record.departmentId}</td>
+		    <td>${positionMap[record.jobId] || record.jobId}</td>
+		    <td>${record.date}</td>
+		    <td>${record.startTime}</td>
+		    <td>${record.closingTime}</td>
+		    <td>${record.workTime}</td>
+		    <td>${record.breakTime}</td>
+		    <td>${record.comment || ""}</td>
+		    <td><button class="edit-btn small-btn">編集</button></td>
+		    <td>
+		      <button class="confirm-btn small-btn" ${isConfirmed ? "disabled" : ""}>
+		        ${isConfirmed ? "確定済" : "確定"}
+		      </button>
+		    </td>
+		  `;
+
           tbody.appendChild(tr);
         });
 

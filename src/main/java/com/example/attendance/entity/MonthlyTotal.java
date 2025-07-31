@@ -17,11 +17,11 @@ public class MonthlyTotal {
 	private int maxPaidLeaveDays;
 	private int maxTransferLeaveDays;
 	*/
-	public int calculateTotalWorkTime(List<Attendance> attendanceList) {
-
-	};
-	public int calculateOvertime(int standardWorkHours) {
-
-	};
+//	public int calculateTotalWorkTime(List<Attendance> attendanceList) {
+//
+//	};
+//	public int calculateOvertime(int standardWorkHours) {
+//
+//	};
 
 }

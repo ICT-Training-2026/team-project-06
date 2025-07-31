@@ -145,6 +145,15 @@ public class AttendanceDAOImpl implements AttendanceDAO {
         jdbcTemplate.update(sql, employeeId, date);
     }
 
+    @Override
+    public void incrementRemainingVacation(String employeeId) {
+        String sql = "UPDATE account SET remaining_vacation = remaining_vacation + 1 WHERE employee_id = ?";
+        jdbcTemplate.update(sql, employeeId);
+    }
 
+    @Override
+    public List<Attendance> adminSearch(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate) {
+        return findByConditions(department, position, employeeId, startDate, endDate);
+    }
 
 }

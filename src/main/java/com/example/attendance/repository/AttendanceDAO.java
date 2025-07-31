@@ -13,4 +13,6 @@ public interface AttendanceDAO {
     void update(Attendance attendance);
     List<Attendance> findByConditions(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate);
     void delete(String employeeId, LocalDate date);
+    void incrementRemainingVacation(String employeeId);
+    List<Attendance> adminSearch(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate);
 }

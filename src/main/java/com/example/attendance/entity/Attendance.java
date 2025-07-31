@@ -22,4 +22,5 @@ public class Attendance {
     private String name;
     private String departmentId;
     private String jobId;
+    private String overtime;
 }

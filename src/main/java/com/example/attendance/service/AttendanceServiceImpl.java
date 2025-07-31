@@ -1,20 +1,29 @@
 package com.example.attendance.service;
-
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.attendance.entity.Attendance;
 import com.example.attendance.repository.AttendanceDAO;
+import com.example.attendance.repository.MonthlyTotalDAO;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private AttendanceDAO attendanceDAO;
+    
+    @Autowired
+    private MonthlyTotalService monthlyTotalService;	
+    
+    @Autowired
+    private MonthlyTotalDAO monthlyTotalDAO;
 
     @Override
     public void recordStart(String employeeId, String categoryId) {
@@ -30,6 +39,11 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendance.setCategoryStatus(false);      
 
         attendanceDAO.insert(attendance);
+        
+        if ("1".equals(categoryId)) {
+            attendanceDAO.incrementRemainingVacation(employeeId);
+        }
+
     }
 
     @Override
@@ -79,6 +93,11 @@ public class AttendanceServiceImpl implements AttendanceService {
             today.setWorkTime(java.sql.Time.valueOf(LocalTime.MIDNIGHT.plus(workDuration)));
 
             attendanceDAO.update(today);
+            
+         // ⏱️ 加班時間の計算を即時実行（當月）
+            LocalDate monthDate = today.getDate().withDayOfMonth(1);
+            monthlyTotalService.calculateAndUpdateOvertime(employeeId, monthDate);
+
         }
     }
 
@@ -98,13 +117,43 @@ public class AttendanceServiceImpl implements AttendanceService {
     
     @Override
     public List<Attendance> findByEmployeeIdAndPeriod(String employeeId, LocalDate start, LocalDate end) {
-        return attendanceDAO.findByEmployeeIdAndPeriod(employeeId, start, end);
+        List<Attendance> records = attendanceDAO.findByEmployeeIdAndPeriod(employeeId, start, end);
+
+        for (Attendance att : records) {
+            LocalDate monthStart = att.getDate().withDayOfMonth(1);
+            Time overtime = monthlyTotalDAO.getOvertime(employeeId, monthStart);
+            att.setOvertime(overtime != null ? overtime.toString() : "");
+        }
+
+        return records;
     }
+
     
     @Override
     public List<Attendance> adminSearch(String department, String position, String employeeId, LocalDate startDate, LocalDate endDate) {
-        return attendanceDAO.findByConditions(department, position, employeeId, startDate, endDate);
+        List<Attendance> result = attendanceDAO.adminSearch(department, position, employeeId, startDate, endDate);
+
+        // 使用 employeeId + 月份（第一天）为 key，只查一次
+        Map<String, String> overtimeMap = new HashMap<>();
+
+        for (Attendance record : result) {
+            String empId = record.getEmployeeId();
+            LocalDate month = record.getDate().withDayOfMonth(1);  // 统一为当月第一天
+
+            String key = empId + "_" + month;
+
+            if (!overtimeMap.containsKey(key)) {
+                String overtime = monthlyTotalDAO.findTotalOvertimeByEmployeeAndMonth(empId, month);
+                overtimeMap.put(key, overtime != null ? overtime : "");
+            }
+
+            record.setOvertime(overtimeMap.get(key));  // 设定值
+        }
+
+        return result;
     }
+
+
 
     @Override
     public void updateAttendance(String employeeId, LocalDate date, String startTime, String closingTime, String workTime, String breakTime) {
@@ -129,7 +178,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public void deleteAttendance(String employeeId, LocalDate date) {
-        attendanceDAO.delete(employeeId, date);
+        attendanceDAO.delete(employeeId, date);	
     }
 
 }
