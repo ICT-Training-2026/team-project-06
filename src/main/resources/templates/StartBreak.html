@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="jp" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Timinute</title>
-    <link rel="stylesheet" th:href="@{/css/header.css}">
-    <link rel="stylesheet" th:href="@{/css/RegistrationResult.css}">
+<meta charset="UTF-8">
+<title>Timinute</title>
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/RegistrationResult.css}">
 </head>
 
 <body>
 
-    <header class="header">
-        <div class="logo-container">
-            <img th:src="@{/image/Timinute_logo.png}" alt="画像">
-        </div>
-        <div class="welcome-text">
-            <p>
-                お疲れ様です！<br> <span th:text="${session.Name}">ユーザー</span>さん
-            </p>
-        </div>
-        <div class="buttons">
-            <a th:href="@{/userhomepage}"><button class="headerbtn">HOME</button></a>
-            <form th:action="@{/logout}" method="post" style="display: inline;">
-                <button class="headerbtn" type="submit">Logout</button>
-            </form>
-        </div>
-    </header>
+	<header class="header">
+		<div class="logo-container">
+			<img th:src="@{/image/Timinute_logo.png}" alt="画像">
+		</div>
+		<div class="welcome-text">
+			<p>
+				お疲れ様です！<br> <span th:text="${session.Name}">ユーザー</span>さん
+			</p>
+		</div>
+		<div class="buttons">
+			<a th:href="@{/userhomepage}"><button class="headerbtn">HOME</button></a>
+			<form th:action="@{/logout}" method="post" style="display: inline;">
+				<button class="headerbtn" type="submit">Logout</button>
+			</form>
+		</div>
+	</header>
 
-    <div class="whole">
-        <h1 th:text="${session.lastTime != null ? session.lastTime : '時間が取得できません'}">時間はいる</h1>
+	<div class="whole">
+		<h1>時間はいる</h1>
 
-        <h2>休憩を開始しました</h2>
+		<h2>休憩を開始しました</h2>
 
-        <a th:href="@{/attendance/register}"><button class="btn" type="button">もどる</button></a>
-    </div>
+		<a href="/attendance/register"><button class="btn" type="button">もどる</button></a>
+	</div>
 
-    <script th:inline="javascript">
-        /*<![CDATA[*/
-        document.addEventListener("DOMContentLoaded", function() {
-            const time = /*[[${session.lastTime}]]*/ '時間が取得できません';
-            document.querySelector("h1").textContent = time;
-        });
-        /*]]>*/
-    </script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const time = sessionStorage.getItem("lastTime");
+			if (time) {
+				document.querySelector("h1").textContent = time;
+			} else {
+				document.querySelector("h1").textContent = "時間が取得できません";
+			}
+		});
+	</script>
 
 </body>
 </html>
