@@ -55,17 +55,17 @@ form label {
 
 
 input[type="radio"] {
-    transform: scale(3) translateY(-1.5px); 
-    margin-right: 30px; 
+    transform: scale(3) translateY(-1.5px);
+    margin-right: 30px;
     margin-left: 95px;
-    
+
 }
 
 .date input[type="date"] {
     width: 280px; /* ここで幅を指定します */
     padding: 20px; /* 内側の余白を指定します */
     /* 他のスタイルも必要に応じて追加できます */
-    background-color: #FFFAD0; 
+    background-color: #FFFAD0;
     border: 3px solid #9EDDFF;
     border-radius: 7px;
     margin-right: 10px;
@@ -73,24 +73,24 @@ input[type="radio"] {
 
 .comment textarea {
      width: 600px; /* ここで幅を指定します */
-     height: 100px; 
+     height: 100px;
      padding: 20px;
      margin-left: 18px;
      margin-right: 10px;
      margin-top: -10px;
-     background-color: #FFFAD0; 
+     background-color: #FFFAD0;
     border: 3px solid #9EDDFF;
     border-radius: 7px;
 }
 
-.request-buttons input[type="submit"] {
+.request-buttons input[type="button"] {
   background-color: rgb(196, 255, 255);
     border: 3px solid #9EDDFF;
     border-radius: 7px;
     padding: 20px 40px;
     font-size: 25px;
     font-weight: bold;
-    
+
 }
 
 .attendance-category label {
