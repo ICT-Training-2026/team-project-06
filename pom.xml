@@ -8,8 +8,9 @@
     <!-- プロジェクト情報 -->
     <groupId>com.example</groupId>
     <artifactId>attendance-system</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging> -->
 
     <!-- Spring Boot の親プロジェクト -->
     <parent>
@@ -44,7 +45,7 @@
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<version>8.1.0</version> <!-- 最新のバージョンを確認してください -->
+			<version>8.0.33</version> <!-- AWS用に編集 -->
 			<scope>runtime</scope>
 		</dependency>
 
@@ -73,6 +74,12 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
+		<!-- AWS要の追記 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Spring Boot Starter Security -->
 		<dependency>
@@ -80,14 +87,14 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-				<!-- Spring Security Test -->
+		<!-- Spring Security Test -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-				<!-- セッションの利用-->
+		<!-- セッションの利用-->
 		<dependency>
 			<groupId>org.springframework.session</groupId>
 			<artifactId>spring-session-jdbc</artifactId>
@@ -101,6 +108,10 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                	<mainClass>TeamProject06Application</mainClass>
+                	<layout>WAR</layout>
+                </configuration>
             </plugin>
         </plugins>
     </build>
