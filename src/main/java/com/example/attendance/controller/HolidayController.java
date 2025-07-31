@@ -55,7 +55,7 @@ public class HolidayController {
                 service.register(prescribed);
             }
             // 正常時のレスポンス返却
-            return ResponseEntity.ok("{\"status\":\"success\", \"message\":\"休日登録が完了しました。\"}");
+            return ResponseEntity.ok("{\"status\":\"success\", \"message\":\"出勤日の登録が完了しました。\"}");
         } catch (Exception e) {
             // エラー発生時のレスポンス返却
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
