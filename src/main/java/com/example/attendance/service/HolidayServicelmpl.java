@@ -18,5 +18,9 @@ public class HolidayServicelmpl implements HolidayService {
         
         repository.add(holiday);
     }
+    @Override
+    public void registerOrUpdate(Prescribed holiday) {
+        repository.updateOrInsert(holiday);
+    }
 
 }
